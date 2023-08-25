@@ -11,26 +11,21 @@ export default new client.Gauge({
     async collect() {
         this.reset();
 
-        const numValues = [
-            'cpu-frequency',
-            'cpu-load',
-            'free-hdd-space',
-            'free-memory',
-        ];
-
-        const strValues = [
-            'uptime',
-            'version',
-        ];
-
         const resources = await Mikrotik.resources();
 
-        numValues.forEach(value => {
-            this.labels(value, null).set(Number(resources[value]));
-        });
+        // mhz => hz
+        this.labels('cpu-frequency', null).set(Number(resources['cpu-frequency']) * 1_000_000);
+        this.labels('cpu-load', null).set(Number(resources['cpu-load']));
 
-        strValues.forEach(value => {
-            this.labels(value, resources[value]).set(1);
-        });
+        const totalMemory = Number(resources['total-memory']);
+        this.labels('total-memory', null).set(totalMemory);
+        this.labels('used-memory', null).set(totalMemory - Number(resources['free-memory']));
+
+        const totalHdd = Number(resources['total-hdd-space']);
+        this.labels('total-hdd-space', null).set(totalHdd);
+        this.labels('used-hdd-space', null).set(totalHdd - Number(resources['free-hdd-space']));
+
+        this.labels('uptime', resources.uptime).set(1);
+        this.labels('version', resources.version).set(1);
     },
 });
