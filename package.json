@@ -1,0 +1,47 @@
+{
+  "name": "mik-prom-exporter",
+  "version": "1.0.0",
+  "description": "[Mikrotik — Prometheus] exporter",
+  "maintainers": [
+    "Kirill Molchanov <k03.mad@gmail.com"
+  ],
+  "repository": "k03mad/mik-prom-exporter",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@k03mad/request": "3.0.1",
+    "chalk": "5.3.0",
+    "compression": "1.7.4",
+    "express": "4.18.2",
+    "helmet": "7.0.0",
+    "morgan": "1.10.0",
+    "prom-client": "14.2.0"
+  },
+  "devDependencies": {
+    "@k03mad/eslint-config": "12.0.6",
+    "@microsoft/eslint-formatter-sarif": "3.0.0",
+    "eslint": "8.47.0",
+    "eslint-plugin-import": "2.28.0",
+    "eslint-plugin-jsdoc": "46.4.6",
+    "eslint-plugin-n": "16.0.1",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "eslint-plugin-sort-destructure-keys": "1.5.0",
+    "eslint-plugin-unicorn": "48.0.1",
+    "husky": "8.0.3",
+    "nodemon": "3.0.1"
+  },
+  "scripts": {
+    "lint": "eslint ./ --report-unused-disable-directives",
+    "lint:github": "eslint ./ --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif",
+    "clean": "rm -rfv ./node_modules || true",
+    "setup": "npm run clean && npm i",
+    "setup:prod": "npm run clean && npm i --omit=dev",
+    "start": "node app/server",
+    "start:dev": "DEBUG=mad* nodemon app/server",
+    "prepare": "husky install || true"
+  }
+}
