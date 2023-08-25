@@ -28,7 +28,7 @@ class Mikrotik {
             ...options,
         });
 
-        return body[0];
+        return body;
     }
 
     /**
@@ -42,7 +42,7 @@ class Mikrotik {
             ...options,
         });
 
-        return body[0];
+        return body;
     }
 
     /**
@@ -50,6 +50,20 @@ class Mikrotik {
      */
     resources() {
         return this._get('system/resource/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    dns() {
+        return this._get('ip/dns/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    dnsCache() {
+        return this._get('ip/dns/cache/print');
     }
 
 }

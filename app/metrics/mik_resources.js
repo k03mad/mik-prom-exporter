@@ -11,7 +11,7 @@ export default new client.Gauge({
     async collect() {
         this.reset();
 
-        const resources = await Mikrotik.resources();
+        const [resources] = await Mikrotik.resources();
 
         // mhz => hz
         this.labels('cpu-frequency', null).set(Number(resources['cpu-frequency']) * 1_000_000);
