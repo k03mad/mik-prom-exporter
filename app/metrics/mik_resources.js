@@ -16,10 +16,6 @@ export default new client.Gauge({
             'cpu-load',
             'free-hdd-space',
             'free-memory',
-            'total-hdd-space',
-            'total-memory',
-            'write-sect-since-reboot',
-            'write-sect-total',
         ];
 
         const strValues = [
