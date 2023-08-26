@@ -6,27 +6,22 @@ import {getCurrentFilename} from '../helpers/paths.js';
 
 export default new client.Gauge({
     name: getCurrentFilename(import.meta.url),
-    help: 'DNS',
+    help: 'ip/dns/cache',
     labelNames: ['type', 'record'],
 
     async collect() {
         this.reset();
 
-        const [[dns], dnsCache] = await Promise.all([
-            Mikrotik.dns(),
-            Mikrotik.dnsCache(),
-        ]);
+        const ipDnsCache = await Mikrotik.ipDnsCache();
 
         const dnsCacheTypes = {};
 
-        dnsCache.forEach(elem => {
+        ipDnsCache.forEach(elem => {
             elem.type && countDupsBy(elem.type, dnsCacheTypes);
         });
 
         Object.entries(dnsCacheTypes).forEach(([key, value]) => {
             this.labels('records', key).set(value);
         });
-
-        this.labels('cache-used', null).set(Number(dns['cache-used']));
     },
 });

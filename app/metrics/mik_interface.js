@@ -5,7 +5,7 @@ import {getCurrentFilename} from '../helpers/paths.js';
 
 export default new client.Gauge({
     name: getCurrentFilename(import.meta.url),
-    help: 'Interfaces',
+    help: 'interface',
     labelNames: ['type', 'name'],
 
     async collect() {
@@ -20,9 +20,13 @@ export default new client.Gauge({
         });
 
         await Promise.all(interfacesEnabled.map(async ({name}) => {
-            const [rates] = await Mikrotik.interfaceMonitorTraffic(name);
-            this.labels('bytes_per_sec', rates.name).set(Number(rates['rx-bits-per-second']) + Number(rates['tx-bits-per-second']));
-            this.labels('errors_per_sec', rates.name).set(Number(rates['rx-errors-per-second']) + Number(rates['tx-errors-per-second']));
+            const [interfaceMonitorTraffic] = await Mikrotik.interfaceMonitorTraffic(name);
+
+            this.labels('bytes_per_sec', interfaceMonitorTraffic.name)
+                .set(Number(interfaceMonitorTraffic['rx-bits-per-second']) + Number(interfaceMonitorTraffic['tx-bits-per-second']));
+
+            this.labels('errors_per_sec', interfaceMonitorTraffic.name)
+                .set(Number(interfaceMonitorTraffic['rx-errors-per-second']) + Number(interfaceMonitorTraffic['tx-errors-per-second']));
         }));
     },
 });

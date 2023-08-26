@@ -21,13 +21,14 @@ class IPinfo {
     /**
      * @param {string} ip
      * @param {object} [options]
+     * @param {object} [cacheOptions]
      * @returns {Promise<object>}
      */
-    async _getCache(ip, options = {}) {
+    async _getCache(ip, options = {}, cacheOptions = {}) {
         const {body} = await requestCache(this.urls.api + ip, {
             ...this.options,
             ...options,
-        });
+        }, cacheOptions);
 
         return body;
     }
@@ -37,7 +38,8 @@ class IPinfo {
      * @returns {Promise<object>}
      */
     req(ip) {
-        return this._getCache(ip);
+        // 7 days cache
+        return this._getCache(ip, {}, {expire: 604_800});
     }
 
 }

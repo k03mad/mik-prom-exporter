@@ -10,20 +10,20 @@ const CONNECTIONS_MIN_BYTES = 1_048_576;
 
 export default new client.Gauge({
     name: getCurrentFilename(import.meta.url),
-    help: 'Firewall Connections',
+    help: 'ip/firewall/connection',
     labelNames: ['type', 'name'],
 
     async collect() {
         this.reset();
 
         const [
-            connections,
-            dhcpIpToName,
-            dnsIpToName,
+            ipFirewallConnection,
+            ipDhcpServerLeaseToName,
+            ipDnsCacheToName,
         ] = await Promise.all([
-            Mikrotik.firewallConnections(),
-            Mikrotik.dhcpLeaseIpToName(),
-            Mikrotik.dnsCacheIpToName(),
+            Mikrotik.ipFirewallConnection(),
+            Mikrotik.ipDhcpServerLeaseToName(),
+            Mikrotik.ipDnsCacheToName(),
         ]);
 
         const bySrc = {};
@@ -31,17 +31,17 @@ export default new client.Gauge({
         const byFasttrack = {};
         const byDstHost = {};
 
-        await Promise.all(connections.map(async elem => {
+        await Promise.all(ipFirewallConnection.map(async elem => {
             const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
 
             const srcIp = elem['src-address'].split(':')[0];
-            countDupsBy(dhcpIpToName[srcIp] || srcIp, bySrc);
+            countDupsBy(ipDhcpServerLeaseToName[srcIp] || srcIp, bySrc);
             countDupsBy(elem.protocol, byProtocol);
             countDupsBy(elem.fasttrack, byFasttrack);
 
             if (bytes > CONNECTIONS_MIN_BYTES) {
                 const ip = elem['dst-address'].split(':')[0];
-                let host = dnsIpToName[ip];
+                let host = ipDnsCacheToName[ip];
 
                 if (!host) {
                     try {

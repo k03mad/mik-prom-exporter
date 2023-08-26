@@ -48,30 +48,30 @@ class Mikrotik {
     /**
      * @returns {Promise<object>}
      */
-    resources() {
+    systemResource() {
         return this._get('system/resource/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    dns() {
+    ipDns() {
         return this._get('ip/dns/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    dnsCache() {
+    ipDnsCache() {
         return this._get('ip/dns/cache/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    async dnsCacheIpToName() {
+    async ipDnsCacheToName() {
         const ipToName = {};
-        const cache = await this.dnsCache();
+        const cache = await this.ipDnsCache();
 
         cache.forEach(elem => {
             if (
@@ -109,35 +109,35 @@ class Mikrotik {
     /**
      * @returns {Promise<object>}
      */
-    update() {
+    systemPackageUpdate() {
         return this._getCache('system/package/update/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    firewallFilter() {
+    ipFirewallFilter() {
         return this._get('ip/firewall/filter/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    firewallNat() {
+    ipFirewallNat() {
         return this._get('ip/firewall/nat/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    firewallMangle() {
+    ipFirewallMangle() {
         return this._get('ip/firewall/mangle/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    firewallRaw() {
+    ipFirewallRaw() {
         return this._get('ip/firewall/raw/print');
     }
 
@@ -146,30 +146,30 @@ class Mikrotik {
      * @param {string} rule.comment
      * @returns {boolean}
      */
-    isDummyRule(rule) {
+    ipFirewallIsDummyRule(rule) {
         return rule.comment.includes('dummy');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    firewallConnections() {
+    ipFirewallConnection() {
         return this._get('ip/firewall/connection/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    dhcpLease() {
+    ipDhcpServerLease() {
         return this._getCache('ip/dhcp-server/lease/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
-    async dhcpLeaseIpToName() {
+    async ipDhcpServerLeaseToName() {
         const ipToName = {};
-        const leases = await this.dhcpLease();
+        const leases = await this.ipDhcpServerLease();
 
         leases.forEach(lease => {
             if (lease.comment) {
@@ -178,6 +178,27 @@ class Mikrotik {
         });
 
         return ipToName;
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    ipFirewallAddressList() {
+        return this._get('ip/firewall/address-list/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    systemScheduler() {
+        return this._get('system/scheduler/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    systemScript() {
+        return this._get('system/script/print');
     }
 
 }
