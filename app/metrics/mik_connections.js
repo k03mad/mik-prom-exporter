@@ -5,6 +5,9 @@ import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
+// 1 MB
+const CONNECTIONS_MIN_BYTES = 1_048_576;
+
 export default new client.Gauge({
     name: getCurrentFilename(import.meta.url),
     help: 'Firewall Connections',
@@ -52,20 +55,24 @@ export default new client.Gauge({
         const byDstOrg = {};
 
         await Promise.all(connections.map(async elem => {
-            const ip = elem['dst-address'].split(':')[0];
-            let ipinfo = {};
+            const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
 
-            try {
-                ipinfo = await IPinfo.req(ip);
-            } catch {}
+            if (bytes > CONNECTIONS_MIN_BYTES) {
+                const ip = elem['dst-address'].split(':')[0];
+                let ipinfo = {};
 
-            const host = dnsIpToName[ip] || ipinfo.hostname;
-            host && countDupsBy(host, byDstHost);
-            ipinfo.org && countDupsBy(ipinfo.org.replace(/^AS\d+\s+/, ''), byDstOrg);
+                try {
+                    ipinfo = await IPinfo.req(ip);
+                } catch {}
 
-            if (ipinfo.country) {
-                countDupsBy(ipinfo.country, byDstCountry);
-                ipinfo.city && countDupsBy(`${ipinfo.country} ${ipinfo.city}`, byDstCity);
+                const host = dnsIpToName[ip] || ipinfo.hostname;
+                host && countDupsBy(host, byDstHost, bytes);
+                ipinfo.org && countDupsBy(ipinfo.org.replace(/^AS\d+\s+/, ''), byDstOrg, bytes);
+
+                if (ipinfo.country) {
+                    countDupsBy(ipinfo.country, byDstCountry, bytes);
+                    ipinfo.city && countDupsBy(`${ipinfo.country} ${ipinfo.city}`, byDstCity, bytes);
+                }
             }
         }));
 
