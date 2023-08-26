@@ -22,7 +22,7 @@ export default new client.Gauge({
         await Promise.all(interfacesEnabled.map(async ({name}) => {
             const [rates] = await Mikrotik.interfaceMonitorTraffic(name);
             this.labels('bytes_per_sec', rates.name).set(Number(rates['rx-bits-per-second']) + Number(rates['tx-bits-per-second']));
-            this.labels('errors_per_sec', rates.name).set(Number(rates['rx-errors-per-second']) + Number(rates['tx-bits-per-second']));
+            this.labels('errors_per_sec', rates.name).set(Number(rates['rx-errors-per-second']) + Number(rates['tx-errors-per-second']));
         }));
     },
 });
