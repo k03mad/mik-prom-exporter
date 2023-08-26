@@ -86,8 +86,48 @@ class Mikrotik {
         });
     }
 
+    /**
+     * @returns {Promise<object>}
+     */
     update() {
         return this._getCache('system/package/update/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    firewallFilter() {
+        return this._get('ip/firewall/filter/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    firewallNat() {
+        return this._get('ip/firewall/nat/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    firewallMangle() {
+        return this._get('ip/firewall/mangle/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    firewallRaw() {
+        return this._get('ip/firewall/raw/print');
+    }
+
+    /**
+     * @param {object} rule
+     * @param {string} rule.comment
+     * @returns {boolean}
+     */
+    isDummyRule(rule) {
+        return rule.comment.includes('dummy');
     }
 
 }
