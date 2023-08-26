@@ -29,26 +29,6 @@ export default new client.Gauge({
         const bySrc = {};
         const byProtocol = {};
         const byFasttrack = {};
-
-        connections.forEach(elem => {
-            const ip = elem['src-address'].split(':')[0];
-            countDupsBy(dhcpIpToName[ip] || ip, bySrc);
-            countDupsBy(elem.protocol, byProtocol);
-            countDupsBy(elem.fasttrack, byFasttrack);
-        });
-
-        Object.entries(bySrc).forEach(([key, value]) => {
-            this.labels('src-name', key).set(value);
-        });
-
-        Object.entries(byProtocol).forEach(([key, value]) => {
-            this.labels('protocol', key).set(value);
-        });
-
-        Object.entries(byFasttrack).forEach(([key, value]) => {
-            this.labels('fasttrack', key).set(value);
-        });
-
         const byDstHost = {};
         const byDstCountry = {};
         const byDstCity = {};
@@ -56,6 +36,11 @@ export default new client.Gauge({
 
         await Promise.all(connections.map(async elem => {
             const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
+
+            const srcIp = elem['src-address'].split(':')[0];
+            countDupsBy(dhcpIpToName[srcIp] || srcIp, bySrc, bytes);
+            countDupsBy(elem.protocol, byProtocol, bytes);
+            countDupsBy(elem.fasttrack, byFasttrack, bytes);
 
             if (bytes > CONNECTIONS_MIN_BYTES) {
                 const ip = elem['dst-address'].split(':')[0];
@@ -75,6 +60,18 @@ export default new client.Gauge({
                 }
             }
         }));
+
+        Object.entries(bySrc).forEach(([key, value]) => {
+            this.labels('src-name', key).set(value);
+        });
+
+        Object.entries(byProtocol).forEach(([key, value]) => {
+            this.labels('protocol', key).set(value);
+        });
+
+        Object.entries(byFasttrack).forEach(([key, value]) => {
+            this.labels('fasttrack', key).set(value);
+        });
 
         Object.entries(byDstHost).forEach(([key, value]) => {
             this.labels('dst-host', key).set(value);
