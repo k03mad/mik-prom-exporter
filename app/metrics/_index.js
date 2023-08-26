@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import mik_connections from './mik_connections.js';
 import mik_dns from './mik_dns.js';
 import mik_firewall from './mik_firewall.js';
 import mik_interfaces from './mik_interfaces.js';
@@ -11,4 +12,5 @@ export default {
     mik_resources,
     mik_update,
     mik_firewall,
+    mik_connections,
 };
