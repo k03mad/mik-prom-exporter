@@ -20,9 +20,7 @@ export default new client.Gauge({
         const dnsCacheTypes = {};
 
         dnsCache.forEach(elem => {
-            if (elem.type) {
-                countDupsBy(elem.type, dnsCacheTypes);
-            }
+            elem.type && countDupsBy(elem.type, dnsCacheTypes);
         });
 
         Object.entries(dnsCacheTypes).forEach(([key, value]) => {

@@ -66,5 +66,25 @@ class Mikrotik {
         return this._get('ip/dns/cache/print');
     }
 
+    /**
+     * @returns {Promise<object>}
+     */
+    interface() {
+        return this._get('interface/print');
+    }
+
+    /**
+     * @param {string} name
+     * @returns {Promise<object>}
+     */
+    interfaceMonitorTraffic(name) {
+        return this._get('interface/monitor-traffic', {
+            json: {
+                interface: name,
+                once: true,
+            },
+        });
+    }
+
 }
 export default new Mikrotik();
