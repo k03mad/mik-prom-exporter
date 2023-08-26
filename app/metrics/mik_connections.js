@@ -30,63 +30,44 @@ export default new client.Gauge({
         const byProtocol = {};
         const byFasttrack = {};
         const byDstHost = {};
-        const byDstCountry = {};
-        const byDstCity = {};
-        const byDstOrg = {};
 
         await Promise.all(connections.map(async elem => {
             const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
 
             const srcIp = elem['src-address'].split(':')[0];
-            countDupsBy(dhcpIpToName[srcIp] || srcIp, bySrc, bytes);
-            countDupsBy(elem.protocol, byProtocol, bytes);
-            countDupsBy(elem.fasttrack, byFasttrack, bytes);
+            countDupsBy(dhcpIpToName[srcIp] || srcIp, bySrc);
+            countDupsBy(elem.protocol, byProtocol);
+            countDupsBy(elem.fasttrack, byFasttrack);
 
             if (bytes > CONNECTIONS_MIN_BYTES) {
                 const ip = elem['dst-address'].split(':')[0];
-                let ipinfo = {};
+                let host = dnsIpToName[ip];
 
-                try {
-                    ipinfo = await IPinfo.req(ip);
-                } catch {}
-
-                const host = dnsIpToName[ip] || ipinfo.hostname;
-                host && countDupsBy(host, byDstHost, bytes);
-                ipinfo.org && countDupsBy(ipinfo.org.replace(/^AS\d+\s+/, ''), byDstOrg, bytes);
-
-                if (ipinfo.country) {
-                    countDupsBy(ipinfo.country, byDstCountry, bytes);
-                    ipinfo.city && countDupsBy(`${ipinfo.country} ${ipinfo.city}`, byDstCity, bytes);
+                if (!host) {
+                    try {
+                        const ipinfo = await IPinfo.req(ip);
+                        host = ipinfo.hostname;
+                    } catch {}
                 }
+
+                host && countDupsBy(host, byDstHost, bytes);
             }
         }));
 
         Object.entries(bySrc).forEach(([key, value]) => {
-            this.labels('src-name', key).set(value);
+            this.labels('src-name-count', key).set(value);
         });
 
         Object.entries(byProtocol).forEach(([key, value]) => {
-            this.labels('protocol', key).set(value);
+            this.labels('protocol-count', key).set(value);
         });
 
         Object.entries(byFasttrack).forEach(([key, value]) => {
-            this.labels('fasttrack', key).set(value);
+            this.labels('fasttrack-count', key).set(value);
         });
 
         Object.entries(byDstHost).forEach(([key, value]) => {
-            this.labels('dst-host', key).set(value);
-        });
-
-        Object.entries(byDstCountry).forEach(([key, value]) => {
-            this.labels('dst-country', key).set(value);
-        });
-
-        Object.entries(byDstCity).forEach(([key, value]) => {
-            this.labels('dst-city', key).set(value);
-        });
-
-        Object.entries(byDstOrg).forEach(([key, value]) => {
-            this.labels('dst-org', key).set(value);
+            this.labels('dst-host-bytes', key).set(value);
         });
     },
 });
