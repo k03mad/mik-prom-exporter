@@ -86,5 +86,9 @@ class Mikrotik {
         });
     }
 
+    update() {
+        return this._getCache('system/package/update/print');
+    }
+
 }
 export default new Mikrotik();

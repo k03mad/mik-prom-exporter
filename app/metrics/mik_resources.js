@@ -26,6 +26,5 @@ export default new client.Gauge({
         this.labels('used-hdd-space', null).set(totalHdd - Number(resources['free-hdd-space']));
 
         this.labels('uptime', resources.uptime).set(1);
-        this.labels('version', resources.version).set(1);
     },
 });
