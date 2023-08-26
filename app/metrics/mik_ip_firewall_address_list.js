@@ -1,3 +1,4 @@
+import {Netmask} from 'netmask';
 import client from 'prom-client';
 
 import Mikrotik from '../api/mikrotik.js';
@@ -12,7 +13,13 @@ export default new client.Gauge({
     async collect() {
         this.reset();
 
-        const ipFirewallAddressList = await Mikrotik.ipFirewallAddressList();
+        const [
+            ipFirewallAddressList,
+            ipDnsCache,
+        ] = await Promise.all([
+            Mikrotik.ipFirewallAddressList(),
+            Mikrotik.ipDnsCache(),
+        ]);
 
         const listsNames = {};
 
@@ -22,6 +29,21 @@ export default new client.Gauge({
 
         Object.entries(listsNames).forEach(([key, value]) => {
             this.labels('count', key).set(value);
+        });
+
+        const listsDataMasks = ipFirewallAddressList.filter(elem => elem.address.includes('/'));
+        const matchedDomains = new Set();
+
+        ipDnsCache.forEach(entry => {
+            listsDataMasks.forEach(mask => {
+                if (entry.type === 'A' && new Netmask(mask.address).contains(entry.data)) {
+                    matchedDomains.add(entry.name);
+                }
+            });
+        });
+
+        [...matchedDomains].forEach((domain, i) => {
+            this.labels('domain-from-dns-by-list-mask', domain).set(++i);
         });
     },
 });
