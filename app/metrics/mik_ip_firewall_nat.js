@@ -14,7 +14,9 @@ export default new client.Gauge({
         const ipFirewallNat = await Mikrotik.ipFirewallNat();
 
         ipFirewallNat.forEach(elem => {
-            !Mikrotik.ipFirewallIsDummyRule(elem) && this.labels('bytes', elem.comment).set(Number(elem.bytes));
+            if (!Mikrotik.ipFirewallIsDummyRule(elem)) {
+                this.labels('bytes', `[${elem.chain} ${elem.action}] ${elem.comment}`).set(Number(elem.bytes));
+            }
         });
     },
 });
