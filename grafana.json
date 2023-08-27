@@ -859,8 +859,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -958,8 +957,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1070,8 +1068,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1085,7 +1082,7 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 33
       },
@@ -1169,8 +1166,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1185,8 +1181,8 @@
       "gridPos": {
         "h": 9,
         "w": 12,
-        "x": 12,
-        "y": 33
+        "x": 0,
+        "y": 42
       },
       "id": 14,
       "options": {
@@ -1268,8 +1264,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1284,7 +1279,7 @@
       "gridPos": {
         "h": 9,
         "w": 12,
-        "x": 0,
+        "x": 12,
         "y": 42
       },
       "id": 15,
@@ -1380,8 +1375,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1395,7 +1389,7 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 52
       },
@@ -1479,8 +1473,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1494,8 +1487,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 52
       },
       "id": 37,
@@ -1579,8 +1572,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1594,9 +1586,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 61
+        "w": 8,
+        "x": 16,
+        "y": 52
       },
       "id": 38,
       "options": {
@@ -1679,8 +1671,106 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 61
+      },
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "mik_interface_wireless_registration_table{type=\"ccq\"}",
+          "instant": false,
+          "legendFormat": "{{name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CCQ",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1779,8 +1869,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1788,7 +1877,7 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "dB"
         },
         "overrides": []
       },
@@ -1798,7 +1887,7 @@
         "x": 0,
         "y": 70
       },
-      "id": 40,
+      "id": 42,
       "options": {
         "legend": {
           "calcs": [
@@ -1824,14 +1913,14 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "mik_interface_wireless_registration_table{type=\"ccq\"}",
+          "expr": "mik_interface_wireless_registration_table{type=\"signal-to-noise\"}",
           "instant": false,
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "CCQ",
+      "title": "Signal To Noise",
       "type": "timeseries"
     },
     {
@@ -1879,8 +1968,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1935,112 +2023,12 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "dB"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 79
-      },
-      "id": 42,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "last"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "sortBy": "Last",
-          "sortDesc": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "mik_interface_wireless_registration_table{type=\"signal-to-noise\"}",
-          "instant": false,
-          "legendFormat": "{{name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Signal To Noise",
-      "type": "timeseries"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 88
+        "y": 79
       },
       "id": 43,
       "panels": [],
@@ -2092,8 +2080,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2107,9 +2094,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
+        "w": 24,
         "x": 0,
-        "y": 89
+        "y": 80
       },
       "id": 44,
       "options": {
@@ -2153,7 +2140,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 98
+        "y": 89
       },
       "id": 19,
       "panels": [],
@@ -2205,8 +2192,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2222,7 +2208,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 99
+        "y": 90
       },
       "id": 20,
       "options": {
@@ -2304,8 +2290,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2321,7 +2306,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 99
+        "y": 90
       },
       "id": 21,
       "options": {
@@ -2403,8 +2388,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2420,7 +2404,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 108
+        "y": 99
       },
       "id": 22,
       "options": {
@@ -2502,8 +2486,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2519,7 +2502,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 108
+        "y": 99
       },
       "id": 23,
       "options": {
@@ -2601,8 +2584,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2618,7 +2600,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 117
+        "y": 108
       },
       "id": 29,
       "options": {
@@ -2700,8 +2682,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2717,7 +2698,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 117
+        "y": 108
       },
       "id": 34,
       "options": {
@@ -2760,7 +2741,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 126
+        "y": 117
       },
       "id": 24,
       "panels": [],
@@ -2812,8 +2793,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2829,7 +2809,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 127
+        "y": 118
       },
       "id": 25,
       "options": {
@@ -2911,8 +2891,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2928,7 +2907,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 127
+        "y": 118
       },
       "id": 28,
       "options": {
@@ -3010,8 +2989,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3027,7 +3005,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 136
+        "y": 127
       },
       "id": 26,
       "options": {
@@ -3109,8 +3087,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3157,7 +3134,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 136
+        "y": 127
       },
       "id": 27,
       "options": {
@@ -3200,7 +3177,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 145
+        "y": 136
       },
       "id": 30,
       "panels": [],
@@ -3252,8 +3229,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3269,7 +3245,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 146
+        "y": 137
       },
       "id": 31,
       "options": {
@@ -3351,8 +3327,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3368,7 +3343,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 146
+        "y": 137
       },
       "id": 33,
       "options": {
@@ -3414,13 +3389,13 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Mikrotik",
   "uid": "cd877682-4711-40a1-be1f-9343023cbff3",
-  "version": 35,
+  "version": 41,
   "weekStart": ""
 }
