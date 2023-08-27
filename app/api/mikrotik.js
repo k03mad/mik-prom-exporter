@@ -201,5 +201,19 @@ class Mikrotik {
         return this._get('system/script/print');
     }
 
+    /**
+     * @returns {Promise<object>}
+     */
+    interfaceWireguardPeers() {
+        return this._get('interface/wireguard/peers/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    interfaceWirelessRegistrationTable() {
+        return this._get('interface/wireless/registration-table/print');
+    }
+
 }
 export default new Mikrotik();
