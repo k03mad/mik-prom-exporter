@@ -2751,7 +2751,7 @@
           "refId": "A"
         }
       ],
-      "title": "Dynamic To VPN Domains List",
+      "title": "To VPN Dynamic Domains",
       "type": "timeseries"
     },
     {
@@ -3414,7 +3414,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
