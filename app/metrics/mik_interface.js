@@ -24,9 +24,6 @@ export default new client.Gauge({
 
             this.labels('bytes_per_sec', interfaceMonitorTraffic.name)
                 .set(Number(interfaceMonitorTraffic['rx-bits-per-second']) + Number(interfaceMonitorTraffic['tx-bits-per-second']));
-
-            this.labels('errors_per_sec', interfaceMonitorTraffic.name)
-                .set(Number(interfaceMonitorTraffic['rx-errors-per-second']) + Number(interfaceMonitorTraffic['tx-errors-per-second']));
         }));
     },
 });
