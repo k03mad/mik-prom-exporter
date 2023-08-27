@@ -21,8 +21,9 @@ export default new client.Gauge({
 
         interfaceWirelessRegistrationTable.forEach(wifiClient => {
             const clientName = ipDhcpServerLeaseToName[wifiClient['last-ip']];
+            const [tx, rx] = wifiClient.bytes.split(',');
 
-            this.labels('bytes', clientName).set(Number(wifiClient.bytes.replace(',', '.')));
+            this.labels('bytes', clientName).set(Number(tx) + Number(rx));
             this.labels('signal-strength', clientName).set(Number(wifiClient['signal-strength'].split('@')[0]));
             this.labels('signal-to-noise', clientName).set(Number(wifiClient['signal-to-noise']));
             this.labels('ccq', clientName).set(Number(wifiClient['tx-ccq']));
