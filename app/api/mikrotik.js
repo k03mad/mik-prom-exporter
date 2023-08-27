@@ -215,5 +215,25 @@ class Mikrotik {
         return this._get('interface/wireless/registration-table/print');
     }
 
+    /**
+     * @returns {Promise<object>}
+     */
+    interfaceWireless() {
+        return this._get('interface/wireless/print');
+    }
+
+    /**
+     * @param {string} id
+     * @returns {Promise<object>}
+     */
+    interfaceWirelessMonitor(id) {
+        return this._get('interface/wireless/monitor', {
+            json: {
+                numbers: id,
+                once: true,
+            },
+        });
+    }
+
 }
 export default new Mikrotik();

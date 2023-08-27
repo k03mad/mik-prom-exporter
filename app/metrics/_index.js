@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import mik_interface from './mik_interface.js';
 import mik_interface_wireguard_peers from './mik_interface_wireguard_peers.js';
+import mik_interface_wireless from './mik_interface_wireless.js';
 import mik_interface_wireless_registration_table from './mik_interface_wireless_registration_table.js';
 import mik_ip_dns from './mik_ip_dns.js';
 import mik_ip_dns_cache from './mik_ip_dns_cache.js';
@@ -18,6 +19,7 @@ import mik_system_script from './mik_system_script.js';
 export default {
     mik_interface_wireguard_peers,
     mik_interface_wireless_registration_table,
+    mik_interface_wireless,
     mik_interface,
     mik_ip_dns_cache,
     mik_ip_dns,
