@@ -14,11 +14,11 @@ export default new client.Gauge({
         const interfaceWireless = await Mikrotik.interfaceWireless();
 
         await Promise.all(interfaceWireless.map(async iface => {
-            const [data] = await Mikrotik.interfaceWirelessMonitor(iface['.id']);
+            const [interfaceWirelessMonitor] = await Mikrotik.interfaceWirelessMonitor(iface['.id']);
 
-            this.labels('noise-floor', iface.ssid).set(Number(data['noise-floor']));
-            this.labels('overall-tx-ccq', iface.ssid).set(Number(data['overall-tx-ccq']));
-            this.labels('registered-clients', iface.ssid).set(Number(data['registered-clients']));
+            this.labels('noise-floor', iface.ssid).set(Number(interfaceWirelessMonitor['noise-floor']));
+            this.labels('overall-tx-ccq', iface.ssid).set(Number(interfaceWirelessMonitor['overall-tx-ccq']));
+            this.labels('registered-clients', iface.ssid).set(Number(interfaceWirelessMonitor['registered-clients']));
         }));
     },
 });
