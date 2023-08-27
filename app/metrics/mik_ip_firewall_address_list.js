@@ -1,6 +1,7 @@
 import {Netmask} from 'netmask';
 import client from 'prom-client';
 
+import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
@@ -31,19 +32,33 @@ export default new client.Gauge({
             this.labels('count', key).set(value);
         });
 
-        const listsDataMasks = ipFirewallAddressList.filter(elem => elem.address.includes('/'));
-        const matchedDomains = new Set();
+        if (env.mikrotik.toVpnList) {
+            const matchedDomains = new Set();
 
-        ipDnsCache.forEach(entry => {
-            listsDataMasks.forEach(mask => {
-                if (entry.type === 'A' && new Netmask(mask.address).contains(entry.data)) {
-                    matchedDomains.add(entry.name);
-                }
+            ipDnsCache.forEach(entry => {
+                ipFirewallAddressList.forEach(elem => {
+                    if (elem.list === env.mikrotik.toVpnList) {
+                        if (
+                            elem.timeout
+                            && elem.address === entry.data
+                        ) {
+                            matchedDomains.add(entry.name);
+                        }
+
+                        if (
+                            elem.address.includes('/')
+                            && entry.type === 'A'
+                            && new Netmask(elem.address).contains(entry.data)
+                        ) {
+                            matchedDomains.add(entry.name);
+                        }
+                    }
+                });
             });
-        });
 
-        [...matchedDomains].forEach((domain, i) => {
-            this.labels('domain-from-dns-by-list-mask', domain).set(++i);
-        });
+            [...matchedDomains].forEach((domain, i) => {
+                this.labels('dynamic-to-vpn-domains-list', domain).set(++i);
+            });
+        }
     },
 });

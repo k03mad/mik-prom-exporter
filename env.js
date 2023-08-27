@@ -11,6 +11,7 @@ const env = {
         host: process.env.npm_config_host || process.env.MIKROTIK_HOST,
         user: process.env.npm_config_user || process.env.MIKROTIK_USER,
         password: process.env.npm_config_password || process.env.MIKROTIK_PASSWORD,
+        toVpnList: process.env.npm_config_tovpn || process.env.MIKROTIK_TO_VPN_LIST,
     },
     ipinfo: {
         token: process.env.npm_config_ipinfo || process.env.IPINFO_TOKEN,
