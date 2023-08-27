@@ -40,7 +40,7 @@ class Mikrotik {
         const {body} = await requestCache(this.urls.api + path, {
             ...this.options,
             ...options,
-        });
+        }, {expire: 3600});
 
         return body;
     }
@@ -191,14 +191,14 @@ class Mikrotik {
      * @returns {Promise<object>}
      */
     systemScheduler() {
-        return this._get('system/scheduler/print');
+        return this._getCache('system/scheduler/print');
     }
 
     /**
      * @returns {Promise<object>}
      */
     systemScript() {
-        return this._get('system/script/print');
+        return this._getCache('system/script/print');
     }
 
     /**
