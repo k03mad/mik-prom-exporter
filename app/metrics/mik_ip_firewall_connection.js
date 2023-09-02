@@ -35,7 +35,12 @@ export default new client.Gauge({
             const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
 
             const srcIp = elem['src-address'].split(':')[0];
-            countDupsBy(ipDhcpServerLeaseToName[srcIp] || srcIp, bySrc);
+            const srcName = ipDhcpServerLeaseToName[srcIp];
+
+            if (srcName) {
+                countDupsBy(srcName, bySrc);
+            }
+
             countDupsBy(elem.protocol, byProtocol);
             countDupsBy(elem.fasttrack, byFasttrack);
 
