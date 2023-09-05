@@ -46,21 +46,21 @@ class Mikrotik {
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     systemResource() {
         return this._get('system/resource/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipDns() {
         return this._get('ip/dns/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipDnsCache() {
         return this._get('ip/dns/cache/print');
@@ -87,7 +87,7 @@ class Mikrotik {
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     interface() {
         return this._get('interface/print');
@@ -95,7 +95,7 @@ class Mikrotik {
 
     /**
      * @param {string} name
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     interfaceMonitorTraffic(name) {
         return this._get('interface/monitor-traffic', {
@@ -107,35 +107,35 @@ class Mikrotik {
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     systemPackageUpdateCheck() {
         return this._getCache('system/package/update/check-for-updates');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipFirewallFilter() {
         return this._get('ip/firewall/filter/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipFirewallNat() {
         return this._get('ip/firewall/nat/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipFirewallMangle() {
         return this._get('ip/firewall/mangle/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipFirewallRaw() {
         return this._get('ip/firewall/raw/print');
@@ -151,14 +151,14 @@ class Mikrotik {
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipFirewallConnection() {
         return this._get('ip/firewall/connection/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipDhcpServerLease() {
         return this._getCache('ip/dhcp-server/lease/print');
@@ -181,42 +181,42 @@ class Mikrotik {
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     ipFirewallAddressList() {
         return this._get('ip/firewall/address-list/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     systemScheduler() {
         return this._getCache('system/scheduler/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     systemScript() {
         return this._getCache('system/script/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     interfaceWireguardPeers() {
         return this._get('interface/wireguard/peers/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     interfaceWirelessRegistrationTable() {
         return this._get('interface/wireless/registration-table/print');
     }
 
     /**
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     interfaceWireless() {
         return this._get('interface/wireless/print');
@@ -224,7 +224,7 @@ class Mikrotik {
 
     /**
      * @param {string} id
-     * @returns {Promise<object>}
+     * @returns {Promise<Array<object>>}
      */
     interfaceWirelessMonitor(id) {
         return this._get('interface/wireless/monitor', {

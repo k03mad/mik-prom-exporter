@@ -11,11 +11,12 @@ export default new client.Gauge({
     async collect() {
         this.reset();
 
-        const [, systemPackageUpdateCheck] = await Mikrotik.systemPackageUpdateCheck();
+        const systemPackageUpdateCheck = await Mikrotik.systemPackageUpdateCheck();
+        const lastMessage = systemPackageUpdateCheck.at(-1);
 
-        this.labels('channel', systemPackageUpdateCheck.channel).set(1);
-        this.labels('installed-version', systemPackageUpdateCheck['installed-version']).set(1);
-        this.labels('latest-version', systemPackageUpdateCheck['latest-version']).set(1);
-        this.labels('status', systemPackageUpdateCheck.status).set(1);
+        this.labels('channel', lastMessage.channel).set(1);
+        this.labels('installed-version', lastMessage['installed-version']).set(1);
+        this.labels('latest-version', lastMessage['latest-version']).set(1);
+        this.labels('status', lastMessage.status).set(1);
     },
 });
