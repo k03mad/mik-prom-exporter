@@ -37,21 +37,14 @@ export default new client.Gauge({
 
             ipDnsCache.forEach(entry => {
                 ipFirewallAddressList.forEach(elem => {
-                    if (elem.list === env.mikrotik.toVpnList) {
-                        if (
-                            elem.timeout
-                            && elem.address === entry.data
-                        ) {
-                            matchedDomains.add(entry.name);
-                        }
-
-                        if (
-                            elem.address.includes('/')
-                            && entry.type === 'A'
-                            && new Netmask(elem.address).contains(entry.data)
-                        ) {
-                            matchedDomains.add(entry.name);
-                        }
+                    if (elem.list === env.mikrotik.toVpnList
+                        && (
+                            (elem.timeout && elem.address === entry.data)
+                            || (elem.address.includes('/') && entry.type === 'A'
+                               && new Netmask(elem.address).contains(entry.data))
+                        )
+                    ) {
+                        matchedDomains.add(`${entry.name} (${elem.address})`);
                     }
                 });
             });
