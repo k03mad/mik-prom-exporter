@@ -109,8 +109,8 @@ class Mikrotik {
     /**
      * @returns {Promise<object>}
      */
-    systemPackageUpdate() {
-        return this._getCache('system/package/update/print');
+    systemPackageUpdateCheck() {
+        return this._getCache('system/package/update/check-for-updates');
     }
 
     /**
