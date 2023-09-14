@@ -1,5 +1,3 @@
-import client from 'prom-client';
-
 import IPinfo from '../api/ipinfo.js';
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
@@ -8,13 +6,13 @@ import {getCurrentFilename} from '../helpers/paths.js';
 // 1 MB
 const CONNECTIONS_MIN_BYTES = 1_048_576;
 
-export default new client.Gauge({
+export default {
     name: getCurrentFilename(import.meta.url),
     help: 'ip/firewall/connection',
     labelNames: ['type', 'name'],
 
-    async collect() {
-        this.reset();
+    async collect(ctx) {
+        ctx.reset();
 
         const [
             ipFirewallConnection,
@@ -60,19 +58,19 @@ export default new client.Gauge({
         }));
 
         Object.entries(bySrc).forEach(([key, value]) => {
-            this.labels('src-name-count', key).set(value);
+            ctx.labels('src-name-count', key).set(value);
         });
 
         Object.entries(byProtocol).forEach(([key, value]) => {
-            this.labels('protocol-count', key).set(value);
+            ctx.labels('protocol-count', key).set(value);
         });
 
         Object.entries(byFasttrack).forEach(([key, value]) => {
-            this.labels('fasttrack-count', key).set(value);
+            ctx.labels('fasttrack-count', key).set(value);
         });
 
         Object.entries(byDstHost).forEach(([key, value]) => {
-            this.labels('dst-host-bytes', key).set(value);
+            ctx.labels('dst-host-bytes', key).set(value);
         });
     },
-});
+};

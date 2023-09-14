@@ -1,18 +1,17 @@
 import {Netmask} from 'netmask';
-import client from 'prom-client';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
-export default new client.Gauge({
+export default {
     name: getCurrentFilename(import.meta.url),
     help: 'ip/firewall/address-list',
     labelNames: ['type', 'name'],
 
-    async collect() {
-        this.reset();
+    async collect(ctx) {
+        ctx.reset();
 
         const [
             ipFirewallAddressList,
@@ -29,7 +28,7 @@ export default new client.Gauge({
         });
 
         Object.entries(listsNames).forEach(([key, value]) => {
-            this.labels('count', key).set(value);
+            ctx.labels('count', key).set(value);
         });
 
         if (env.mikrotik.toVpnList) {
@@ -50,8 +49,8 @@ export default new client.Gauge({
             });
 
             [...matchedDomains].forEach((domain, i) => {
-                this.labels('dynamic-to-vpn-domains-list', domain).set(++i);
+                ctx.labels('dynamic-to-vpn-domains-list', domain).set(++i);
             });
         }
     },
-});
+};

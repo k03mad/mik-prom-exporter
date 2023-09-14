@@ -1,18 +1,16 @@
-import client from 'prom-client';
-
 import Mikrotik from '../api/mikrotik.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
-export default new client.Gauge({
+export default {
     name: getCurrentFilename(import.meta.url),
     help: 'ip/dns',
     labelNames: ['type'],
 
-    async collect() {
-        this.reset();
+    async collect(ctx) {
+        ctx.reset();
 
         const [ipDns] = await Mikrotik.ipDns();
 
-        this.labels('cache-used').set(Number(ipDns['cache-used']));
+        ctx.labels('cache-used').set(Number(ipDns['cache-used']));
     },
-});
+};

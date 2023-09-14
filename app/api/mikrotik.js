@@ -235,5 +235,12 @@ class Mikrotik {
         });
     }
 
+    /**
+     * @returns {Promise<Array<object>>}
+     */
+    toolNetwatch() {
+        return this._get('tool/netwatch/print');
+    }
+
 }
 export default new Mikrotik();
