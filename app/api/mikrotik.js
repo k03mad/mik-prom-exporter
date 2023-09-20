@@ -257,14 +257,14 @@ class Mikrotik {
             'out-interface-list',
             'out-interface',
             'protocol',
-            'src-address-list',
-            'dst-address-list',
-            'address-list',
-            'address-list-timeout',
             'src-address',
             'src-port',
             'dst-address',
             'dst-port',
+            'src-address-list',
+            'dst-address-list',
+            'address-list',
+            'address-list-timeout',
             'tcp-flags',
             'connection-state',
             'connection-nat-state',
@@ -275,7 +275,7 @@ class Mikrotik {
         const str = params
             .map(elem => rule[elem])
             .filter(Boolean)
-            .join(' ');
+            .join(' :: ');
 
         return `${++i}. ${str}`;
     }
