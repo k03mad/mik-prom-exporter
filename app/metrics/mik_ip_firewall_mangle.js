@@ -11,9 +11,9 @@ export default {
 
         const ipFirewallMangle = await Mikrotik.ipFirewallMangle();
 
-        ipFirewallMangle.forEach(elem => {
+        ipFirewallMangle.forEach((elem, i) => {
             if (!Mikrotik.ipFirewallIsDummyRule(elem)) {
-                ctx.labels('bytes', `[${elem.chain} ${elem.action}] ${elem.comment}`).set(Number(elem.bytes));
+                ctx.labels('bytes', Mikrotik.formatFilterRule(elem, i)).set(Number(elem.bytes));
             }
         });
     },

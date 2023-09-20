@@ -147,7 +147,7 @@ class Mikrotik {
      * @returns {boolean}
      */
     ipFirewallIsDummyRule(rule) {
-        return rule.comment.includes('dummy');
+        return rule.comment?.includes('dummy');
     }
 
     /**
@@ -240,6 +240,44 @@ class Mikrotik {
      */
     toolNetwatch() {
         return this._get('tool/netwatch/print');
+    }
+
+    /**
+     * @param {object} rule
+     * @param {string|number} i
+     * @returns {string}
+     */
+    formatFilterRule(rule, i) {
+        const params = [
+            'comment',
+            'action',
+            'chain',
+            'in-interface-list',
+            'in-interface',
+            'out-interface-list',
+            'out-interface',
+            'protocol',
+            'src-address-list',
+            'dst-address-list',
+            'address-list',
+            'address-list-timeout',
+            'src-address',
+            'src-port',
+            'dst-address',
+            'dst-port',
+            'tcp-flags',
+            'connection-state',
+            'connection-nat-state',
+            'new-mss',
+            'new-routing-mark',
+        ];
+
+        const str = params
+            .map(elem => rule[elem])
+            .filter(Boolean)
+            .join(' ');
+
+        return `${++i}. ${str}`;
     }
 
 }

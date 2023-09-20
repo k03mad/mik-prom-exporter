@@ -11,9 +11,9 @@ export default {
 
         const ipFirewallNat = await Mikrotik.ipFirewallNat();
 
-        ipFirewallNat.forEach(elem => {
+        ipFirewallNat.forEach((elem, i) => {
             if (!Mikrotik.ipFirewallIsDummyRule(elem)) {
-                ctx.labels('bytes', `[${elem.chain} ${elem.action}] ${elem.comment}`).set(Number(elem.bytes));
+                ctx.labels('bytes', Mikrotik.formatFilterRule(elem, i)).set(Number(elem.bytes));
             }
         });
     },
