@@ -11,10 +11,8 @@ export default {
 
         const ipFirewallFilter = await Mikrotik.ipFirewallFilter();
 
-        ipFirewallFilter.forEach((elem, i) => {
-            if (!Mikrotik.ipFirewallIsDummyRule(elem)) {
-                ctx.labels('bytes', Mikrotik.formatFilterRule(elem, i)).set(Number(elem.bytes));
-            }
-        });
+        ipFirewallFilter
+            .filter(elem => !Mikrotik.ipFirewallIsDummyRule(elem))
+            .forEach((elem, i) => ctx.labels('bytes', Mikrotik.formatFilterRule(elem, i)).set(Number(elem.bytes)));
     },
 };
