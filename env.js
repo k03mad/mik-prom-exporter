@@ -13,18 +13,12 @@ const env = {
         password: process.env.npm_config_password || process.env.MIKROTIK_PASSWORD,
         toVpnList: process.env.npm_config_tovpn || process.env.MIKROTIK_TO_VPN_LIST,
     },
-    ipinfo: {
-        token: process.env.npm_config_ipinfo || process.env.IPINFO_TOKEN,
-    },
     debug: process.env.DEBUG,
 };
 
 const missedEnvNames = [];
 
-[
-    ...Object.entries(env.mikrotik),
-    ...Object.entries(env.ipinfo),
-].forEach(([key, value]) => {
+Object.entries(env.mikrotik).forEach(([key, value]) => {
     if (!value) {
         missedEnvNames.push(key);
     }
@@ -32,7 +26,7 @@ const missedEnvNames = [];
 
 if (missedEnvNames.length > 0) {
     throwPlainError([
-        errorText(` Mikrotik/IPinfo [${missedEnvNames.join(' + ')}] is not specified `),
+        errorText(` Mikrotik [${missedEnvNames.join(' + ')}] is not specified `),
         '> use env variables or npm parameters',
         '> see readme',
     ]);
