@@ -1,4 +1,3 @@
-import IPinfo from '../api/ipinfo.js';
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
@@ -29,7 +28,7 @@ export default {
         const byFasttrack = {};
         const byDstHost = {};
 
-        await Promise.all(ipFirewallConnection.map(async elem => {
+        ipFirewallConnection.forEach(elem => {
             const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
 
             const srcIp = elem['src-address'].split(':')[0];
@@ -44,18 +43,13 @@ export default {
 
             if (bytes > CONNECTIONS_MIN_BYTES) {
                 const ip = elem['dst-address'].split(':')[0];
-                let host = ipDnsCacheToName[ip];
+                const host = ipDnsCacheToName[ip];
 
-                if (!host) {
-                    try {
-                        const ipinfo = await IPinfo.req(ip);
-                        host = ipinfo.hostname;
-                    } catch {}
+                if (host) {
+                    countDupsBy(host, byDstHost, bytes);
                 }
-
-                host && countDupsBy(host, byDstHost, bytes);
             }
-        }));
+        });
 
         Object.entries(bySrc).forEach(([key, value]) => {
             ctx.labels('src-name-count', key).set(value);
