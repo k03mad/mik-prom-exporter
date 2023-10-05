@@ -26,27 +26,37 @@ export default {
         const redirectDnsDest = {};
         const redirectDnsSrc = {};
         const redirectDnsProto = {};
+        const redirectDnsFull = {};
 
         log.forEach((item, i) => {
             ctx.labels('entries', `[${item.time}] ${item.message}`).set(++i);
             countDupsBy(item.topics, topics);
 
-            const destDns = item.message.match(REDIRECT_DNS_DEST_RE)?.[1];
-
-            if (destDns) {
-                countDupsBy(destDns, redirectDnsDest);
-            }
+            const redirectFull = [];
 
             const srcDns = item.message.match(REDIRECT_DNS_SRC_RE)?.[1];
 
             if (srcDns) {
                 countDupsBy(ipDhcpServerLeaseToName[srcDns] || srcDns, redirectDnsSrc);
+                redirectFull.push(srcDns);
+            }
+
+            const destDns = item.message.match(REDIRECT_DNS_DEST_RE)?.[1];
+
+            if (destDns) {
+                countDupsBy(destDns, redirectDnsDest);
+                redirectFull.push('=>', destDns);
             }
 
             const protoDns = item.message.match(REDIRECT_DNS_PROTO_RE)?.[1];
 
             if (protoDns) {
                 countDupsBy(protoDns, redirectDnsProto);
+                redirectFull.push(`(${protoDns})`);
+            }
+
+            if (redirectFull.length > 0) {
+                countDupsBy(redirectFull.join(' '), redirectDnsFull);
             }
         });
 
@@ -64,6 +74,10 @@ export default {
 
         Object.entries(redirectDnsProto).forEach(([key, value]) => {
             ctx.labels('redirect-dns-proto', key).set(value);
+        });
+
+        Object.entries(redirectDnsFull).forEach(([key, value]) => {
+            ctx.labels('redirect-dns-full', key).set(value);
         });
     },
 };
