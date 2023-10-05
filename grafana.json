@@ -4147,6 +4147,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": false,
             "inspect": false
           },
           "mappings": [],
@@ -4164,7 +4165,44 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 1000
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "num"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 41
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "#"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 9
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 19,
@@ -4177,18 +4215,18 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
-          "enablePagination": false,
+          "enablePagination": true,
           "fields": "",
           "reducer": [
             "sum"
           ],
           "show": false
         },
-        "showHeader": false,
+        "showHeader": true,
         "sortBy": [
           {
-            "desc": false,
-            "displayName": "Value"
+            "desc": true,
+            "displayName": "#"
           }
         ]
       },
@@ -4220,8 +4258,23 @@
           "options": {
             "include": {
               "names": [
-                "name"
+                "name",
+                "Value"
               ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Value": 0,
+              "name": 1
+            },
+            "renameByName": {
+              "Value": "#",
+              "name": " "
             }
           }
         }
@@ -4244,6 +4297,6 @@
   "timezone": "",
   "title": "Mikrotik",
   "uid": "cd877682-4711-40a1-be1f-9343023cbff3",
-  "version": 70,
+  "version": 73,
   "weekStart": ""
 }
