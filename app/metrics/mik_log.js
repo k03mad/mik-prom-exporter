@@ -61,7 +61,7 @@ export default {
             }
         });
 
-        Object.entries(topics).forEach(([key, value]) => {
+        Object.entries(topics).reverse().forEach(([key, value]) => {
             ctx.labels('topics', key).set(value);
         });
 
