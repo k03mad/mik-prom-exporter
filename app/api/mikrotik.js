@@ -243,6 +243,13 @@ class Mikrotik {
     }
 
     /**
+     * @returns {Promise<Array<object>>}
+     */
+    log() {
+        return this._get('log/print');
+    }
+
+    /**
      * @param {object} rule
      * @param {string|number} i
      * @returns {string}
