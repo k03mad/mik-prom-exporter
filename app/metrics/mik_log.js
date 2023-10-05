@@ -37,8 +37,9 @@ export default {
             const srcDns = item.message.match(REDIRECT_DNS_SRC_RE)?.[1];
 
             if (srcDns) {
-                countDupsBy(ipDhcpServerLeaseToName[srcDns] || srcDns, redirectDnsSrc);
-                redirectFull.push(srcDns);
+                const nameOrIp = ipDhcpServerLeaseToName[srcDns] || srcDns;
+                countDupsBy(nameOrIp, redirectDnsSrc);
+                redirectFull.push(nameOrIp);
             }
 
             const destDns = item.message.match(REDIRECT_DNS_DEST_RE)?.[1];
