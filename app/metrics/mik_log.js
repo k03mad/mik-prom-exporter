@@ -29,7 +29,7 @@ export default {
         const redirectDnsFull = {};
 
         log.forEach((item, i) => {
-            ctx.labels('entries', `[${item.time}] ${item.message}`).set(++i);
+            ctx.labels('entries', `[${item.time} :: ${item.topics}] ${item.message}`).set(++i);
             countDupsBy(item.topics, topics);
 
             const redirectFull = [];
