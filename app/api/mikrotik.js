@@ -16,7 +16,7 @@ class Mikrotik {
             password: env.mikrotik.password,
         };
 
-        this.rps = 3;
+        this.rps = 5;
     }
 
     /**
