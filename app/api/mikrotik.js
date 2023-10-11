@@ -15,8 +15,6 @@ class Mikrotik {
             username: env.mikrotik.user,
             password: env.mikrotik.password,
         };
-
-        this.rps = 5;
     }
 
     /**
@@ -28,7 +26,7 @@ class Mikrotik {
         const {body} = await request(this.urls.api + path, {
             ...this.options,
             ...options,
-        }, {rps: this.rps});
+        });
 
         return body;
     }
@@ -42,7 +40,7 @@ class Mikrotik {
         const {body} = await requestCache(this.urls.api + path, {
             ...this.options,
             ...options,
-        }, {rps: this.rps, expire: 3600});
+        }, {expire: 3600});
 
         return body;
     }
