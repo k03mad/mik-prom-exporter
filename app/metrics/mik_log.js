@@ -9,7 +9,7 @@ const REDIRECT_DNS_PROTO_RE = /dstnat.+proto (\w+).+->.+:53/;
 export default {
     name: getCurrentFilename(import.meta.url),
     help: 'log',
-    labelNames: ['type', 'name'],
+    labelNames: ['type', 'time', 'topics', 'message', 'key'],
 
     async collect(ctx) {
         ctx.reset();
@@ -29,7 +29,7 @@ export default {
         const redirectDnsFull = {};
 
         log.forEach((item, i) => {
-            ctx.labels('entries', `[${item.time} :: ${item.topics}] ${item.message}`).set(++i);
+            ctx.labels('entries', item.time, item.topics, item.message, null).set(++i);
             countDupsBy(item.topics, topics);
 
             const redirectFull = [];
@@ -62,23 +62,23 @@ export default {
         });
 
         Object.entries(topics).forEach(([key, value]) => {
-            ctx.labels('topics', key).set(value);
+            ctx.labels('topics', null, null, null, key).set(value);
         });
 
         Object.entries(redirectDnsDest).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-dest', key).set(value);
+            ctx.labels('redirect-dns-dest', null, null, null, key).set(value);
         });
 
         Object.entries(redirectDnsSrc).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-src', key).set(value);
+            ctx.labels('redirect-dns-src', null, null, null, key).set(value);
         });
 
         Object.entries(redirectDnsProto).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-proto', key).set(value);
+            ctx.labels('redirect-dns-proto', null, null, null, key).set(value);
         });
 
         Object.entries(redirectDnsFull).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-full', key).set(value);
+            ctx.labels('redirect-dns-full', null, null, null, key).set(value);
         });
     },
 };
