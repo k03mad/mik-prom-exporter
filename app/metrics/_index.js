@@ -11,12 +11,15 @@ import mik_ip_firewall_filter from './mik_ip_firewall_filter.js';
 import mik_ip_firewall_mangle from './mik_ip_firewall_mangle.js';
 import mik_ip_firewall_nat from './mik_ip_firewall_nat.js';
 import mik_ip_firewall_raw from './mik_ip_firewall_raw.js';
+import mik_ip_proxy_connections from './mik_ip_proxy_connections.js';
 import mik_log from './mik_log.js';
+import mik_system_history from './mik_system_history.js';
 import mik_system_package_update from './mik_system_package_update.js';
 import mik_system_resource from './mik_system_resource.js';
 import mik_system_scheduler from './mik_system_scheduler.js';
 import mik_system_script from './mik_system_script.js';
 import mik_tool_netwatch from './mik_tool_netwatch.js';
+import mik_tool_profile from './mik_tool_profile.js';
 
 export default {
     mik_interface_wireguard_peers,
@@ -31,10 +34,13 @@ export default {
     mik_ip_firewall_mangle,
     mik_ip_firewall_nat,
     mik_ip_firewall_raw,
+    mik_ip_proxy_connections,
     mik_log,
     mik_system_package_update,
     mik_system_resource,
     mik_system_scheduler,
     mik_system_script,
+    mik_system_history,
     mik_tool_netwatch,
+    mik_tool_profile,
 };

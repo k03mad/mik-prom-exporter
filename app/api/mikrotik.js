@@ -55,6 +55,13 @@ class Mikrotik {
     /**
      * @returns {Promise<Array<object>>}
      */
+    systemHistory() {
+        return this._get('system/history/print');
+    }
+
+    /**
+     * @returns {Promise<Array<object>>}
+     */
     ipDns() {
         return this._get('ip/dns/print');
     }
@@ -190,6 +197,13 @@ class Mikrotik {
     /**
      * @returns {Promise<Array<object>>}
      */
+    ipProxyConnections() {
+        return this._get('ip/proxy/connections/print');
+    }
+
+    /**
+     * @returns {Promise<Array<object>>}
+     */
     systemScheduler() {
         return this._getCache('system/scheduler/print');
     }
@@ -240,6 +254,17 @@ class Mikrotik {
      */
     toolNetwatch() {
         return this._get('tool/netwatch/print');
+    }
+
+    /**
+     * @returns {Promise<Array<object>>}
+     */
+    toolProfile() {
+        return this._get('tool/profile', {
+            json: {
+                duration: '10s',
+            },
+        });
     }
 
     /**
