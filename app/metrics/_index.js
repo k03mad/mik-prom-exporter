@@ -19,7 +19,7 @@ import mik_system_resource from './mik_system_resource.js';
 import mik_system_scheduler from './mik_system_scheduler.js';
 import mik_system_script from './mik_system_script.js';
 import mik_tool_netwatch from './mik_tool_netwatch.js';
-import mik_tool_profile from './mik_tool_profile.js';
+// import mik_tool_profile from './mik_tool_profile.js';
 
 export default {
     mik_interface_wireguard_peers,
@@ -42,5 +42,5 @@ export default {
     mik_system_script,
     mik_system_history,
     mik_tool_netwatch,
-    mik_tool_profile,
+    // mik_tool_profile,
 };
