@@ -13,6 +13,6 @@ export default {
 
         ipFirewallFilter
             .filter(elem => !Mikrotik.ipFirewallIsDummyRule(elem))
-            .forEach((elem, i) => ctx.labels('bytes', Mikrotik.formatFilterRule(elem, i)).set(Number(elem.bytes)));
+            .forEach(elem => ctx.labels('bytes', Mikrotik.formatFilterRule(elem)).set(Number(elem.bytes)));
     },
 };

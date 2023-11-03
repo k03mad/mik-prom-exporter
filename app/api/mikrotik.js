@@ -276,10 +276,9 @@ class Mikrotik {
 
     /**
      * @param {object} rule
-     * @param {string|number} i
      * @returns {string}
      */
-    formatFilterRule(rule, i) {
+    formatFilterRule(rule) {
         const params = [
             'comment',
             'chain',
@@ -304,12 +303,10 @@ class Mikrotik {
             'new-routing-mark',
         ];
 
-        const str = params
+        return params
             .map(elem => rule[elem])
             .filter(Boolean)
             .join(' :: ');
-
-        return `${++i}. ${str}`;
     }
 
 }
