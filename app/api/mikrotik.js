@@ -280,9 +280,9 @@ class Mikrotik {
      */
     formatFilterRule(rule) {
         const params = [
-            'comment',
             'chain',
             'action',
+            'comment',
             'in-interface-list',
             'in-interface',
             'out-interface-list',
