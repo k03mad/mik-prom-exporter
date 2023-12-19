@@ -10,6 +10,8 @@ import metrics from './metrics/_index.js';
 
 const register = new client.Registry();
 
+client.collectDefaultMetrics({register});
+
 register.setDefaultLabels({
     app: packageJson.name,
     host: os.hostname,

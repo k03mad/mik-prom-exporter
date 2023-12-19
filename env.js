@@ -4,8 +4,8 @@ import {throwPlainError} from './app/helpers/logging.js';
 const env = {
     server: {
         port: process.env.npm_config_port
-           || process.env.MIKROTIK_EXPORTER_PORT
-           || 11_012,
+        || process.env.MIKROTIK_EXPORTER_PORT
+        || 11_012,
     },
     mikrotik: {
         host: process.env.npm_config_host || process.env.MIKROTIK_HOST,

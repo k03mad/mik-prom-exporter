@@ -40,7 +40,7 @@ export default {
                         && (
                             (elem.timeout && elem.address === entry.data)
                             || (elem.address.includes('/') && entry.type === 'A'
-                               && new Netmask(elem.address).contains(entry.data))
+                            && new Netmask(elem.address).contains(entry.data))
                         )
                     ) {
                         matchedDomains.add(`${entry.name} (${elem.address})`);
