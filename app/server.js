@@ -17,12 +17,9 @@ if (env.debug) {
 
 app.use(helmet());
 app.use(compression());
-app.use(express.json());
 
 app.get('/metrics', async (req, res) => {
     const metrics = await register.metrics();
-
-    res.setHeader('Content-Type', register.contentType);
     res.send(metrics);
 });
 
