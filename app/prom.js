@@ -3,6 +3,7 @@ import os from 'node:os';
 import client from 'prom-client';
 
 import env from '../env.js';
+
 import {errorText} from './helpers/colors.js';
 import {logPlainError} from './helpers/logging.js';
 import {packageJson} from './helpers/parse.js';
