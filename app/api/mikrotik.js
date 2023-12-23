@@ -259,6 +259,13 @@ class Mikrotik {
     /**
      * @returns {Promise<Array<object>>}
      */
+    queueTree() {
+        return this._get('queue/tree/print');
+    }
+
+    /**
+     * @returns {Promise<Array<object>>}
+     */
     toolProfile() {
         return this._get('tool/profile', {
             json: {
