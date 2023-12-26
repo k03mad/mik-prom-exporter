@@ -13,7 +13,7 @@
     "node": ">=21"
   },
   "dependencies": {
-    "@k03mad/request": "4.2.0",
+    "@k03mad/request": "4.3.0",
     "chalk": "5.3.0",
     "compression": "1.7.4",
     "express": "4.18.2",
@@ -23,20 +23,14 @@
     "prom-client": "15.1.0"
   },
   "devDependencies": {
-    "@k03mad/eslint-config": "15.2.0",
-    "@stylistic/eslint-plugin": "1.5.1",
+    "@k03mad/eslint-config": "16.3.0",
     "eslint": "8.56.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jsdoc": "46.9.1",
-    "eslint-plugin-n": "16.5.0",
-    "eslint-plugin-sonarjs": "0.23.0",
-    "eslint-plugin-unicorn": "50.0.1",
     "husky": "8.0.3",
     "nodemon": "3.0.2"
   },
   "scripts": {
     "lint": "npm run lint:eslint",
-    "lint:eslint": "eslint ./ --report-unused-disable-directives --cache",
+    "lint:eslint": "eslint ./ --cache",
     "clean": "rm -rf ./node_modules || true",
     "setup": "npm run clean && npm i",
     "setup:prod": "npm run clean && npm i --omit=dev",
