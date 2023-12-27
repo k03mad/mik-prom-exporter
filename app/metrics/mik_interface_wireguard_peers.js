@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/filename-case */
+
 import Mikrotik from '../api/mikrotik.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 

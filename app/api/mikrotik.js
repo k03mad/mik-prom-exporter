@@ -18,6 +18,41 @@ class Mikrotik {
     }
 
     /**
+     * @param {object} rule
+     * @returns {string}
+     */
+    static formatFilterRule(rule) {
+        const params = [
+            'chain',
+            'action',
+            'comment',
+            'in-interface-list',
+            'in-interface',
+            'out-interface-list',
+            'out-interface',
+            'protocol',
+            'src-address',
+            'src-port',
+            'dst-address',
+            'dst-port',
+            'src-address-list',
+            'dst-address-list',
+            'address-list',
+            'address-list-timeout',
+            'tcp-flags',
+            'connection-state',
+            'connection-nat-state',
+            'new-mss',
+            'new-routing-mark',
+        ];
+
+        return params
+            .map(elem => rule[elem])
+            .filter(Boolean)
+            .join(' :: ');
+    }
+
+    /**
      * @param {string} path
      * @param {object} [options]
      * @returns {Promise<object>}
@@ -46,6 +81,51 @@ class Mikrotik {
     }
 
     /**
+     * @returns {Promise<object>}
+     */
+    async ipDnsCacheToName() {
+        const ipToName = {};
+        const cache = await this.ipDnsCache();
+
+        cache.forEach(elem => {
+            if (
+                elem.type === 'A'
+                && elem.data?.includes('.')
+                && elem.name?.includes('.')
+            ) {
+                ipToName[elem.data] = elem.name;
+            }
+        });
+
+        return ipToName;
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    async ipDhcpServerLeaseToName() {
+        const ipToName = {};
+        const leases = await this.ipDhcpServerLease();
+
+        leases.forEach(lease => {
+            if (lease.comment) {
+                ipToName[lease.address] = lease.comment;
+            }
+        });
+
+        return ipToName;
+    }
+
+    /**
+     * @param {object} rule
+     * @param {string} rule.comment
+     * @returns {boolean}
+     */
+    ipFirewallIsDummyRule(rule) {
+        return rule.comment?.includes('dummy');
+    }
+
+    /**
      * @returns {Promise<Array<object>>}
      */
     systemResource() {
@@ -71,26 +151,6 @@ class Mikrotik {
      */
     ipDnsCache() {
         return this._get('ip/dns/cache/print');
-    }
-
-    /**
-     * @returns {Promise<object>}
-     */
-    async ipDnsCacheToName() {
-        const ipToName = {};
-        const cache = await this.ipDnsCache();
-
-        cache.forEach(elem => {
-            if (
-                elem.type === 'A'
-                && elem.data?.includes('.')
-                && elem.name?.includes('.')
-            ) {
-                ipToName[elem.data] = elem.name;
-            }
-        });
-
-        return ipToName;
     }
 
     /**
@@ -149,15 +209,6 @@ class Mikrotik {
     }
 
     /**
-     * @param {object} rule
-     * @param {string} rule.comment
-     * @returns {boolean}
-     */
-    ipFirewallIsDummyRule(rule) {
-        return rule.comment?.includes('dummy');
-    }
-
-    /**
      * @returns {Promise<Array<object>>}
      */
     ipFirewallConnection() {
@@ -169,22 +220,6 @@ class Mikrotik {
      */
     ipDhcpServerLease() {
         return this._getCache('ip/dhcp-server/lease/print');
-    }
-
-    /**
-     * @returns {Promise<object>}
-     */
-    async ipDhcpServerLeaseToName() {
-        const ipToName = {};
-        const leases = await this.ipDhcpServerLease();
-
-        leases.forEach(lease => {
-            if (lease.comment) {
-                ipToName[lease.address] = lease.comment;
-            }
-        });
-
-        return ipToName;
     }
 
     /**
@@ -279,41 +314,6 @@ class Mikrotik {
      */
     log() {
         return this._get('log/print');
-    }
-
-    /**
-     * @param {object} rule
-     * @returns {string}
-     */
-    formatFilterRule(rule) {
-        const params = [
-            'chain',
-            'action',
-            'comment',
-            'in-interface-list',
-            'in-interface',
-            'out-interface-list',
-            'out-interface',
-            'protocol',
-            'src-address',
-            'src-port',
-            'dst-address',
-            'dst-port',
-            'src-address-list',
-            'dst-address-list',
-            'address-list',
-            'address-list-timeout',
-            'tcp-flags',
-            'connection-state',
-            'connection-nat-state',
-            'new-mss',
-            'new-routing-mark',
-        ];
-
-        return params
-            .map(elem => rule[elem])
-            .filter(Boolean)
-            .join(' :: ');
     }
 
 }

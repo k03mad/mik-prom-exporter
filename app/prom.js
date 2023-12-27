@@ -7,7 +7,7 @@ import env from '../env.js';
 import {errorText} from './helpers/colors.js';
 import {logPlainError} from './helpers/logging.js';
 import {packageJson} from './helpers/parse.js';
-import metrics from './metrics/_index.js';
+import * as metrics from './metrics/_index.js';
 
 const register = new client.Registry();
 
