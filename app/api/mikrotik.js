@@ -18,41 +18,6 @@ class Mikrotik {
     }
 
     /**
-     * @param {object} rule
-     * @returns {string}
-     */
-    static formatFilterRule(rule) {
-        const params = [
-            'chain',
-            'action',
-            'comment',
-            'in-interface-list',
-            'in-interface',
-            'out-interface-list',
-            'out-interface',
-            'protocol',
-            'src-address',
-            'src-port',
-            'dst-address',
-            'dst-port',
-            'src-address-list',
-            'dst-address-list',
-            'address-list',
-            'address-list-timeout',
-            'tcp-flags',
-            'connection-state',
-            'connection-nat-state',
-            'new-mss',
-            'new-routing-mark',
-        ];
-
-        return params
-            .map(elem => rule[elem])
-            .filter(Boolean)
-            .join(' :: ');
-    }
-
-    /**
      * @param {string} path
      * @param {object} [options]
      * @returns {Promise<object>}
@@ -114,6 +79,41 @@ class Mikrotik {
         });
 
         return ipToName;
+    }
+
+    /**
+     * @param {object} rule
+     * @returns {string}
+     */
+    formatFilterRule(rule) {
+        const params = [
+            'chain',
+            'action',
+            'comment',
+            'in-interface-list',
+            'in-interface',
+            'out-interface-list',
+            'out-interface',
+            'protocol',
+            'src-address',
+            'src-port',
+            'dst-address',
+            'dst-port',
+            'src-address-list',
+            'dst-address-list',
+            'address-list',
+            'address-list-timeout',
+            'tcp-flags',
+            'connection-state',
+            'connection-nat-state',
+            'new-mss',
+            'new-routing-mark',
+        ];
+
+        return params
+            .map(elem => rule[elem])
+            .filter(Boolean)
+            .join(' :: ');
     }
 
     /**
