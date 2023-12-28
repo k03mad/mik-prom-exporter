@@ -51,7 +51,7 @@ export default {
             });
 
             [...matchedDomains].forEach((domain, i) => {
-                ctx.labels('dynamic-to-vpn-domains-list', domain).set(++i);
+                ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
             });
         }
     },

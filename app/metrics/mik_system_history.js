@@ -23,7 +23,7 @@ export default {
                 item.policy,
                 removeNewLine(item.redo),
                 removeNewLine(item.undo),
-            ).set(++i);
+            ).set(i + 1);
         });
     },
 };
