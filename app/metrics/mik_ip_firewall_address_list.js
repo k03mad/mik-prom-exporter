@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/filename-case */
-
 import {Netmask} from 'netmask';
 
 import env from '../../env.js';

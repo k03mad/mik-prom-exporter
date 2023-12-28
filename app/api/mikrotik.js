@@ -46,42 +46,6 @@ class Mikrotik {
     }
 
     /**
-     * @returns {Promise<object>}
-     */
-    async ipDnsCacheToName() {
-        const ipToName = {};
-        const cache = await this.ipDnsCache();
-
-        cache.forEach(elem => {
-            if (
-                elem.type === 'A'
-                && elem.data?.includes('.')
-                && elem.name?.includes('.')
-            ) {
-                ipToName[elem.data] = elem.name;
-            }
-        });
-
-        return ipToName;
-    }
-
-    /**
-     * @returns {Promise<object>}
-     */
-    async ipDhcpServerLeaseToName() {
-        const ipToName = {};
-        const leases = await this.ipDhcpServerLease();
-
-        leases.forEach(lease => {
-            if (lease.comment) {
-                ipToName[lease.address] = lease.comment;
-            }
-        });
-
-        return ipToName;
-    }
-
-    /**
      * @param {object} rule
      * @returns {string}
      */
@@ -314,6 +278,42 @@ class Mikrotik {
      */
     log() {
         return this._get('log/print');
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    async ipDnsCacheToName() {
+        const ipToName = {};
+        const cache = await this.ipDnsCache();
+
+        cache.forEach(elem => {
+            if (
+                elem.type === 'A'
+                && elem.data?.includes('.')
+                && elem.name?.includes('.')
+            ) {
+                ipToName[elem.data] = elem.name;
+            }
+        });
+
+        return ipToName;
+    }
+
+    /**
+     * @returns {Promise<object>}
+     */
+    async ipDhcpServerLeaseToName() {
+        const ipToName = {};
+        const leases = await this.ipDhcpServerLease();
+
+        leases.forEach(lease => {
+            if (lease.comment) {
+                ipToName[lease.address] = lease.comment;
+            }
+        });
+
+        return ipToName;
     }
 
 }

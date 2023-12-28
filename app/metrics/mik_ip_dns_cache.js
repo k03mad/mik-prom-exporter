@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/filename-case */
-
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
