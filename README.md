@@ -10,9 +10,14 @@
 — Start exporter:
 
 ```bash
-npm run start --user=admin --password=123 --host=localhost:3030 --port=11000
+# one time
+npm i pnpm -g
+pnpm run setup
+
+# start app
+pnpm run start --user=admin --password=123 --host=localhost:3030 --port=11000
 # or with envs
-MIKROTIK_USER=admin MIKROTIK_PASSWORD=123 MIKROTIK_HOST=localhost:3030 MIKROTIK_EXPORTER_PORT=11000 npm run start
+MIKROTIK_USER=admin MIKROTIK_PASSWORD=123 MIKROTIK_HOST=localhost:3030 MIKROTIK_EXPORTER_PORT=11000 pnpm run start
 ```
 
 — Update Prometheus `scrape_configs` \
