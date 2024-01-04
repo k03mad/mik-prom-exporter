@@ -21,5 +21,5 @@ jobs:
           script: |
             cd ~/git/mik-prom-exporter
             git pull
-            ~/.nvm/nvm-exec pnpm run setup:prod
+            ~/.nvm/nvm-exec npm run setup:prod
             systemctl restart mik-exporter.service

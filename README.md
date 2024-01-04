@@ -12,12 +12,12 @@
 ```bash
 # one time
 npm i pnpm -g
-pnpm run setup
+npm run setup
 
 # start app
-pnpm run start --user=admin --password=123 --host=localhost:3030 --port=11000
+npm run start --user=admin --password=123 --host=localhost:3030 --port=11000
 # or with envs
-MIKROTIK_USER=admin MIKROTIK_PASSWORD=123 MIKROTIK_HOST=localhost:3030 MIKROTIK_EXPORTER_PORT=11000 pnpm run start
+MIKROTIK_USER=admin MIKROTIK_PASSWORD=123 MIKROTIK_HOST=localhost:3030 MIKROTIK_EXPORTER_PORT=11000 npm run start
 ```
 
 — Update Prometheus `scrape_configs` \
