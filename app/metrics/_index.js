@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 
 // export {default as mik_ip_proxy_connections} from './mik_ip_proxy_connections.js';
+export {default as mik_interface} from './mik_interface.js';
 // export {default as mik_tool_profile} from './mik_tool_profile.js';
 export {default as mik_interface_wireguard_peers} from './mik_interface_wireguard_peers.js';
-export {default as mik_interface_wireless_registration_table} from './mik_interface_wireless_registration_table.js';
 export {default as mik_interface_wireless} from './mik_interface_wireless.js';
-export {default as mik_interface} from './mik_interface.js';
-export {default as mik_ip_dns_cache} from './mik_ip_dns_cache.js';
+export {default as mik_interface_wireless_registration_table} from './mik_interface_wireless_registration_table.js';
 export {default as mik_ip_dns} from './mik_ip_dns.js';
+export {default as mik_ip_dns_cache} from './mik_ip_dns_cache.js';
 export {default as mik_ip_firewall_address_list} from './mik_ip_firewall_address_list.js';
 export {default as mik_ip_firewall_connection} from './mik_ip_firewall_connection.js';
 export {default as mik_ip_firewall_filter} from './mik_ip_firewall_filter.js';
