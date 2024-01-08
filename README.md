@@ -11,7 +11,6 @@
 
 ```bash
 # one time
-npm i pnpm -g
 npm run setup
 
 # start app
