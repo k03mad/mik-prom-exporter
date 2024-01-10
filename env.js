@@ -1,5 +1,5 @@
 import {errorText} from './app/helpers/colors.js';
-import {throwPlainError} from './app/helpers/logging.js';
+import {throwError} from './app/helpers/logging.js';
 
 const env = {
     server: {
@@ -25,7 +25,7 @@ Object.entries(env.mikrotik).forEach(([key, value]) => {
 });
 
 if (missedEnvNames.length > 0) {
-    throwPlainError([
+    throwError([
         errorText(` Mikrotik [${missedEnvNames.join(' + ')}] is not specified `),
         '> use env variables or npm parameters',
         '> see readme',

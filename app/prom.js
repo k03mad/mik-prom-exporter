@@ -1,12 +1,10 @@
 import os from 'node:os';
 
-import {getDateYMDHMS} from '@k03mad/simple-date';
 import client from 'prom-client';
 
 import env from '../env.js';
 
-import {errorText} from './helpers/colors.js';
-import {logPlainError} from './helpers/logging.js';
+import {logError} from './helpers/logging.js';
 import {packageJson} from './helpers/parse.js';
 import * as metrics from './metrics/_index.js';
 
@@ -32,10 +30,7 @@ Object
                 try {
                     await collect(this);
                 } catch (err) {
-                    logPlainError([
-                        `${getDateYMDHMS()} [${name}]`,
-                        errorText(err),
-                    ]);
+                    logError([`[${name}]`, err]);
                 }
             },
         });

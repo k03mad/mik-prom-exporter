@@ -1,25 +1,29 @@
+/* eslint-disable no-console */
+
+import {getDateYMDHMS} from '@k03mad/simple-date';
+
 import {convertToArray} from './array.js';
 
-/* eslint-disable no-console */
 /**
  * @param {any|any[]} msg
  * @returns {void}
  */
-export const log = msg => console.log(convertToArray(msg).join('\n'));
+export const log = msg => convertToArray(msg)
+    .forEach(elem => console.log(elem));
 
 /**
  * @param {any|any[]} msg
  * @returns {void}
  */
-export const logPlainError = msg => {
-    console.error(`\n${convertToArray(msg).join('\n')}\n`);
-};
+export const logError = msg => [getDateYMDHMS(), convertToArray(msg)]
+    .flat()
+    .forEach(elem => console.error(elem));
 
 /**
  * @param {any|any[]} msg
  * @returns {void}
  */
-export const throwPlainError = msg => {
-    logPlainError(msg);
+export const throwError = msg => {
+    logError(msg);
     process.exit(1);
 };
