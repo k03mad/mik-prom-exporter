@@ -1,5 +1,6 @@
 import os from 'node:os';
 
+import {getDateYMDHMS} from '@k03mad/simple-date';
 import client from 'prom-client';
 
 import env from '../env.js';
@@ -32,7 +33,7 @@ Object
                     await collect(this);
                 } catch (err) {
                     logPlainError([
-                        `${new Date().toISOString()} [${name}]`,
+                        `${getDateYMDHMS()} [${name}]`,
                         errorText(err),
                     ]);
                 }

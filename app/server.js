@@ -1,3 +1,4 @@
+import {getDateYMDHMS} from '@k03mad/simple-date';
 import compression from 'compression';
 import express from 'express';
 import helmet from 'helmet';
@@ -25,7 +26,7 @@ app.get('/metrics', async (req, res) => {
 });
 
 app.listen(env.server.port, () => log([
-    `[${new Date().toLocaleString()}]`,
+    `[${getDateYMDHMS()}]`,
     nameText(packageJson.name),
     'started on port',
     numText(env.server.port),
