@@ -5,7 +5,10 @@
   "maintainers": [
     "Kirill Molchanov <k03.mad@gmail.com"
   ],
-  "repository": "k03mad/mik-prom-exporter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k03mad/mik-prom-exporter.git"
+  },
   "license": "MIT",
   "private": true,
   "type": "module",
