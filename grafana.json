@@ -1611,6 +1611,8 @@
       "options": {
         "legend": {
           "calcs": [
+            "max",
+            "mean",
             "lastNotNull"
           ],
           "displayMode": "table",
@@ -1630,16 +1632,21 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "builder",
+          "disableTextWrap": false,
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_interface{type=\"bytes\"} > 0",
+          "expr": "increase(mik_interface{type=\"bytes\"}[60m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Bytes",
+      "title": "Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -2300,7 +2307,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -2337,6 +2344,7 @@
       "options": {
         "legend": {
           "calcs": [
+            "max",
             "mean",
             "lastNotNull"
           ],
@@ -2357,16 +2365,21 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "builder",
+          "disableTextWrap": false,
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_interface_wireless_registration_table{type=\"bytes\"}",
+          "expr": "increase(mik_interface_wireless_registration_table{type=\"bytes\"}[60m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Bytes",
+      "title": "Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -2676,16 +2689,21 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "builder",
+          "disableTextWrap": false,
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_interface_wireguard_peers{type=\"bytes\"}",
+          "expr": "increase(mik_interface_wireguard_peers{type=\"bytes\"}[60m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Bytes",
+      "title": "Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -2792,14 +2810,15 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_ip_firewall_filter{type=\"bytes\"}",
+          "expr": "increase(mik_ip_firewall_filter{type=\"bytes\"}[60m])",
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Filter Bytes",
+      "title": "Filter Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -2893,14 +2912,15 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_ip_firewall_nat{type=\"bytes\"}",
+          "expr": "increase(mik_ip_firewall_nat{type=\"bytes\"}[60m])",
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Nat Bytes",
+      "title": "Nat Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -2994,14 +3014,15 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_ip_firewall_mangle{type=\"bytes\"}",
+          "expr": "increase(mik_ip_firewall_mangle{type=\"bytes\"}[60m])",
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Mangle Bytes",
+      "title": "Mangle Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -3095,14 +3116,15 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_ip_firewall_raw{type=\"bytes\"}",
+          "expr": "increase(mik_ip_firewall_raw{type=\"bytes\"}[60m])",
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Raw Bytes",
+      "title": "Raw Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -3364,8 +3386,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -3469,8 +3490,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -3574,8 +3594,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -3679,8 +3698,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -3845,14 +3863,15 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "mik_queue_tree{type=\"bytes\"}",
+          "expr": "increase(mik_queue_tree{type=\"bytes\"}[60m])",
           "instant": false,
+          "interval": "60m",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Bytes",
+      "title": "Bytes Per Hour",
       "type": "timeseries"
     },
     {
@@ -5438,6 +5457,6 @@
   "timezone": "",
   "title": "Mikrotik",
   "uid": "cd877682-4711-40a1-be1f-9343023cbff3",
-  "version": 101,
+  "version": 102,
   "weekStart": ""
 }
