@@ -21,4 +21,4 @@ MIKROTIK_USER=admin MIKROTIK_PASSWORD=123 MIKROTIK_HOST=localhost:3030 MIKROTIK_
 ```
 
 — Update Prometheus `scrape_configs` \
-— [Import Grafana dashboard](grafana.json)
+— [Import Grafana dashboard](grafana)
