@@ -1,3 +1,5 @@
+import os from 'node:os';
+
 import {errorText} from './app/helpers/colors.js';
 import {throwError} from './app/helpers/logging.js';
 
@@ -13,6 +15,9 @@ const env = {
         password: process.env.npm_config_password || process.env.MIKROTIK_PASSWORD,
         toVpnList: process.env.npm_config_tovpn || process.env.MIKROTIK_TO_VPN_LIST,
         honeypotList: process.env.npm_config_honeypot || process.env.MIKROTIK_HONEYPOT_LIST,
+    },
+    geoip: {
+        cacheDir: `${os.homedir()}/.ip2geo`,
     },
     debug: process.env.DEBUG,
 };

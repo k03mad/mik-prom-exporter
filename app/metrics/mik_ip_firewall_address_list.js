@@ -60,7 +60,9 @@ export default {
 
             await Promise.all(ipFirewallAddressList.map(async elem => {
                 if (elem.list === env.mikrotik.honeypotList) {
-                    const data = await ip2geo(elem.address);
+                    const data = await ip2geo(elem.address, {
+                        cacheDir: env.geoip.cacheDir,
+                    });
 
                     countDupsBy(`${data.emoji} ${data.country}`, countries);
                     countDupsBy(data.isp, isps);
