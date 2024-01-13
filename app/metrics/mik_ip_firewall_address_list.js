@@ -1,3 +1,4 @@
+import {ip2geo} from '@k03mad/ip2geo';
 import {Netmask} from 'netmask';
 
 import env from '../../env.js';
@@ -50,6 +51,28 @@ export default {
 
             [...matchedDomains].forEach((domain, i) => {
                 ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
+            });
+        }
+
+        if (env.mikrotik.honeypotList) {
+            const countries = {};
+            const isps = {};
+
+            await Promise.all(ipFirewallAddressList.map(async elem => {
+                if (elem.list === env.mikrotik.honeypotList) {
+                    const data = await ip2geo(elem.address);
+
+                    countDupsBy(`${data.emoji} ${data.country}`, countries);
+                    countDupsBy(data.isp, isps);
+                }
+            }));
+
+            Object.entries(countries).forEach(([name, count]) => {
+                ctx.labels('geoip_country', name).set(count);
+            });
+
+            Object.entries(isps).forEach(([name, count]) => {
+                ctx.labels('geoip_isp', name).set(count);
             });
         }
     },

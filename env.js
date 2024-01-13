@@ -12,6 +12,7 @@ const env = {
         user: process.env.npm_config_user || process.env.MIKROTIK_USER,
         password: process.env.npm_config_password || process.env.MIKROTIK_PASSWORD,
         toVpnList: process.env.npm_config_tovpn || process.env.MIKROTIK_TO_VPN_LIST,
+        honeypotList: process.env.npm_config_honeypot || process.env.MIKROTIK_HONEYPOT_LIST,
     },
     debug: process.env.DEBUG,
 };

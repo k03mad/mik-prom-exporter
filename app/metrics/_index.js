@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
 
 // export {default as mik_ip_proxy_connections} from './mik_ip_proxy_connections.js';
-export {default as mik_interface} from './mik_interface.js';
 // export {default as mik_tool_profile} from './mik_tool_profile.js';
+
+export {default as mik_interface} from './mik_interface.js';
 export {default as mik_interface_wireguard_peers} from './mik_interface_wireguard_peers.js';
 export {default as mik_interface_wireless} from './mik_interface_wireless.js';
 export {default as mik_interface_wireless_registration_table} from './mik_interface_wireless_registration_table.js';
