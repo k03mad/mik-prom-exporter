@@ -2,6 +2,7 @@
 
 // export {default as mik_ip_proxy_connections} from './mik_ip_proxy_connections.js';
 // export {default as mik_tool_profile} from './mik_tool_profile.js';
+// export {default as mik_tool_netwatch} from './mik_tool_netwatch.js';
 
 export {default as mik_interface} from './mik_interface.js';
 export {default as mik_interface_wireguard_peers} from './mik_interface_wireguard_peers.js';
@@ -22,4 +23,3 @@ export {default as mik_system_package_update} from './mik_system_package_update.
 export {default as mik_system_resource} from './mik_system_resource.js';
 export {default as mik_system_scheduler} from './mik_system_scheduler.js';
 export {default as mik_system_script} from './mik_system_script.js';
-export {default as mik_tool_netwatch} from './mik_tool_netwatch.js';
