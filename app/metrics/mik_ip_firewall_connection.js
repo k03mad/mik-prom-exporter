@@ -1,3 +1,6 @@
+import {ip2geo} from '@k03mad/ip2geo';
+
+import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
@@ -27,8 +30,13 @@ export default {
         const byProtocol = {};
         const byFasttrack = {};
         const byDstHost = {};
+        const byDstCountry = {};
+        const byDstIsp = {};
+
+        const dstAddresses = new Set();
 
         ipFirewallConnection.forEach(elem => {
+            dstAddresses.add();
             const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
 
             const srcIp = elem['src-address'].split(':')[0];
@@ -41,15 +49,34 @@ export default {
             countDupsBy(elem.protocol, byProtocol);
             countDupsBy(elem.fasttrack, byFasttrack);
 
-            if (bytes > CONNECTIONS_MIN_BYTES) {
-                const ip = elem['dst-address'].split(':')[0];
-                const host = ipDnsCacheToName[ip];
+            const ip = elem['dst-address'].split(':')[0];
 
-                if (host) {
-                    countDupsBy(host, byDstHost, bytes);
+            if (ip) {
+                dstAddresses.add(ip);
+
+                if (bytes > CONNECTIONS_MIN_BYTES) {
+                    const host = ipDnsCacheToName[ip];
+
+                    if (host) {
+                        countDupsBy(host, byDstHost, bytes);
+                    }
                 }
             }
         });
+
+        await Promise.all([...dstAddresses].map(async address => {
+            const {country, emoji, isp} = await ip2geo(address, {
+                cacheDir: env.geoip.cacheDir,
+            });
+
+            if (country) {
+                countDupsBy(`${emoji} ${country}`, byDstCountry);
+            }
+
+            if (isp) {
+                countDupsBy(isp, byDstIsp);
+            }
+        }));
 
         Object.entries(bySrc).forEach(([key, value]) => {
             ctx.labels('src-name-count', key).set(value);
@@ -65,6 +92,14 @@ export default {
 
         Object.entries(byDstHost).forEach(([key, value]) => {
             ctx.labels('dst-host-bytes', key).set(value);
+        });
+
+        Object.entries(byDstCountry).forEach(([key, value]) => {
+            ctx.labels('dst-country', key).set(value);
+        });
+
+        Object.entries(byDstIsp).forEach(([key, value]) => {
+            ctx.labels('dst-isp', key).set(value);
         });
     },
 };
