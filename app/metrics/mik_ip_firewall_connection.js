@@ -36,7 +36,6 @@ export default {
         const dstAddresses = new Set();
 
         ipFirewallConnection.forEach(elem => {
-            dstAddresses.add();
             const bytes = Number(elem['orig-bytes']) + Number(elem['repl-bytes']);
 
             const srcIp = elem['src-address'].split(':')[0];
