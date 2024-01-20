@@ -1,4 +1,4 @@
-import {ip2geo} from '@k03mad/ip2geo';
+import {cacheStorage, ip2geo} from '@k03mad/ip2geo';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
@@ -76,6 +76,8 @@ export default {
                 countDupsBy(isp, byDstIsp);
             }
         }));
+
+        ctx.labels('map_entries', null).set(cacheStorage.size);
 
         Object.entries(bySrc).forEach(([key, value]) => {
             ctx.labels('src-name-count', key).set(value);
