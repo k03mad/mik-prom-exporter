@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@k03mad/ip2geo':
-    specifier: 4.2.1
-    version: 4.2.1
+    specifier: 4.3.0
+    version: 4.3.0
   '@k03mad/request':
     specifier: 5.6.0
     version: 5.6.0
@@ -162,8 +162,8 @@ packages:
       - vue-eslint-parser
     dev: true
 
-  /@k03mad/ip2geo@4.2.1:
-    resolution: {integrity: sha512-ZBXCjp+l1t468jZ6yGYoNwNWMkISfUh//E5Dpf/F0uw09GeUCfPNcCTLvbJnszfhyIYx+KqqWvjyY6Kog5JjJQ==}
+  /@k03mad/ip2geo@4.3.0:
+    resolution: {integrity: sha512-AtR1YnyF8cWGDRBL2HPkp1xOBwp0tiRNOMmYxLlyV1WvvpKGvy66ojPx0txjjShHf/BxPyGUwf1A36zgicKEHw==}
     engines: {node: '>=20'}
     hasBin: true
     dependencies:
