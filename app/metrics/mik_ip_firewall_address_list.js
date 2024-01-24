@@ -62,6 +62,7 @@ export default {
                 if (elem.list === env.mikrotik.honeypotList) {
                     const data = await ip2geo(elem.address, {
                         cacheDir: env.geoip.cacheDir,
+                        cacheMapMaxEntries: 0,
                     });
 
                     countDupsBy(`${data.emoji} ${data.country}`, countries);
