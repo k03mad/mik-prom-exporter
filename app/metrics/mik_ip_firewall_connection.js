@@ -66,7 +66,6 @@ export default {
         await Promise.all([...dstAddresses].map(async address => {
             const {country, emoji, isp} = await ip2geo(address, {
                 cacheDir: env.geoip.cacheDir,
-                cacheMapMaxEntries: 0,
             });
 
             if (country) {
