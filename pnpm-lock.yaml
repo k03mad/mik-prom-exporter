@@ -26,14 +26,14 @@ dependencies:
 
 devDependencies:
   '@k03mad/eslint-config':
-    specifier: 19.5.0
-    version: 19.5.0(eslint@8.56.0)(typescript@5.3.3)
+    specifier: 20.2.0
+    version: 20.2.0(eslint@8.56.0)(typescript@5.3.3)
   eslint:
     specifier: 8.56.0
     version: 8.56.0
   husky:
-    specifier: 8.0.3
-    version: 8.0.3
+    specifier: 9.0.5
+    version: 9.0.5
   nodemon:
     specifier: 3.0.3
     version: 3.0.3
@@ -133,8 +133,8 @@ packages:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
 
-  /@k03mad/eslint-config@19.5.0(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-qQO7el9bTFmsOXOVAhzk1wRkSdbljYgwV+dk0Uix6vrRmrYZkzBmC1wS3bKlVYk9GFrAb1isJbi5qp/5ZFN4YA==}
+  /@k03mad/eslint-config@20.2.0(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-43mLOy67DwoDpP00ccVKCDIKsmjrM4oR++z4Xulor9CQvOI9xxVTBRIWSGvPFZk4jRoAj92q1EfjKV0OkiQJuA==}
     engines: {node: '>=20'}
     dependencies:
       '@eslint/js': 8.56.0
@@ -1715,9 +1715,9 @@ packages:
       resolve-alpn: 1.2.1
     dev: false
 
-  /husky@8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
+  /husky@9.0.5:
+    resolution: {integrity: sha512-/EX48XLor4FczjgdJjwK4qMETrJxJqF4rkgo+NUeK8b2F4TV6s5QxAuG2JZfxm4b9WnrgBGS7bA/JK+H5CKg+A==}
+    engines: {node: '>=18'}
     hasBin: true
     dev: true
 
