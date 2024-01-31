@@ -64,16 +64,17 @@ export default {
         });
 
         await Promise.all([...dstAddresses].map(async address => {
-            const {country, emoji, isp} = await ip2geo(address, {
+            const {country, countryEmoji = '', connectionIsp} = await ip2geo({
+                ip: address,
                 cacheDir: env.geoip.cacheDir,
             });
 
             if (country) {
-                countDupsBy(`${emoji} ${country}`, byDstCountry);
+                countDupsBy(`${countryEmoji} ${country}`.trim(), byDstCountry);
             }
 
-            if (isp) {
-                countDupsBy(isp, byDstIsp);
+            if (connectionIsp) {
+                countDupsBy(connectionIsp, byDstIsp);
             }
         }));
 

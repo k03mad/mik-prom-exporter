@@ -18,7 +18,7 @@ const env = {
         honeypotList: process.env.npm_config_honeypot || process.env.MIKROTIK_HONEYPOT_LIST,
     },
     geoip: {
-        cacheDir: `${os.homedir()}/.ip2geo`,
+        cacheDir: `${os.homedir()}/.ip2geo-cache`,
     },
     debug: process.env.DEBUG,
 };
