@@ -32,8 +32,8 @@ devDependencies:
     specifier: 8.56.0
     version: 8.56.0
   husky:
-    specifier: 9.0.8
-    version: 9.0.8
+    specifier: 9.0.10
+    version: 9.0.10
   nodemon:
     specifier: 3.0.3
     version: 3.0.3
@@ -1715,8 +1715,8 @@ packages:
       resolve-alpn: 1.2.1
     dev: false
 
-  /husky@9.0.8:
-    resolution: {integrity: sha512-/f3Oj+419kf2RkchD5GpFTPj8yAeMYuSs0vB+cgdi8pDxydI8zCFlK/kVQOCqAujahfW6fDBb7t/ZWxTfevOpA==}
+  /husky@9.0.10:
+    resolution: {integrity: sha512-TQGNknoiy6bURzIO77pPRu+XHi6zI7T93rX+QnJsoYFf3xdjKOur+IlfqzJGMHIK/wXrLg+GsvMs8Op7vI2jVA==}
     engines: {node: '>=18'}
     hasBin: true
     dev: true
