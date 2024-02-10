@@ -34,14 +34,16 @@ export default {
             elem.type && countDupsBy(elem.type, dnsCacheTypes);
         });
 
-        ipDnsCache.forEach(elem => {
-            if (
-                DOMAINS_INCLUDES_TOVPN_LIST.some(domain => elem.name.includes(domain))
-                && !ipFirewallAddressList.some(list => list.list === env.mikrotik.toVpnList && list.address === elem.name)
-            ) {
-                countDupsBy(elem.name, dnsCacheDomainsToVpn);
-            }
-        });
+        if (env.mikrotik.toVpnList) {
+            ipDnsCache.forEach(elem => {
+                if (
+                    DOMAINS_INCLUDES_TOVPN_LIST.some(domain => elem.name.includes(domain))
+                    && !ipFirewallAddressList.some(list => list.list === env.mikrotik.toVpnList && list.address === elem.name)
+                ) {
+                    countDupsBy(elem.name, dnsCacheDomainsToVpn);
+                }
+            });
+        }
 
         Object.entries(dnsCacheTypes).forEach(([key, value]) => {
             ctx.labels('records', key).set(value);
