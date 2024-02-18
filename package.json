@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "@k03mad/ip2geo": "7.0.0",
-    "@k03mad/request": "5.6.0",
-    "@k03mad/simple-log": "2.1.0",
-    "@k03mad/simple-prom": "2.1.0",
+    "@k03mad/request": "5.6.1",
+    "@k03mad/simple-log": "2.1.1",
+    "@k03mad/simple-prom": "2.2.0",
     "chalk": "5.3.0",
     "netmask": "2.0.2"
   },
@@ -35,7 +35,7 @@
     "clean": "npm run clean:modules && npm run clean:eslint:cache",
     "clean:modules": "rm -rf ./node_modules || true",
     "clean:eslint:cache": "rm -rf .eslintcache || true",
-    "setup": "npm run clean && pnpm i",
+    "setup": "npm run clean && npm i pnpm -g && pnpm i",
     "start": "node app/server",
     "start:dev": "DEBUG=mad* nodemon app/server",
     "prepare": "husky || true"
