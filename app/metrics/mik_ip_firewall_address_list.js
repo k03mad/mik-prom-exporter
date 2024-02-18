@@ -35,19 +35,26 @@ export default {
         if (env.mikrotik.toVpnList) {
             const matchedDomains = new Set();
 
-            ipDnsCache.forEach(entry => {
-                ipFirewallAddressList.forEach(elem => {
-                    if (elem.list === env.mikrotik.toVpnList
-                        && (
-                            (elem.timeout && elem.address === entry.data)
-                            || (elem.address.includes('/') && entry.type === 'A'
-                            && new Netmask(elem.address).contains(entry.data))
-                        )
+            const vpnList = ipFirewallAddressList
+                .filter(elem => elem.list === env.mikrotik.toVpnList);
+
+            const dnsEntriesWithoutVpnDomains = ipDnsCache
+                .filter(
+                    entry => entry.type === 'A'
+                    && !vpnList.map(elem => elem.address).includes(entry.name),
+                );
+
+            for (const entry of dnsEntriesWithoutVpnDomains) {
+                for (const elem of vpnList) {
+                    if (
+                        elem.address.includes('/')
+                        && new Netmask(elem.address).contains(entry.data)
                     ) {
                         matchedDomains.add(`${entry.name} (${elem.address})`);
+                        break;
                     }
-                });
-            });
+                }
+            }
 
             [...matchedDomains].forEach((domain, i) => {
                 ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
