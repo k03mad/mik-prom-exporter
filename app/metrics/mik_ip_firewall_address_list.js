@@ -72,8 +72,13 @@ export default {
                         cacheDir: env.geoip.cacheDir,
                     });
 
-                    countDupsBy(`${countryEmoji} ${country}`.trim(), countries);
-                    countDupsBy(connectionIsp, isps);
+                    if (country) {
+                        countDupsBy(`${countryEmoji} ${country}`.trim(), countries);
+                    }
+
+                    if (connectionIsp) {
+                        countDupsBy(connectionIsp, isps);
+                    }
                 }
             }));
 
