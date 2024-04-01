@@ -17,14 +17,14 @@
   },
   "dependencies": {
     "@k03mad/ip2geo": "7.0.3",
-    "@k03mad/request": "5.6.2",
+    "@k03mad/request": "5.6.3",
     "@k03mad/simple-log": "2.1.2",
     "@k03mad/simple-prom": "2.2.1",
     "chalk": "5.3.0",
     "netmask": "2.0.2"
   },
   "devDependencies": {
-    "@k03mad/eslint-config": "20.5.0",
+    "@k03mad/eslint-config": "20.6.0",
     "eslint": "8.57.0",
     "husky": "9.0.11",
     "nodemon": "3.1.0"
