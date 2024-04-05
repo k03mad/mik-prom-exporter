@@ -9,8 +9,8 @@ dependencies:
     specifier: 7.1.0
     version: 7.1.0
   '@k03mad/request':
-    specifier: 5.6.4
-    version: 5.6.4
+    specifier: 5.7.0
+    version: 5.7.0
   '@k03mad/simple-log':
     specifier: 2.1.3
     version: 2.1.3
@@ -26,8 +26,8 @@ dependencies:
 
 devDependencies:
   '@k03mad/eslint-config':
-    specifier: 20.8.0
-    version: 20.8.0(eslint@8.57.0)(typescript@5.3.3)
+    specifier: 20.9.0
+    version: 20.9.0(eslint@8.57.0)(typescript@5.3.3)
   eslint:
     specifier: 8.57.0
     version: 8.57.0
@@ -133,8 +133,8 @@ packages:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
 
-  /@k03mad/eslint-config@20.8.0(eslint@8.57.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-yS8ObJ7m2rA8Yt0T80gEPXA3RNlkAgybpkJcLOQDryL7dAsBI7RgTJYUZeshDYxilagiqJ6OztJ/+OPS/xRT7Q==}
+  /@k03mad/eslint-config@20.9.0(eslint@8.57.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-cdSaHVExvG0M8xK9lAuopkGNiK+As+GZx13E3iSagQIkg9WSgq88uurx+Jx8hGGtbJIl5olq7IhwtwfTek5a8g==}
     engines: {node: '>=20'}
     dependencies:
       '@eslint/js': 8.57.0
@@ -177,6 +177,20 @@ packages:
 
   /@k03mad/request@5.6.4:
     resolution: {integrity: sha512-R/9aj93McN4ZHxv/wlq5mHUTsntOgTIqLetCyFQmGQTx1hJYhg0PO5qIuieNp7+yv6ZoIes/Y+zp3EZ0nNpYXA==}
+    engines: {node: '>=20'}
+    dependencies:
+      chalk: 5.3.0
+      debug: 4.3.4(supports-color@5.5.0)
+      got: 14.2.1
+      p-queue: 8.0.1
+      pretty-bytes: 6.1.1
+      strip-ansi: 7.1.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@k03mad/request@5.7.0:
+    resolution: {integrity: sha512-docEH8bmXlBSdfBatQuGMI7OhxlHcXhF1q1sQKKiEfF3bxePnSAjx8SwhV3WltuXnR74qbd4XRPnikmGrpnotw==}
     engines: {node: '>=20'}
     dependencies:
       chalk: 5.3.0
