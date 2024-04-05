@@ -6,17 +6,17 @@ settings:
 
 dependencies:
   '@k03mad/ip2geo':
-    specifier: 7.0.3
-    version: 7.0.3
+    specifier: 7.1.0
+    version: 7.1.0
   '@k03mad/request':
-    specifier: 5.6.3
-    version: 5.6.3
+    specifier: 5.6.4
+    version: 5.6.4
   '@k03mad/simple-log':
-    specifier: 2.1.2
-    version: 2.1.2
+    specifier: 2.1.3
+    version: 2.1.3
   '@k03mad/simple-prom':
-    specifier: 2.2.1
-    version: 2.2.1
+    specifier: 2.2.2
+    version: 2.2.2
   chalk:
     specifier: 5.3.0
     version: 5.3.0
@@ -26,8 +26,8 @@ dependencies:
 
 devDependencies:
   '@k03mad/eslint-config':
-    specifier: 20.6.0
-    version: 20.6.0(eslint@8.57.0)(typescript@5.3.3)
+    specifier: 20.7.0
+    version: 20.7.0(eslint@8.57.0)(typescript@5.3.3)
   eslint:
     specifier: 8.57.0
     version: 8.57.0
@@ -133,8 +133,8 @@ packages:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
 
-  /@k03mad/eslint-config@20.6.0(eslint@8.57.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-mPXPUCixRKn9CmKZyEt6A0Tq/3krDSBFJzyhGef1BgxUXppIpGAFzi0L7NMy+G5/lSnIQzKj0Qq8U/4c3WWy5w==}
+  /@k03mad/eslint-config@20.7.0(eslint@8.57.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-65YxRd6xtpDpZWJmZed4z17c6KjiPvuOCK+nkNqkiUqXhBa2WrY1PowQEyXNAHB5N29Zw0dnM0nexeo1qn6/ZA==}
     engines: {node: '>=20'}
     dependencies:
       '@eslint/js': 8.57.0
@@ -146,8 +146,8 @@ packages:
       eslint-plugin-perfectionist: 2.7.0(eslint@8.57.0)(typescript@5.3.3)
       eslint-plugin-promise: 6.1.1(eslint@8.57.0)
       eslint-plugin-regexp: 2.4.0(eslint@8.57.0)
-      eslint-plugin-sonarjs: 0.25.0(eslint@8.57.0)
-      eslint-plugin-unicorn: 51.0.1(eslint@8.57.0)
+      eslint-plugin-sonarjs: 0.25.1(eslint@8.57.0)
+      eslint-plugin-unicorn: 52.0.0(eslint@8.57.0)
       globals: 15.0.0
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
@@ -162,35 +162,21 @@ packages:
       - vue-eslint-parser
     dev: true
 
-  /@k03mad/ip2geo@7.0.3:
-    resolution: {integrity: sha512-75lBtMfkYIq+d+ITlP6jmzkW8M9lmhjN+GUTM4afXqevGIphEucdCgLldP7Tp94wRv09a74w+KdVyocMCTRiPw==}
+  /@k03mad/ip2geo@7.1.0:
+    resolution: {integrity: sha512-ISiCLt5UJYo+zCI21peCw8FMq1ixYKO66X3hpMcQQ38zl9kKR59ffiVePq/M4byhaYVF8D/+XNTV3Ia7/og32g==}
     engines: {node: '>=20'}
     hasBin: true
     dependencies:
-      '@k03mad/request': 5.6.2
-      '@k03mad/simple-log': 2.1.2
+      '@k03mad/request': 5.6.4
+      '@k03mad/simple-log': 2.1.3
       chalk: 5.3.0
       debug: 4.3.4(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@k03mad/request@5.6.2:
-    resolution: {integrity: sha512-rBWjWlkRK8uKDYvQFbzbNH/URbXUw4284vj425LhOzedMQA1oTbr/0dXCooszeY8J+PT1n9jaOS4KIPivujqjg==}
-    engines: {node: '>=20'}
-    dependencies:
-      chalk: 5.3.0
-      debug: 4.3.4(supports-color@5.5.0)
-      got: 14.2.0
-      p-queue: 8.0.1
-      pretty-bytes: 6.1.1
-      strip-ansi: 7.1.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@k03mad/request@5.6.3:
-    resolution: {integrity: sha512-4YB4elsBS8csKOHUE0K4sBqatUQ981vNe+8Hlm+3wh7ebb90c0WTsKZyMRRdIo6g8fr4ycUrQEhSpSsCOreNcg==}
+  /@k03mad/request@5.6.4:
+    resolution: {integrity: sha512-R/9aj93McN4ZHxv/wlq5mHUTsntOgTIqLetCyFQmGQTx1hJYhg0PO5qIuieNp7+yv6ZoIes/Y+zp3EZ0nNpYXA==}
     engines: {node: '>=20'}
     dependencies:
       chalk: 5.3.0
@@ -220,18 +206,25 @@ packages:
       '@k03mad/simple-date': 1.0.1
     dev: false
 
-  /@k03mad/simple-prom@2.2.1:
-    resolution: {integrity: sha512-yHEGQoEAWwH4onQL2ANPFIuC56jI4wCL9C3C64zH2cP/Bh7ziO3R3qVNH5cD53VKBgJmjKNpg4TmpymUH9vXOA==}
+  /@k03mad/simple-log@2.1.3:
+    resolution: {integrity: sha512-NkQxWtW8urDjb9wr+tQM+CFuHblCR3bUbfk/3cg6fCn0OrMTHNa+MnsL2OQAHl3Z4hwFVOws4Z0UoWeizccn5A==}
+    engines: {node: '>=20'}
+    dependencies:
+      '@k03mad/simple-date': 1.0.2
+    dev: false
+
+  /@k03mad/simple-prom@2.2.2:
+    resolution: {integrity: sha512-Y/imDf6pMcEzhsww9Zj29urGGqRQ+ZkhQz2mKD1lShUpY5P6PXrif4N+nOpbhUxyEPQMglNOH+/3dVVXhUJqVA==}
     engines: {node: '>=20'}
     dependencies:
       '@k03mad/simple-date': 1.0.2
       '@k03mad/simple-log': 2.1.2
       chalk: 5.3.0
       compression: 1.7.4
-      express: 4.18.3
+      express: 4.19.2
       helmet: 7.1.0
       morgan: 1.10.0
-      prom-client: 15.1.0
+      prom-client: 15.1.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -838,8 +831,8 @@ packages:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
     dev: false
 
-  /cookie@0.5.0:
-    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
+  /cookie@0.6.0:
+    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
     dev: false
 
@@ -1257,8 +1250,8 @@ packages:
       scslre: 0.3.0
     dev: true
 
-  /eslint-plugin-sonarjs@0.25.0(eslint@8.57.0):
-    resolution: {integrity: sha512-DaZOtpUucEZbvowgKxVFwICV6r0h7jSCAx0IHICvCowP+etFussnhtaiCPSnYAuwVJ+P/6UFUhkv7QJklpXFyA==}
+  /eslint-plugin-sonarjs@0.25.1(eslint@8.57.0):
+    resolution: {integrity: sha512-5IOKvj/GMBNqjxBdItfotfRHo7w48496GOu1hxdeXuD0mB1JBlDCViiLHETDTfA8pDAVSBimBEQoetRXYceQEw==}
     engines: {node: '>=16'}
     peerDependencies:
       eslint: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -1266,8 +1259,8 @@ packages:
       eslint: 8.57.0
     dev: true
 
-  /eslint-plugin-unicorn@51.0.1(eslint@8.57.0):
-    resolution: {integrity: sha512-MuR/+9VuB0fydoI0nIn2RDA5WISRn4AsJyNSaNKLVwie9/ONvQhxOBbkfSICBPnzKrB77Fh6CZZXjgTt/4Latw==}
+  /eslint-plugin-unicorn@52.0.0(eslint@8.57.0):
+    resolution: {integrity: sha512-1Yzm7/m+0R4djH0tjDjfVei/ju2w3AzUGjG6q8JnuNIL5xIwsflyCooW5sfBvQp2pMYQFSWWCFONsjCax1EHng==}
     engines: {node: '>=16'}
     peerDependencies:
       eslint: '>=8.56.0'
@@ -1395,8 +1388,8 @@ packages:
     resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
     dev: false
 
-  /express@4.18.3:
-    resolution: {integrity: sha512-6VyCijWQ+9O7WuVMTRBTl+cjNNIzD5cY5mQ1WM8r/LEkI2u8EYpOotESNwzNlyCn3g+dmjKYI6BmNneSr/FSRw==}
+  /express@4.19.2:
+    resolution: {integrity: sha512-5T6nhjsT+EOMzuck8JjBHARTHfMht0POzlA60WV2pMD3gyXw2LZnZ+ueGdNxG+0calOJcWKbpFcuzLZ91YWq9Q==}
     engines: {node: '>= 0.10.0'}
     dependencies:
       accepts: 1.3.8
@@ -1404,7 +1397,7 @@ packages:
       body-parser: 1.20.2
       content-disposition: 0.5.4
       content-type: 1.0.5
-      cookie: 0.5.0
+      cookie: 0.6.0
       cookie-signature: 1.0.6
       debug: 2.6.9
       depd: 2.0.0
@@ -1663,23 +1656,6 @@ packages:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
       get-intrinsic: 1.2.2
-
-  /got@14.2.0:
-    resolution: {integrity: sha512-dBq2KkHcQl3AwPoIWsLsQScCPpUgRulz1qZVthjPYKYOPmYfBnekR3vxecjZbm91Vc3JUGnV9mqFX7B+Fe2quw==}
-    engines: {node: '>=20'}
-    dependencies:
-      '@sindresorhus/is': 6.1.0
-      '@szmarczak/http-timer': 5.0.1
-      cacheable-lookup: 7.0.0
-      cacheable-request: 10.2.14
-      decompress-response: 6.0.0
-      form-data-encoder: 4.0.2
-      get-stream: 8.0.1
-      http2-wrapper: 2.2.1
-      lowercase-keys: 3.0.0
-      p-cancelable: 4.0.1
-      responselike: 3.0.0
-    dev: false
 
   /got@14.2.1:
     resolution: {integrity: sha512-KOaPMremmsvx6l9BLC04LYE6ZFW4x7e4HkTe3LwBmtuYYQwpeS4XKqzhubTIkaQ1Nr+eXxeori0zuwupXMovBQ==}
@@ -2451,8 +2427,8 @@ packages:
     engines: {node: ^14.13.1 || >=16.0.0}
     dev: false
 
-  /prom-client@15.1.0:
-    resolution: {integrity: sha512-cCD7jLTqyPdjEPBo/Xk4Iu8jxjuZgZJ3e/oET3L+ZwOuap/7Cw3dH/TJSsZKs1TQLZ2IHpIlRAKw82ef06kmMw==}
+  /prom-client@15.1.1:
+    resolution: {integrity: sha512-GVA2H96QCg2q71rjc3VYvSrVG7OpnJxyryC7dMzvfJfpJJHzQVwF3TJLfHzKORcwJpElWs1TwXLthlJAFJxq2A==}
     engines: {node: ^16 || ^18 || >=20}
     dependencies:
       '@opentelemetry/api': 1.7.0
