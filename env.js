@@ -10,6 +10,10 @@ const env = {
         || process.env.MIKROTIK_EXPORTER_PORT
         || 11_012,
     },
+    metrics: {
+        turnOff: process.env.npm_config_turnoff
+        || process.env.SYS_EXPORTER_METRICS_TURN_OFF,
+    },
     mikrotik: {
         host: process.env.npm_config_host || process.env.MIKROTIK_HOST,
         user: process.env.npm_config_user || process.env.MIKROTIK_USER,

@@ -10,4 +10,5 @@ startMetricsServer({
     port: env.server.port,
     debug: env.debug,
     metrics,
+    metricsTurnOff: env.metrics.turnOff?.split(','),
 });
