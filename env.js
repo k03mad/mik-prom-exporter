@@ -23,6 +23,7 @@ const env = {
     },
     geoip: {
         cacheDir: `${os.homedir()}/.ip2geo-cache`,
+        cacheMapMaxEntries: 1500,
     },
     debug: process.env.DEBUG,
 };
