@@ -16,7 +16,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@k03mad/ip2geo": "7.1.0",
+    "@k03mad/ip2geo": "7.2.0",
     "@k03mad/request": "5.7.0",
     "@k03mad/simple-log": "2.1.4",
     "@k03mad/simple-prom": "3.0.0",
@@ -24,10 +24,10 @@
     "netmask": "2.0.2"
   },
   "devDependencies": {
-    "@k03mad/eslint-config": "22.1.0",
+    "@k03mad/eslint-config": "22.3.0",
     "eslint": "8.57.0",
     "husky": "9.0.11",
-    "nodemon": "3.1.2"
+    "nodemon": "3.1.3"
   },
   "scripts": {
     "lint": "npm run lint:eslint",
