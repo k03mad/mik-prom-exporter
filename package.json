@@ -13,7 +13,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "dependencies": {
     "@k03mad/ip2geo": "7.2.0",
