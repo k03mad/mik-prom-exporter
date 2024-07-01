@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@k03mad/ip2geo':
-        specifier: 7.2.0
-        version: 7.2.0
+        specifier: 7.3.0
+        version: 7.3.0
       '@k03mad/request':
         specifier: 5.8.0
         version: 5.8.0
@@ -83,6 +83,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -90,38 +91,35 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@k03mad/eslint-config@22.4.0':
     resolution: {integrity: sha512-re0lzmCOgEhXKKVjzxtibFJaTgn18wbV3dy+mOoNY3Lu5zKOrVGtyrOgi8U+XDd9AhEz4r0HSzH1a3uYA/A5+g==}
     engines: {node: '>=20'}
 
-  '@k03mad/ip2geo@7.2.0':
-    resolution: {integrity: sha512-uY8LKWbE7g/tgxcJpNRJkTnFT+TfacdmWX0/nVTihSxTsv8PtrLUjaTsjSW06PCeYnmcd9oDIL+9/asdAFNTJg==}
+  '@k03mad/ip2geo@7.3.0':
+    resolution: {integrity: sha512-7zsfYOXIZdq9nG0o7NpdnyP3QfuQOMCaufGMUUfD8aTr5SzIXSvNq6TcbxIBusgpjQTJq9S2zd9mxEENRLjDYQ==}
     engines: {node: '>=20'}
     hasBin: true
-
-  '@k03mad/request@5.7.0':
-    resolution: {integrity: sha512-docEH8bmXlBSdfBatQuGMI7OhxlHcXhF1q1sQKKiEfF3bxePnSAjx8SwhV3WltuXnR74qbd4XRPnikmGrpnotw==}
-    engines: {node: '>=20'}
 
   '@k03mad/request@5.8.0':
     resolution: {integrity: sha512-lICi0UA/ap2/IPkUg1Mjrt38dEF7bbWTC75WsWxE0Z7hWh1squ+C6nbv28wRHhRzd9R/iFsbMZWlMvtoWgSqrg==}
     engines: {node: '>=20'}
 
-  '@k03mad/simple-date@1.0.4':
-    resolution: {integrity: sha512-Ma3pVI4m0pquUsUY4mIQGuSqCenQ4uUlXzZHpWurygtj8V5uZtEXIUkdCWNIXMVNQBSxjdV/PFtz/ajoKSU/nw==}
+  '@k03mad/request@5.8.1':
+    resolution: {integrity: sha512-C1CouQdbkVKGUsVtrURBEQGhlHAcqqxJqdYAEd0ZrXYUFXnoznbC+iNGnKKpLcD2AcdT5K6gNREwr2HqcZgHbQ==}
     engines: {node: '>=20'}
 
   '@k03mad/simple-date@1.1.0':
     resolution: {integrity: sha512-ZzvlFyR49yaGXrgwvePb3LGip0OfCuh67ZFUEfJRYHHsTLkcOlgY48z5+C+z/nzLIxt+s6ZKw8L9VCVZLqh35Q==}
     engines: {node: '>=20'}
 
-  '@k03mad/simple-log@2.1.4':
-    resolution: {integrity: sha512-3ZxcCPUudYsrFsJYvbTljyWvNFN7d+oBj0GUC4eIVXIHY+pbxmNyCL93QnV71z8JeQsEZOwJxOzkADku2EJTMQ==}
-    engines: {node: '>=20'}
-
   '@k03mad/simple-log@2.2.0':
     resolution: {integrity: sha512-qI1vCYV9mWdxhsbv6PPBe18GBhHteSb3+sTR6y1Y5yR6m8xhN0CR7b5SOG+25lgKNt2GhkOFfhW9wFPyaHO6DA==}
+    engines: {node: '>=20'}
+
+  '@k03mad/simple-log@2.2.1':
+    resolution: {integrity: sha512-2ku1ShlHTTShetmspdpW0nDeN6hL9fQtnexyYeAqbnBdMQgNGnt4pWhdBsfM4RBUMQAeztycCVi+lSdjESQpZQ==}
     engines: {node: '>=20'}
 
   '@k03mad/simple-prom@3.1.0':
@@ -387,10 +385,6 @@ packages:
     resolution: {integrity: sha512-+qJyx4xiKra8mZrcwhjMRMUhD5NR1R8esPkzIYxX96JiecFoxAXFuz/GpR3+ev4PE1WamHip78wV0vcmPQtp8w==}
     engines: {node: '>=14.16'}
 
-  cacheable-request@10.2.14:
-    resolution: {integrity: sha512-zkDT5WAF4hSSoUgyfg5tFIxz8XQK+25W/TLVojJTMKBaxevLBBtLxgqguAuVQB8PVW79FVjHcU+GJ9tVbDZ9mQ==}
-    engines: {node: '>=14.16'}
-
   cacheable-request@12.0.1:
     resolution: {integrity: sha512-Yo9wGIQUaAfIbk+qY0X4cDQgCosecfBe3V9NSyeY4qPC2SAkbCS4Xj79VP8WOzitpJUZKc/wsRCYF5ariDIwkg==}
     engines: {node: '>=18'}
@@ -502,15 +496,6 @@ packages:
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
-  debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
     peerDependenciesMeta:
@@ -862,10 +847,6 @@ packages:
     resolution: {integrity: sha512-5uYhsJH8VJBTv7oslg4BznJYhDoRI6waYCxMmCdnTrcCrHA/fCFKoTFz2JKKE0HdDFUF7/oQuhzumXJK7paBRQ==}
     engines: {node: '>= 0.4'}
 
-  get-stream@6.0.1:
-    resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
-    engines: {node: '>=10'}
-
   get-stream@8.0.1:
     resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
     engines: {node: '>=16'}
@@ -915,10 +896,6 @@ packages:
 
   gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
-
-  got@14.2.1:
-    resolution: {integrity: sha512-KOaPMremmsvx6l9BLC04LYE6ZFW4x7e4HkTe3LwBmtuYYQwpeS4XKqzhubTIkaQ1Nr+eXxeori0zuwupXMovBQ==}
-    engines: {node: '>=20'}
 
   got@14.4.1:
     resolution: {integrity: sha512-IvDJbJBUeexX74xNQuMIVgCRRuNOm5wuK+OC3Dc2pnSoh1AOmgc7JVj7WC+cJ4u0aPcO9KZ2frTXcqK4W/5qTQ==}
@@ -1871,23 +1848,12 @@ snapshots:
       - typescript
       - vue-eslint-parser
 
-  '@k03mad/ip2geo@7.2.0':
+  '@k03mad/ip2geo@7.3.0':
     dependencies:
-      '@k03mad/request': 5.7.0
-      '@k03mad/simple-log': 2.1.4
+      '@k03mad/request': 5.8.1
+      '@k03mad/simple-log': 2.2.1
       chalk: 5.3.0
       debug: 4.3.5(supports-color@5.5.0)
-    transitivePeerDependencies:
-      - supports-color
-
-  '@k03mad/request@5.7.0':
-    dependencies:
-      chalk: 5.3.0
-      debug: 4.3.4
-      got: 14.2.1
-      p-queue: 8.0.1
-      pretty-bytes: 6.1.1
-      strip-ansi: 7.1.0
     transitivePeerDependencies:
       - supports-color
 
@@ -1902,15 +1868,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@k03mad/simple-date@1.0.4': {}
+  '@k03mad/request@5.8.1':
+    dependencies:
+      chalk: 5.3.0
+      debug: 4.3.5(supports-color@5.5.0)
+      got: 14.4.1
+      p-queue: 8.0.1
+      pretty-bytes: 6.1.1
+      strip-ansi: 7.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@k03mad/simple-date@1.1.0': {}
 
-  '@k03mad/simple-log@2.1.4':
-    dependencies:
-      '@k03mad/simple-date': 1.0.4
-
   '@k03mad/simple-log@2.2.0':
+    dependencies:
+      '@k03mad/simple-date': 1.1.0
+
+  '@k03mad/simple-log@2.2.1':
     dependencies:
       '@k03mad/simple-date': 1.1.0
 
@@ -2239,16 +2214,6 @@ snapshots:
 
   cacheable-lookup@7.0.0: {}
 
-  cacheable-request@10.2.14:
-    dependencies:
-      '@types/http-cache-semantics': 4.0.4
-      get-stream: 6.0.1
-      http-cache-semantics: 4.1.1
-      keyv: 4.5.4
-      mimic-response: 4.0.0
-      normalize-url: 8.0.1
-      responselike: 3.0.0
-
   cacheable-request@12.0.1:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
@@ -2379,10 +2344,6 @@ snapshots:
   debug@3.2.7:
     dependencies:
       ms: 2.1.3
-
-  debug@4.3.4:
-    dependencies:
-      ms: 2.1.2
 
   debug@4.3.5(supports-color@5.5.0):
     dependencies:
@@ -2865,8 +2826,6 @@ snapshots:
       has-symbols: 1.0.3
       hasown: 2.0.2
 
-  get-stream@6.0.1: {}
-
   get-stream@8.0.1: {}
 
   get-stream@9.0.1:
@@ -2926,20 +2885,6 @@ snapshots:
   gopd@1.0.1:
     dependencies:
       get-intrinsic: 1.2.4
-
-  got@14.2.1:
-    dependencies:
-      '@sindresorhus/is': 6.3.1
-      '@szmarczak/http-timer': 5.0.1
-      cacheable-lookup: 7.0.0
-      cacheable-request: 10.2.14
-      decompress-response: 6.0.0
-      form-data-encoder: 4.0.2
-      get-stream: 8.0.1
-      http2-wrapper: 2.2.1
-      lowercase-keys: 3.0.0
-      p-cancelable: 4.0.1
-      responselike: 3.0.0
 
   got@14.4.1:
     dependencies:
