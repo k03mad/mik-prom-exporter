@@ -12,8 +12,8 @@ importers:
         specifier: 7.3.0
         version: 7.3.0
       '@k03mad/request':
-        specifier: 5.8.0
-        version: 5.8.0
+        specifier: 5.8.1
+        version: 5.8.1
       '@k03mad/simple-log':
         specifier: 2.2.1
         version: 2.2.1
@@ -101,10 +101,6 @@ packages:
     resolution: {integrity: sha512-7zsfYOXIZdq9nG0o7NpdnyP3QfuQOMCaufGMUUfD8aTr5SzIXSvNq6TcbxIBusgpjQTJq9S2zd9mxEENRLjDYQ==}
     engines: {node: '>=20'}
     hasBin: true
-
-  '@k03mad/request@5.8.0':
-    resolution: {integrity: sha512-lICi0UA/ap2/IPkUg1Mjrt38dEF7bbWTC75WsWxE0Z7hWh1squ+C6nbv28wRHhRzd9R/iFsbMZWlMvtoWgSqrg==}
-    engines: {node: '>=20'}
 
   '@k03mad/request@5.8.1':
     resolution: {integrity: sha512-C1CouQdbkVKGUsVtrURBEQGhlHAcqqxJqdYAEd0ZrXYUFXnoznbC+iNGnKKpLcD2AcdT5K6gNREwr2HqcZgHbQ==}
@@ -1854,17 +1850,6 @@ snapshots:
       '@k03mad/simple-log': 2.2.1
       chalk: 5.3.0
       debug: 4.3.5(supports-color@5.5.0)
-    transitivePeerDependencies:
-      - supports-color
-
-  '@k03mad/request@5.8.0':
-    dependencies:
-      chalk: 5.3.0
-      debug: 4.3.5(supports-color@5.5.0)
-      got: 14.4.1
-      p-queue: 8.0.1
-      pretty-bytes: 6.1.1
-      strip-ansi: 7.1.0
     transitivePeerDependencies:
       - supports-color
 
