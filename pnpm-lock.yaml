@@ -15,8 +15,8 @@ importers:
         specifier: 5.8.0
         version: 5.8.0
       '@k03mad/simple-log':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.2.1
+        version: 2.2.1
       '@k03mad/simple-prom':
         specifier: 3.1.0
         version: 3.1.0
@@ -83,6 +83,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -90,6 +91,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@k03mad/eslint-config@22.4.0':
     resolution: {integrity: sha512-re0lzmCOgEhXKKVjzxtibFJaTgn18wbV3dy+mOoNY3Lu5zKOrVGtyrOgi8U+XDd9AhEz4r0HSzH1a3uYA/A5+g==}
@@ -122,6 +124,10 @@ packages:
 
   '@k03mad/simple-log@2.2.0':
     resolution: {integrity: sha512-qI1vCYV9mWdxhsbv6PPBe18GBhHteSb3+sTR6y1Y5yR6m8xhN0CR7b5SOG+25lgKNt2GhkOFfhW9wFPyaHO6DA==}
+    engines: {node: '>=20'}
+
+  '@k03mad/simple-log@2.2.1':
+    resolution: {integrity: sha512-2ku1ShlHTTShetmspdpW0nDeN6hL9fQtnexyYeAqbnBdMQgNGnt4pWhdBsfM4RBUMQAeztycCVi+lSdjESQpZQ==}
     engines: {node: '>=20'}
 
   '@k03mad/simple-prom@3.1.0':
@@ -1911,6 +1917,10 @@ snapshots:
       '@k03mad/simple-date': 1.0.4
 
   '@k03mad/simple-log@2.2.0':
+    dependencies:
+      '@k03mad/simple-date': 1.1.0
+
+  '@k03mad/simple-log@2.2.1':
     dependencies:
       '@k03mad/simple-date': 1.1.0
 
