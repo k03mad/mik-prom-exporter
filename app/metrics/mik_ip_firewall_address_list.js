@@ -33,10 +33,14 @@ export default {
         });
 
         if (env.mikrotik.toVpnList) {
+            // found all domains by mask
             const matchedDomains = new Set();
 
             const vpnList = ipFirewallAddressList
                 .filter(elem => elem.list === env.mikrotik.toVpnList);
+
+            const vpnListMasks = vpnList
+                .filter(elem => elem.address.includes('/'));
 
             const dnsEntriesWithoutVpnDomains = ipDnsCache
                 .filter(
@@ -45,11 +49,8 @@ export default {
                 );
 
             for (const entry of dnsEntriesWithoutVpnDomains) {
-                for (const elem of vpnList) {
-                    if (
-                        elem.address.includes('/')
-                        && new Netmask(elem.address).contains(entry.data)
-                    ) {
+                for (const elem of vpnListMasks) {
+                    if (new Netmask(elem.address).contains(entry.data)) {
                         matchedDomains.add(`${entry.name} (${elem.address})`);
                         break;
                     }
@@ -58,6 +59,25 @@ export default {
 
             [...matchedDomains].forEach((domain, i) => {
                 ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
+            });
+
+            // not found google videos
+            const matchedGoogle = new Set();
+
+            const dnsEntriesGoogleVideoIps = ipDnsCache
+                .filter(
+                    entry => entry.type === 'A'
+                    && entry.name.includes('googlevideo.com'),
+                );
+
+            for (const entry of dnsEntriesGoogleVideoIps) {
+                if (!vpnListMasks.some(elem => new Netmask(elem.address).contains(entry.data))) {
+                    matchedGoogle.add(`${entry.name} (${entry.data})`);
+                }
+            }
+
+            [...matchedGoogle].forEach((domain, i) => {
+                ctx.labels('google-video-to-vpn-domains-list', domain).set(i + 1);
             });
         }
 
