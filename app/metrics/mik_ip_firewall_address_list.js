@@ -60,25 +60,6 @@ export default {
             [...matchedDomains].forEach((domain, i) => {
                 ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
             });
-
-            // not found google videos
-            const matchedGoogle = new Set();
-
-            const dnsEntriesGoogleVideoIps = ipDnsCache
-                .filter(
-                    entry => entry.type === 'A'
-                    && entry.name.includes('googlevideo.com'),
-                );
-
-            for (const entry of dnsEntriesGoogleVideoIps) {
-                if (!vpnListMasks.some(elem => new Netmask(elem.address).contains(entry.data))) {
-                    matchedGoogle.add(`${entry.name} (${entry.data})`);
-                }
-            }
-
-            [...matchedGoogle].forEach((domain, i) => {
-                ctx.labels('google-video-to-vpn-domains-list', domain).set(i + 1);
-            });
         }
 
         if (env.mikrotik.honeypotList) {
