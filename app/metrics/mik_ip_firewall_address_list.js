@@ -33,7 +33,9 @@ export default {
         });
 
         if (env.mikrotik.toVpnList) {
-            // found all domains by mask
+            const createdByDnsRe = /^created for (.+)\./;
+
+            // all found domains by mask
             const matchedDomains = new Set();
 
             const vpnList = ipFirewallAddressList
@@ -59,6 +61,15 @@ export default {
 
             [...matchedDomains].forEach((domain, i) => {
                 ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
+            });
+
+            const vpnListCreatedByDns = new Set(vpnList
+                .filter(elem => createdByDnsRe.test(elem.comment))
+                .map(elem => elem.comment.match(createdByDnsRe)[1]),
+            );
+
+            [...vpnListCreatedByDns].forEach((domain, i) => {
+                ctx.labels('dns-to-vpn-domains-list', domain).set(i + 1);
             });
         }
 
