@@ -33,8 +33,6 @@ export default {
         });
 
         if (env.mikrotik.toVpnList) {
-            const createdByDnsRe = /^created for (.+)\./;
-
             // all found domains by mask
             const matchedDomains = new Set();
 
@@ -62,6 +60,9 @@ export default {
             [...matchedDomains].forEach((domain, i) => {
                 ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
             });
+
+            // created domains by dns
+            const createdByDnsRe = /^created for (.+)\./;
 
             const vpnListCreatedByDns = new Set(vpnList
                 .filter(elem => createdByDnsRe.test(elem.comment))
