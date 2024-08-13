@@ -37,7 +37,7 @@ export default {
             const matchedDomains = new Set();
 
             const vpnList = ipFirewallAddressList
-                .filter(elem => elem.list === env.mikrotik.toVpnList);
+                .filter(elem => elem.list === env.mikrotik.toVpnList && elem.disabled !== 'true');
 
             const vpnListMasks = vpnList
                 .filter(elem => elem.address.includes('/'));
