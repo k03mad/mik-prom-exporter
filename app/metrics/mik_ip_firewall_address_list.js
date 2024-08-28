@@ -1,4 +1,5 @@
 import {ip2geo} from '@k03mad/ip2geo';
+import {Netmask} from 'netmask';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
@@ -13,7 +14,13 @@ export default {
     async collect(ctx) {
         ctx.reset();
 
-        const ipFirewallAddressList = await Mikrotik.ipFirewallAddressList();
+        const [
+            ipFirewallAddressList,
+            ipDnsCache,
+        ] = await Promise.all([
+            Mikrotik.ipFirewallAddressList(),
+            Mikrotik.ipDnsCache(),
+        ]);
 
         const listsNames = {};
 
@@ -26,8 +33,33 @@ export default {
         });
 
         if (env.mikrotik.toVpnList) {
+            // all found domains by mask
+            const matchedDomains = new Set();
+
             const vpnList = ipFirewallAddressList
                 .filter(elem => elem.list === env.mikrotik.toVpnList && elem.disabled !== 'true');
+
+            const vpnListMasks = vpnList
+                .filter(elem => elem.address.includes('/'));
+
+            const dnsEntriesWithoutVpnDomains = ipDnsCache
+                .filter(
+                    entry => entry.type === 'A'
+                    && !vpnList.map(elem => elem.address).includes(entry.name),
+                );
+
+            for (const entry of dnsEntriesWithoutVpnDomains) {
+                for (const elem of vpnListMasks) {
+                    if (new Netmask(elem.address).contains(entry.data)) {
+                        matchedDomains.add(`${entry.name} (${elem.address})`);
+                        break;
+                    }
+                }
+            }
+
+            [...matchedDomains].forEach((domain, i) => {
+                ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
+            });
 
             // created domains by dns
             const createdByDnsRe = /^created for (.+)\./;
