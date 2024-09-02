@@ -16,7 +16,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@k03mad/ip2geo": "9.7.0",
+    "@k03mad/ip2geo": "10.1.1",
     "@k03mad/request": "6.1.0",
     "@k03mad/simple-log": "4.0.0",
     "@k03mad/simple-prom": "3.2.1",
