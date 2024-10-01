@@ -12,8 +12,8 @@ importers:
         specifier: 10.1.1
         version: 10.1.1
       '@k03mad/request':
-        specifier: 6.1.0
-        version: 6.1.0
+        specifier: 6.2.0
+        version: 6.2.0
       '@k03mad/simple-log':
         specifier: 4.0.0
         version: 4.0.0
@@ -100,6 +100,10 @@ packages:
 
   '@k03mad/request@6.1.0':
     resolution: {integrity: sha512-dl2h3XhAnt96SktmioJVgA6FSzIkFfdNIrd3PSNNStWy9Okb0kSJTb1PRkM7j+FBUN3BIXlqDJzxpGtCXeLXYw==}
+    engines: {node: '>=20'}
+
+  '@k03mad/request@6.2.0':
+    resolution: {integrity: sha512-4iHPtfhqvykU5GpcfvJneV7Dqm3N1dBFDgQEveqDd8svkLSMbWs/M05BMWoiuKkDOvd8K3vnrKMxI3IHVDE7/Q==}
     engines: {node: '>=20'}
 
   '@k03mad/simple-date@1.2.0':
@@ -1867,6 +1871,17 @@ snapshots:
       - supports-color
 
   '@k03mad/request@6.1.0':
+    dependencies:
+      chalk: 5.3.0
+      debug: 4.3.6(supports-color@5.5.0)
+      got: 14.4.2
+      p-queue: 8.0.1
+      pretty-bytes: 6.1.1
+      strip-ansi: 7.1.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@k03mad/request@6.2.0':
     dependencies:
       chalk: 5.3.0
       debug: 4.3.6(supports-color@5.5.0)
