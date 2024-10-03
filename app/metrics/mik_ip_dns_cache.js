@@ -15,7 +15,9 @@ export default {
         const dnsCacheTypes = {};
 
         ipDnsCache.forEach(elem => {
-            elem.type && countDupsBy(elem.type, dnsCacheTypes);
+            if (elem.type) {
+                countDupsBy(elem.type, dnsCacheTypes);
+            }
         });
 
         Object.entries(dnsCacheTypes).forEach(([key, value]) => {

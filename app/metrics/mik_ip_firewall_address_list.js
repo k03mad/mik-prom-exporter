@@ -45,7 +45,7 @@ export default {
             const dnsEntriesWithoutVpnDomains = ipDnsCache
                 .filter(
                     entry => entry.type === 'A'
-                    && !vpnList.map(elem => elem.address).includes(entry.name),
+                        && !vpnList.map(elem => elem.address).includes(entry.name),
                 );
 
             for (const entry of dnsEntriesWithoutVpnDomains) {
