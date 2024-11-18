@@ -23,4 +23,4 @@ jobs:
             git reset --hard
             git pull
             ~/.nvm/nvm-exec npm run setup
-            # systemctl restart mik-exporter.service
+            systemctl restart mik-exporter.service
