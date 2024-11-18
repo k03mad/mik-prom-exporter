@@ -6,11 +6,11 @@ on:
       - master
 
 jobs:
-  ssh-pi:
-    environment: pi
+  ssh-vds:
+    environment: vds
     runs-on: ubuntu-22.04
     steps:
-      - uses: appleboy/ssh-action@v1.0.3
+      - uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
@@ -23,4 +23,4 @@ jobs:
             git reset --hard
             git pull
             ~/.nvm/nvm-exec npm run setup
-            sudo systemctl restart mik-exporter.service
+            # systemctl restart mik-exporter.service
