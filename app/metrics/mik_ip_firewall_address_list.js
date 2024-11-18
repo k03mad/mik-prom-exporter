@@ -33,7 +33,6 @@ export default {
         });
 
         if (env.mikrotik.toVpnList) {
-            // all found domains by mask
             const matchedDomains = new Set();
 
             const vpnList = ipFirewallAddressList
@@ -42,11 +41,17 @@ export default {
             const vpnListMasks = vpnList
                 .filter(elem => elem.address.includes('/'));
 
-            const dnsEntriesWithoutVpnDomains = ipDnsCache
-                .filter(
-                    entry => entry.type === 'A'
-                        && !vpnList.map(elem => elem.address).includes(entry.name),
-                );
+            const vpnListDomains = vpnList
+                .filter(elem => (/\D$/).test(elem.address));
+
+            // added domains
+            vpnListDomains.forEach(elem => matchedDomains.add(elem.address));
+
+            // found domains by mask
+            const dnsEntriesWithoutVpnDomains = ipDnsCache.filter(
+                entry => entry.type === 'A'
+                    && !vpnList.map(elem => elem.address).includes(entry.name),
+            );
 
             for (const entry of dnsEntriesWithoutVpnDomains) {
                 for (const elem of vpnListMasks) {
@@ -57,20 +62,14 @@ export default {
                 }
             }
 
-            [...matchedDomains].forEach((domain, i) => {
-                ctx.labels('dynamic-to-vpn-domains-list', domain).set(i + 1);
-            });
-
             // created domains by dns
-            const createdByDnsRe = /^created for (.+)\./;
+            vpnList
+                .map(elem => elem.comment?.match(/^created for (.+)\./)?.[1])
+                .filter(Boolean)
+                .forEach(elem => matchedDomains.add(elem));
 
-            const vpnListCreatedByDns = new Set(vpnList
-                .filter(elem => createdByDnsRe.test(elem.comment))
-                .map(elem => elem.comment.match(createdByDnsRe)[1]),
-            );
-
-            [...vpnListCreatedByDns].forEach((domain, i) => {
-                ctx.labels('dns-to-vpn-domains-list', domain).set(i + 1);
+            [...matchedDomains].forEach((domain, i) => {
+                ctx.labels('tovpn', domain).set(i + 1);
             });
         }
 
