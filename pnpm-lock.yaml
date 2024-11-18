@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@k03mad/ip2geo':
-        specifier: 10.4.0
-        version: 10.4.0
+        specifier: 11.0.0
+        version: 11.0.0
       '@k03mad/request':
         specifier: 6.3.0
         version: 6.3.0
@@ -761,13 +761,17 @@ packages:
     resolution: {integrity: sha512-lfxX2Gz5gyI0AuwjpBCF465xMgWCtSUxY9Xbzdxz/fP5LrfpBKxuctMwR91oQRy1gaZ7yoVpUUTf1IY0Xqf//A==}
     engines: {node: '>=20'}
 
-  '@k03mad/ip2geo@10.4.0':
-    resolution: {integrity: sha512-PA1jIFWB5ugqasZYBTB651bLQlZ65r7gzcm+1KQOis814lepT+QLCcrlNm5kDnFteExW74m0WyaDh+At7JdcZA==}
-    engines: {node: '>=20'}
+  '@k03mad/ip2geo@11.0.0':
+    resolution: {integrity: sha512-aG8iy5RgMq0qLxmnLVs83+qOfh2BDsx8c0gC2dxT5sY2uKWfsRyuTPb0fU311RWwnJByevHdagM7NgoPaH22tQ==}
+    engines: {node: '>=22'}
     hasBin: true
 
   '@k03mad/request@6.3.0':
     resolution: {integrity: sha512-J5JeQt8yPB4eU7lq8LEwLleGFdYVu7VTxAosTvfQ6qdb2BuqRTepnFEwikCTVgEeAAGyfO+EWK9IYXpjIB42Og==}
+    engines: {node: '>=20'}
+
+  '@k03mad/request@6.4.0':
+    resolution: {integrity: sha512-6PsBP+jQqT2jfyoB3lWKxDz2qTcXfsecLwzwmyMzbD3+yTDL6J0f2AaRnLXgPKg88XiapoCrPVURkBLGsaJTaA==}
     engines: {node: '>=20'}
 
   '@k03mad/simple-date@3.1.0':
@@ -813,6 +817,10 @@ packages:
 
   '@sindresorhus/is@7.0.0':
     resolution: {integrity: sha512-WDTlVTyvFivSOuyvMeedzg2hdoBLZ3f1uNVuEida2Rl9BrfjrIRjWA/VZIrMRLvSwJYCAlCRA3usDt1THytxWQ==}
+    engines: {node: '>=18'}
+
+  '@sindresorhus/is@7.0.1':
+    resolution: {integrity: sha512-QWLl2P+rsCJeofkDNIT3WFmb6NrRud1SUYW8dIhXK/46XFV8Q/g7Bsvib0Askb0reRLe+WYPeeE+l5cH7SlkuQ==}
     engines: {node: '>=18'}
 
   '@stylistic/eslint-plugin@2.8.0':
@@ -1547,6 +1555,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@10.1.0:
@@ -1727,6 +1736,10 @@ packages:
 
   got@14.4.2:
     resolution: {integrity: sha512-+Te/qEZ6hr7i+f0FNgXx/6WQteSM/QqueGvxeYQQFm0GDfoxLVJ/oiwUKYMTeioColWUTdewZ06hmrBjw6F7tw==}
+    engines: {node: '>=20'}
+
+  got@14.4.4:
+    resolution: {integrity: sha512-tqiF7eSgTBwQkxb1LxsEpva8TaMYVisbhplrFVmw9GQE3855Z+MH/mnsXLLOkDxR6hZJRFMj5VTAZ8lmTF8ZOA==}
     engines: {node: '>=20'}
 
   graceful-fs@4.2.11:
@@ -2675,6 +2688,10 @@ packages:
 
   type-fest@4.23.0:
     resolution: {integrity: sha512-ZiBujro2ohr5+Z/hZWHESLz3g08BBdrdLMieYFULJO+tWc437sn8kQsWLJoZErY8alNhxre9K4p3GURAG11n+w==}
+    engines: {node: '>=16'}
+
+  type-fest@4.27.0:
+    resolution: {integrity: sha512-3IMSWgP7C5KSQqmo1wjhKrwsvXAtF33jO3QY+Uy++ia7hqvgSK6iXbbg5PbDBc1P2ZbNEDgejOrN4YooXvhwCw==}
     engines: {node: '>=16'}
 
   type-is@1.6.18:
@@ -3672,7 +3689,7 @@ snapshots:
   '@eslint/eslintrc@2.1.4':
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.6(supports-color@5.5.0)
+      debug: 4.3.7
       espree: 9.6.1
       globals: 13.24.0
       ignore: 5.3.1
@@ -3688,7 +3705,7 @@ snapshots:
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
-      debug: 4.3.6(supports-color@5.5.0)
+      debug: 4.3.7
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -3740,9 +3757,9 @@ snapshots:
       - typescript
       - vue-eslint-parser
 
-  '@k03mad/ip2geo@10.4.0':
+  '@k03mad/ip2geo@11.0.0':
     dependencies:
-      '@k03mad/request': 6.3.0
+      '@k03mad/request': 6.4.0
       '@k03mad/simple-log': 4.2.0
       chalk: 5.3.0
       debug: 4.3.7
@@ -3755,6 +3772,17 @@ snapshots:
       chalk: 5.3.0
       debug: 4.3.7
       got: 14.4.2
+      p-queue: 8.0.1
+      pretty-bytes: 6.1.1
+      strip-ansi: 7.1.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@k03mad/request@6.4.0':
+    dependencies:
+      chalk: 5.3.0
+      debug: 4.3.7
+      got: 14.4.4
       p-queue: 8.0.1
       pretty-bytes: 6.1.1
       strip-ansi: 7.1.0
@@ -3805,6 +3833,8 @@ snapshots:
   '@sec-ant/readable-stream@0.4.1': {}
 
   '@sindresorhus/is@7.0.0': {}
+
+  '@sindresorhus/is@7.0.1': {}
 
   '@stylistic/eslint-plugin@2.8.0(eslint@8.57.0)(typescript@5.5.4)':
     dependencies:
@@ -5059,6 +5089,20 @@ snapshots:
       responselike: 3.0.0
       type-fest: 4.23.0
 
+  got@14.4.4:
+    dependencies:
+      '@sindresorhus/is': 7.0.1
+      '@szmarczak/http-timer': 5.0.1
+      cacheable-lookup: 7.0.0
+      cacheable-request: 12.0.1
+      decompress-response: 6.0.0
+      form-data-encoder: 4.0.2
+      http2-wrapper: 2.2.1
+      lowercase-keys: 3.0.0
+      p-cancelable: 4.0.1
+      responselike: 3.0.0
+      type-fest: 4.27.0
+
   graceful-fs@4.2.11: {}
 
   graphemer@1.4.0: {}
@@ -5972,6 +6016,8 @@ snapshots:
   type-fest@0.8.1: {}
 
   type-fest@4.23.0: {}
+
+  type-fest@4.27.0: {}
 
   type-is@1.6.18:
     dependencies:
