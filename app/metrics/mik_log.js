@@ -36,7 +36,7 @@ export default {
         const topics = {};
         const counters = {};
 
-        for (const [i, item] of log.entries()) {
+        await Promise.all(log.map(async (item, i) => {
             ctx.labels('entries', item.time, item.topics, item.message, null).set(i + 1);
             countDupsBy(item.topics, topics);
 
@@ -104,7 +104,7 @@ export default {
                     countDupsBy(redirectFullArr.join(' '), counters[type].full);
                 }
             }));
-        }
+        }));
 
         Object.entries(topics).forEach(([key, value]) => {
             ctx.labels('topics', null, null, null, key).set(value);
