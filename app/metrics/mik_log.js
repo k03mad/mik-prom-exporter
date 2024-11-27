@@ -1,3 +1,6 @@
+import {ip2geo} from '@k03mad/ip2geo';
+
+import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
@@ -33,11 +36,11 @@ export default {
         const topics = {};
         const counters = {};
 
-        log.forEach((item, i) => {
+        for (const [i, item] of log.entries()) {
             ctx.labels('entries', item.time, item.topics, item.message, null).set(i + 1);
             countDupsBy(item.topics, topics);
 
-            Object.keys(redirectsRe).forEach(type => {
+            await Promise.all(Object.keys(redirectsRe).map(async type => {
                 if (!counters[type]) {
                     counters[type] = {};
                 }
@@ -64,8 +67,22 @@ export default {
                         counters[type].dest = {};
                     }
 
-                    countDupsBy(dest, counters[type].dest);
-                    redirectFullArr.push('=>', dest);
+                    let destDomain = dest;
+
+                    if (dest.includes('.')) {
+                        const {connectionDomain} = await ip2geo({
+                            ip: dest,
+                            cacheDir: env.geoip.cacheDir,
+                            cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
+                        });
+
+                        if (connectionDomain) {
+                            destDomain += ` / ${connectionDomain}`;
+                        }
+                    }
+
+                    countDupsBy(destDomain, counters[type].dest);
+                    redirectFullArr.push('=>', destDomain);
                 }
 
                 const proto = item.message.match(redirectsRe[type].proto)?.[1];
@@ -86,8 +103,8 @@ export default {
 
                     countDupsBy(redirectFullArr.join(' '), counters[type].full);
                 }
-            });
-        });
+            }));
+        }
 
         Object.entries(topics).forEach(([key, value]) => {
             ctx.labels('topics', null, null, null, key).set(value);
