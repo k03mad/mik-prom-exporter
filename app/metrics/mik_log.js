@@ -2,9 +2,17 @@ import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
-const REDIRECT_DNS_DEST_RE = /dns_redirect.+->([\d.]+)/;
-const REDIRECT_DNS_SRC_RE = /dns_redirect.+ ([\d.]+):\d+/;
-const REDIRECT_DNS_PROTO_RE = /dns_redirect.+proto (\w+)/;
+const redirectsRe = {
+    dns: {
+        dest: /dns_redirect.+->([\d.]+)/,
+        src: /dns_redirect.+ ([\d.]+):\d+/,
+        proto: /dns_redirect.+proto (\w+)/,
+    },
+    ntp: {
+        dest: /ntp_redirect.+->([\d.]+)/,
+        src: /ntp_redirect.+ ([\d.]+):\d+/,
+    },
+};
 
 export default {
     name: getCurrentFilename(import.meta.url),
@@ -23,62 +31,74 @@ export default {
         ]);
 
         const topics = {};
-        const redirectDnsDest = {};
-        const redirectDnsSrc = {};
-        const redirectDnsProto = {};
-        const redirectDnsFull = {};
+        const counters = {};
 
         log.forEach((item, i) => {
             ctx.labels('entries', item.time, item.topics, item.message, null).set(i + 1);
             countDupsBy(item.topics, topics);
 
-            const redirectFull = [];
+            Object.keys(redirectsRe).forEach(type => {
+                if (!counters[type]) {
+                    counters[type] = {};
+                }
 
-            const srcDns = item.message.match(REDIRECT_DNS_SRC_RE)?.[1];
+                const redirectFullArr = [];
 
-            if (srcDns) {
-                const nameOrIp = ipDhcpServerLeaseToName[srcDns] || srcDns;
-                countDupsBy(nameOrIp, redirectDnsSrc);
-                redirectFull.push(nameOrIp);
-            }
+                const src = item.message.match(redirectsRe[type].src)?.[1];
 
-            const destDns = item.message.match(REDIRECT_DNS_DEST_RE)?.[1];
+                if (src) {
+                    const nameOrIp = ipDhcpServerLeaseToName[src] || src;
 
-            if (destDns) {
-                countDupsBy(destDns, redirectDnsDest);
-                redirectFull.push('=>', destDns);
-            }
+                    if (!counters[type].src) {
+                        counters[type].src = {};
+                    }
 
-            const protoDns = item.message.match(REDIRECT_DNS_PROTO_RE)?.[1];
+                    countDupsBy(nameOrIp, counters[type].src);
+                    redirectFullArr.push(nameOrIp);
+                }
 
-            if (protoDns) {
-                countDupsBy(protoDns, redirectDnsProto);
-                redirectFull.push(`(${protoDns})`);
-            }
+                const dest = item.message.match(redirectsRe[type].dest)?.[1];
 
-            if (redirectFull.length > 0) {
-                countDupsBy(redirectFull.join(' '), redirectDnsFull);
-            }
+                if (dest) {
+                    if (!counters[type].dest) {
+                        counters[type].dest = {};
+                    }
+
+                    countDupsBy(dest, counters[type].dest);
+                    redirectFullArr.push('=>', dest);
+                }
+
+                const proto = item.message.match(redirectsRe[type].proto)?.[1];
+
+                if (proto) {
+                    if (!counters[type].proto) {
+                        counters[type].proto = {};
+                    }
+
+                    countDupsBy(proto, counters[type].proto);
+                    redirectFullArr.push(`(${proto})`);
+                }
+
+                if (redirectFullArr.length > 0) {
+                    if (!counters[type].full) {
+                        counters[type].full = {};
+                    }
+
+                    countDupsBy(redirectFullArr.join(' '), counters[type].full);
+                }
+            });
         });
 
         Object.entries(topics).forEach(([key, value]) => {
             ctx.labels('topics', null, null, null, key).set(value);
         });
 
-        Object.entries(redirectDnsDest).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-dest', null, null, null, key).set(value);
-        });
-
-        Object.entries(redirectDnsSrc).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-src', null, null, null, key).set(value);
-        });
-
-        Object.entries(redirectDnsProto).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-proto', null, null, null, key).set(value);
-        });
-
-        Object.entries(redirectDnsFull).forEach(([key, value]) => {
-            ctx.labels('redirect-dns-full', null, null, null, key).set(value);
+        Object.entries(counters).forEach(([type, obj]) => {
+            Object.entries(obj).forEach(([key, data]) => {
+                Object.entries(data).forEach(([src, value]) => {
+                    ctx.labels(`redirect-${type}-${key}`, null, null, null, src).set(value);
+                });
+            });
         });
     },
 };
