@@ -1,4 +1,4 @@
-[grafana-dashboards](https://github.com/k03mad/grafana-dashboards/tree/master/export) ::
+> [grafana-dashboards](https://github.com/k03mad/grafana-dashboards/tree/master/export)
 
 # [Mikrotik — Prometheus] exporter
 
