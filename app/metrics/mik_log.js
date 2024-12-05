@@ -69,7 +69,7 @@ export default {
 
                     let destDomain = dest;
 
-                    if (dest.includes('.')) {
+                    if (dest.includes('.') && !globalThis.ip2geoLimitExceed) {
                         const {connectionDomain} = await ip2geo({
                             ip: dest,
                             cacheDir: env.geoip.cacheDir,

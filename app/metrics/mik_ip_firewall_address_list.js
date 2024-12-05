@@ -78,7 +78,7 @@ export default {
             const isps = {};
 
             await Promise.all(ipFirewallAddressList.map(async elem => {
-                if (elem.list === env.mikrotik.honeypotList) {
+                if (elem.list === env.mikrotik.honeypotList && !globalThis.ip2geoLimitExceed) {
                     const {country, countryEmoji = '', connectionIsp} = await ip2geo({
                         ip: elem.address,
                         cacheDir: env.geoip.cacheDir,

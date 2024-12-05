@@ -63,21 +63,23 @@ export default {
             }
         });
 
-        await Promise.all([...dstAddresses].map(async address => {
-            const {country, countryEmoji = '', connectionIsp} = await ip2geo({
-                ip: address,
-                cacheDir: env.geoip.cacheDir,
-                cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
-            });
+        if (!globalThis.ip2geoLimitExceed) {
+            await Promise.all([...dstAddresses].map(async address => {
+                const {country, countryEmoji = '', connectionIsp} = await ip2geo({
+                    ip: address,
+                    cacheDir: env.geoip.cacheDir,
+                    cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
+                });
 
-            if (country) {
-                countDupsBy(`${countryEmoji} ${country}`.trim(), byDstCountry);
-            }
+                if (country) {
+                    countDupsBy(`${countryEmoji} ${country}`.trim(), byDstCountry);
+                }
 
-            if (connectionIsp) {
-                countDupsBy(connectionIsp, byDstIsp);
-            }
-        }));
+                if (connectionIsp) {
+                    countDupsBy(connectionIsp, byDstIsp);
+                }
+            }));
+        }
 
         ctx.labels('map_entries', null).set(cacheStorage.size);
 
