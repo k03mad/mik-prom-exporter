@@ -2,6 +2,7 @@ import {cacheStorage, ip2geo} from '@k03mad/ip2geo';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
+import {isLocalIp} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
@@ -65,18 +66,20 @@ export default {
 
         if (!globalThis.ip2geoLimitExceed) {
             await Promise.all([...dstAddresses].map(async address => {
-                const {country, countryEmoji = '', connectionIsp} = await ip2geo({
-                    ip: address,
-                    cacheDir: env.geoip.cacheDir,
-                    cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
-                });
+                if (!isLocalIp(address)) {
+                    const {country, countryEmoji = '', connectionIsp} = await ip2geo({
+                        ip: address,
+                        cacheDir: env.geoip.cacheDir,
+                        cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
+                    });
 
-                if (country) {
-                    countDupsBy(`${countryEmoji} ${country}`.trim(), byDstCountry);
-                }
+                    if (country) {
+                        countDupsBy(`${countryEmoji} ${country}`.trim(), byDstCountry);
+                    }
 
-                if (connectionIsp) {
-                    countDupsBy(connectionIsp, byDstIsp);
+                    if (connectionIsp) {
+                        countDupsBy(connectionIsp, byDstIsp);
+                    }
                 }
             }));
         }

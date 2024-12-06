@@ -3,6 +3,7 @@ import {Netmask} from 'netmask';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
+import {isLocalIp} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
@@ -78,7 +79,11 @@ export default {
             const isps = {};
 
             await Promise.all(ipFirewallAddressList.map(async elem => {
-                if (elem.list === env.mikrotik.honeypotList && !globalThis.ip2geoLimitExceed) {
+                if (
+                    elem.list === env.mikrotik.honeypotList
+                    && !globalThis.ip2geoLimitExceed
+                    && !isLocalIp(elem.address)
+                ) {
                     const {country, countryEmoji = '', connectionIsp} = await ip2geo({
                         ip: elem.address,
                         cacheDir: env.geoip.cacheDir,

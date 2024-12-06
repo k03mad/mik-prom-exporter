@@ -2,6 +2,7 @@ import {ip2geo} from '@k03mad/ip2geo';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
+import {isLocalIp} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
@@ -60,29 +61,33 @@ export default {
                     redirectFullArr.push(nameOrIp);
                 }
 
-                const dest = item.message.match(redirectsRe[type].dest)?.[1];
+                const address = item.message.match(redirectsRe[type].dest)?.[1];
 
-                if (dest) {
+                if (address) {
                     if (!counters[type].dest) {
                         counters[type].dest = {};
                     }
 
-                    let destDomain = dest;
+                    let addressDomain = address;
 
-                    if (dest.includes('.') && !globalThis.ip2geoLimitExceed) {
+                    if (
+                        address.includes('.')
+                        && !globalThis.ip2geoLimitExceed
+                        && !isLocalIp(address)
+                    ) {
                         const {connectionDomain} = await ip2geo({
-                            ip: dest,
+                            ip: address,
                             cacheDir: env.geoip.cacheDir,
                             cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
                         });
 
                         if (connectionDomain) {
-                            destDomain += ` / ${connectionDomain}`;
+                            addressDomain += ` / ${connectionDomain}`;
                         }
                     }
 
-                    countDupsBy(destDomain, counters[type].dest);
-                    redirectFullArr.push('=>', destDomain);
+                    countDupsBy(addressDomain, counters[type].dest);
+                    redirectFullArr.push('=>', addressDomain);
                 }
 
                 const proto = item.message.match(redirectsRe[type].proto)?.[1];
