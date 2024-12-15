@@ -72,7 +72,7 @@ export default {
 
                     if (
                         address.includes('.')
-                        && !globalThis.ip2geoLimitExceed
+                        && !globalThis.ip2geoError
                         && !isLocalIp(address)
                     ) {
                         const {connectionDomain} = await ip2geo({

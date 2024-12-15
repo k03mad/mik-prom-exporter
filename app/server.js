@@ -17,10 +17,7 @@ try {
     });
 } catch (err) {
     logError(err);
-
-    if (err?.message?.includes("You've hit the monthly limit")) {
-        globalThis.ip2geoLimitExceed = true;
-    }
+    globalThis.ip2geoError = true;
 }
 
 startMetricsServer({

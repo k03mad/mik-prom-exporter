@@ -16,18 +16,18 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@k03mad/ip2geo": "11.1.0",
-    "@k03mad/request": "7.5.0",
-    "@k03mad/simple-log": "5.1.0",
-    "@k03mad/simple-prom": "4.1.0",
+    "@k03mad/ip2geo": "11.2.2",
+    "@k03mad/request": "7.6.1",
+    "@k03mad/simple-log": "5.1.1",
+    "@k03mad/simple-prom": "4.2.2",
     "chalk": "5.3.0",
     "netmask": "2.0.2"
   },
   "devDependencies": {
-    "@k03mad/eslint-config": "28.0.0",
-    "eslint": "9.16.0",
+    "@k03mad/eslint-config": "28.1.0",
+    "eslint": "9.17.0",
     "husky": "9.1.7",
-    "nodemon": "3.1.7"
+    "nodemon": "3.1.9"
   },
   "scripts": {
     "lint": "npm run lint:eslint",

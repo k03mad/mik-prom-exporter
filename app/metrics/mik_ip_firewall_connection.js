@@ -64,7 +64,7 @@ export default {
             }
         });
 
-        if (!globalThis.ip2geoLimitExceed) {
+        if (!globalThis.ip2geoError) {
             await Promise.all([...dstAddresses].map(async address => {
                 if (!isLocalIp(address)) {
                     const {country, countryEmoji = '', connectionIsp} = await ip2geo({

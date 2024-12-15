@@ -81,7 +81,7 @@ export default {
             await Promise.all(ipFirewallAddressList.map(async elem => {
                 if (
                     elem.list === env.mikrotik.honeypotList
-                    && !globalThis.ip2geoLimitExceed
+                    && !globalThis.ip2geoError
                     && !isLocalIp(elem.address)
                 ) {
                     const {country, countryEmoji = '', connectionIsp} = await ip2geo({
