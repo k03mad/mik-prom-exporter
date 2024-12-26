@@ -13,7 +13,7 @@ import * as metrics from './metrics/_index.js';
 try {
     await ip2geo({
         ip: '1.1.1.1',
-        cacheDir: path.join(os.tmpdir(), `.ip2geo-cache/${Date.now()}`),
+        cacheDir: path.join(os.tmpdir(), `.ip2geo-cache-temp/${Date.now()}`),
     });
 } catch (err) {
     logError(err);
