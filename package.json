@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "@k03mad/ip2geo": "11.5.0",
-    "@k03mad/request": "7.6.1",
-    "@k03mad/simple-log": "5.1.1",
-    "@k03mad/simple-prom": "4.2.2",
+    "@k03mad/request": "7.6.2",
+    "@k03mad/simple-log": "5.2.0",
+    "@k03mad/simple-prom": "4.3.0",
     "chalk": "5.4.1",
     "netmask": "2.0.2"
   },
