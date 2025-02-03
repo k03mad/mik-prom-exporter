@@ -16,15 +16,15 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@k03mad/ip2geo": "11.6.0",
-    "@k03mad/request": "7.7.0",
+    "@k03mad/ip2geo": "12.0.0",
+    "@k03mad/request": "7.8.0",
     "@k03mad/simple-log": "5.2.1",
     "@k03mad/simple-prom": "4.3.1",
     "chalk": "5.4.1",
     "netmask": "2.0.2"
   },
   "devDependencies": {
-    "@k03mad/eslint-config": "28.4.0",
+    "@k03mad/eslint-config": "28.5.0",
     "eslint": "9.19.0",
     "husky": "9.1.7",
     "nodemon": "3.1.9"
