@@ -12,10 +12,6 @@ const redirectsRe = {
         src: /dns_redirect.+ ([\d.]+):\d+/,
         proto: /dns_redirect.+proto (\w+)/,
     },
-    ntp: {
-        dest: /ntp_redirect.+->([\d.]+)/,
-        src: /ntp_redirect.+ ([\d.]+):\d+/,
-    },
 };
 
 export default {
