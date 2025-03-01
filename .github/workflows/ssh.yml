@@ -10,7 +10,7 @@ jobs:
     environment: vds
     runs-on: ubuntu-22.04
     steps:
-      - uses: appleboy/ssh-action@v1.2.0
+      - uses: appleboy/ssh-action@v1.2.1
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
