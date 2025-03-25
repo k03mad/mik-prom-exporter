@@ -7,6 +7,15 @@ import {isLocalIp} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
+const MERGE_DOMAINS = [
+    'cdninstagram.com',
+    'facebook.com',
+    'fbcdn.net',
+    'googlevideo.com',
+    'gvt1.com',
+    'instagram.com',
+];
+
 export default {
     name: getCurrentFilename(import.meta.url),
     help: 'ip/firewall/address-list',
@@ -46,7 +55,16 @@ export default {
                 .filter(elem => (/\D$/).test(elem.address));
 
             // added domains
-            vpnListDomains.forEach(elem => matchedDomains.add(elem.address));
+            vpnListDomains.forEach(elem => {
+                let {address} = elem;
+
+                if (MERGE_DOMAINS.some(domain => address.endsWith(domain))) {
+                    const splitted = address.split('.');
+                    address = ['*', splitted.at(-2), splitted.at(-1)].join('.');
+                }
+
+                matchedDomains.add(address);
+            });
 
             // found domains by mask
             const dnsEntriesWithoutVpnDomains = ipDnsCache.filter(
