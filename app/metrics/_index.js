@@ -13,7 +13,6 @@ export {default as mik_ip_firewall_mangle} from './mik_ip_firewall_mangle.js';
 export {default as mik_ip_firewall_nat} from './mik_ip_firewall_nat.js';
 export {default as mik_ip_firewall_raw} from './mik_ip_firewall_raw.js';
 export {default as mik_log} from './mik_log.js';
-export {default as mik_queue_tree} from './mik_queue_tree.js';
 export {default as mik_system_history} from './mik_system_history.js';
 export {default as mik_system_package_update} from './mik_system_package_update.js';
 export {default as mik_system_resource} from './mik_system_resource.js';
