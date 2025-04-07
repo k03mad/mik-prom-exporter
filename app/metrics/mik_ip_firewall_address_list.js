@@ -1,5 +1,4 @@
 import {ip2geo} from '@k03mad/ip2geo';
-import {Netmask} from 'netmask';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
@@ -24,13 +23,7 @@ export default {
     async collect(ctx) {
         ctx.reset();
 
-        const [
-            ipFirewallAddressList,
-            ipDnsCache,
-        ] = await Promise.all([
-            Mikrotik.ipFirewallAddressList(),
-            Mikrotik.ipDnsCache(),
-        ]);
+        const ipFirewallAddressList = await Mikrotik.ipFirewallAddressList();
 
         const listsNames = {};
 
@@ -45,47 +38,25 @@ export default {
         if (env.mikrotik.toVpnList) {
             const matchedDomains = new Set();
 
-            const vpnList = ipFirewallAddressList
-                .filter(elem => elem.list === env.mikrotik.toVpnList && elem.disabled !== 'true');
+            ipFirewallAddressList.forEach(elem => {
+                if (
+                    elem.list === env.mikrotik.toVpnList
+                    && elem.disabled !== 'true'
+                    && (/\D$/).test(elem.address)
+                ) {
+                    if (MERGE_DOMAINS.some(domain => elem.address.endsWith(domain))) {
+                        const splitted = elem.address.split('.');
 
-            const vpnListMasks = vpnList
-                .filter(elem => elem.address.includes('/'));
-
-            const vpnListDomains = vpnList
-                .filter(elem => (/\D$/).test(elem.address));
-
-            // added domains
-            vpnListDomains.forEach(elem => {
-                let {address} = elem;
-
-                if (MERGE_DOMAINS.some(domain => address.endsWith(domain))) {
-                    const splitted = address.split('.');
-                    address = ['*', splitted.at(-2), splitted.at(-1)].join('.');
-                }
-
-                matchedDomains.add(address);
-            });
-
-            // found domains by mask
-            const dnsEntriesWithoutVpnDomains = ipDnsCache.filter(
-                entry => entry.type === 'A'
-                    && !vpnList.map(elem => elem.address).includes(entry.name),
-            );
-
-            for (const entry of dnsEntriesWithoutVpnDomains) {
-                for (const elem of vpnListMasks) {
-                    if (new Netmask(elem.address).contains(entry.data)) {
-                        matchedDomains.add(`${entry.name} (${elem.address})`);
-                        break;
+                        elem.address = [
+                            '*',
+                            splitted.at(-2),
+                            splitted.at(-1),
+                        ].join('.');
                     }
-                }
-            }
 
-            // created domains by dns
-            vpnList
-                .map(elem => elem.comment?.match(/^created for (.+)\./)?.[1])
-                .filter(Boolean)
-                .forEach(elem => matchedDomains.add(elem));
+                    matchedDomains.add(elem.address);
+                }
+            });
 
             [...matchedDomains].forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
