@@ -40,7 +40,7 @@ export default {
 
             ipFirewallAddressList.forEach(elem => {
                 if (elem.list === env.mikrotik.toVpnList) {
-                    const domain = elem.comment.match(/^created for (?<domain>.+)\.$/)?.groups?.domain;
+                    const domain = elem.comment?.match(/^created for (?<domain>.+)\.$/)?.groups?.domain;
 
                     if (domain) {
                         if (MERGE_DOMAINS.some(rule => domain.endsWith(rule))) {
