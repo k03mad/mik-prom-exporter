@@ -23,7 +23,7 @@
     "chalk": "5.4.1"
   },
   "devDependencies": {
-    "@k03mad/eslint-config": "28.10.0",
+    "@k03mad/eslint-config": "28.11.0",
     "eslint": "9.28.0",
     "husky": "9.1.7",
     "nodemon": "3.1.10"
