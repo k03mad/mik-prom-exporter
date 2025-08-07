@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@k03mad/ip2geo':
-        specifier: 12.11.0
-        version: 12.11.0
+        specifier: 12.12.0
+        version: 12.12.0
       '@k03mad/request':
-        specifier: 7.18.0
-        version: 7.18.0
+        specifier: 7.19.0
+        version: 7.19.0
       '@k03mad/simple-log':
         specifier: 5.3.0
         version: 5.3.0
       '@k03mad/simple-prom':
-        specifier: 5.8.0
-        version: 5.8.0
+        specifier: 5.9.0
+        version: 5.9.0
       chalk:
         specifier: 5.5.0
         version: 5.5.0
@@ -126,17 +126,17 @@ packages:
     resolution: {integrity: sha512-k2gVAGxb5jFYBiVBVmUhMQT22khit+bzWRaGl3CkVZaagQAoo+qtd3tfhmLNQgq9DZuxGoWFKjvIjBTCTIbtKQ==}
     engines: {node: '>=22'}
 
-  '@k03mad/ip2geo@12.11.0':
-    resolution: {integrity: sha512-9CVSFyeaPaaGon+Ym5xD6puaOq1bpyIedL696JuJGhB3EqszicoNAQ5mxnwVcGdFf3eSyOc0Kn8SaAwYnu+tuA==}
+  '@k03mad/ip2geo@12.12.0':
+    resolution: {integrity: sha512-dqciXfVxsxt2FOhDC55VL514Ia7cckdcGDY06QdvRigX6vWf7bH0eUttm4kMy6+MfzdgD5/MZJZ8w/WLlbfhyg==}
     engines: {node: '>=22'}
     hasBin: true
 
-  '@k03mad/request@7.18.0':
-    resolution: {integrity: sha512-7TABqr7JKGx79NlGpXmzFvXqOveSdluP8jMS831fWXCrMce4GhzuHYBpuqXpwHw+A4onyD+URGuUAEw+ju+7UA==}
+  '@k03mad/request@7.19.0':
+    resolution: {integrity: sha512-Rhkg3X+PaDioQEsX03fS2vH0+9zVhye7Vb4vOCTqft59Ox5BhW77ZEKb8WBZeDFl3Zv5rlGc6xP6MiT7/AzCsQ==}
     engines: {node: '>=22'}
 
-  '@k03mad/simple-date@4.11.0':
-    resolution: {integrity: sha512-czHoV0sNbn3J/pFdY7FAW2v7YBNXmNN0t+RfHgC/UO3G0eP92Wb8CVfqsCeKcrT4G7Rr9qMjjhSiixBEhjGhzg==}
+  '@k03mad/simple-date@4.12.0':
+    resolution: {integrity: sha512-MwwuQf6YvVcczHDgE4nZmadtC7RMmbUhe6NNbioMxwNCRbYPVDl88Yt3656gx4BrKfKxJzWWfmoUtCzCiZNojw==}
     engines: {node: '>=22'}
 
   '@k03mad/simple-date@4.3.0':
@@ -147,8 +147,8 @@ packages:
     resolution: {integrity: sha512-9rg+aIiqkKP3gBDaU+9Ojhs6mlnKbJJV4eaQLG1hNXDXb/X38x2rfsnESE7TO1h7WwKarMAQVipj4FXUNNQaxA==}
     engines: {node: '>=22'}
 
-  '@k03mad/simple-prom@5.8.0':
-    resolution: {integrity: sha512-AAlI1bEc2OZ/oq+HxO9k5Dozri7I9go0OwOBJ0TNAezoxaLe5eBgAIXsVunoba7xVbNWX5d0gFrp0bhYwJ+TWQ==}
+  '@k03mad/simple-prom@5.9.0':
+    resolution: {integrity: sha512-vGZqzzUoKjZqKHI87/TiPdVXqpMwvWk05Sg2Gtzo3bVqOffxNb01bNd/Im+ECa5Qx7INeamKRv/vvbFM7eJbfA==}
     engines: {node: '>=22'}
 
   '@napi-rs/wasm-runtime@0.2.12':
@@ -546,8 +546,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.198:
-    resolution: {integrity: sha512-G5COfnp3w+ydVu80yprgWSfmfQaYRh9DOxfhAxstLyetKaLyl55QrNjx8C38Pc/C+RaDmb1M0Lk8wPEMQ+bGgQ==}
+  electron-to-chromium@1.5.199:
+    resolution: {integrity: sha512-3gl0S7zQd88kCAZRO/DnxtBKuhMO4h0EaQIN3YgZfV6+pW+5+bf2AdQeHNESCoaQqo/gjGVYEf2YM4O5HJQqpQ==}
 
   encodeurl@2.0.0:
     resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
@@ -1556,9 +1556,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@k03mad/ip2geo@12.11.0':
+  '@k03mad/ip2geo@12.12.0':
     dependencies:
-      '@k03mad/request': 7.18.0
+      '@k03mad/request': 7.19.0
       '@k03mad/simple-log': 5.3.0
       chalk: 5.5.0
       debug: 4.4.1(supports-color@5.5.0)
@@ -1566,7 +1566,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@k03mad/request@7.18.0':
+  '@k03mad/request@7.19.0':
     dependencies:
       chalk: 5.5.0
       debug: 4.4.1(supports-color@5.5.0)
@@ -1577,7 +1577,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@k03mad/simple-date@4.11.0': {}
+  '@k03mad/simple-date@4.12.0': {}
 
   '@k03mad/simple-date@4.3.0': {}
 
@@ -1585,9 +1585,9 @@ snapshots:
     dependencies:
       '@k03mad/simple-date': 4.3.0
 
-  '@k03mad/simple-prom@5.8.0':
+  '@k03mad/simple-prom@5.9.0':
     dependencies:
-      '@k03mad/simple-date': 4.11.0
+      '@k03mad/simple-date': 4.12.0
       '@k03mad/simple-log': 5.3.0
       chalk: 5.5.0
       compression: 1.8.1
@@ -1832,7 +1832,7 @@ snapshots:
   browserslist@4.25.1:
     dependencies:
       caniuse-lite: 1.0.30001731
-      electron-to-chromium: 1.5.198
+      electron-to-chromium: 1.5.199
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.1)
 
@@ -1973,7 +1973,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.198: {}
+  electron-to-chromium@1.5.199: {}
 
   encodeurl@2.0.0: {}
 
