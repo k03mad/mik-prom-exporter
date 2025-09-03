@@ -12,7 +12,7 @@ export default {
         const peers = await Mikrotik.interfaceWireguardPeers();
 
         peers.forEach(peer => {
-            ctx.labels('bytes', peer.comment).set(Number(peer.rx) + Number(peer.tx));
+            ctx.labels('bytes', peer.name).set(Number(peer.rx) + Number(peer.tx));
         });
     },
 };
