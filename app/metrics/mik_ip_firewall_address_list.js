@@ -39,17 +39,12 @@ export default {
             const matchedDomains = new Set();
 
             ipFirewallAddressList.forEach(elem => {
-                if (elem.list === env.mikrotik.toVpnList) {
-                    const domain = elem.comment?.match(/^created for (?<domain>.+)\.$/)?.groups?.domain;
-
-                    if (domain) {
-                        if (MERGE_DOMAINS.some(rule => domain.endsWith(rule))) {
-                            const splitted = domain.split('.');
-
-                            matchedDomains.add(`*.${splitted.at(-2)}.${splitted.at(-1)}`);
-                        } else {
-                            matchedDomains.add(domain);
-                        }
+                if (elem.list === env.mikrotik.toVpnList && elem.comment) {
+                    if (MERGE_DOMAINS.some(rule => elem.comment.endsWith(rule))) {
+                        const splitted = elem.comment.split('.');
+                        matchedDomains.add(`*.${splitted.at(-2)}.${splitted.at(-1)}`);
+                    } else {
+                        matchedDomains.add(elem.comment);
                     }
                 }
             });
