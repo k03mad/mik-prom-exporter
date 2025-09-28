@@ -29,11 +29,7 @@
     "nodemon": "3.1.10"
   },
   "scripts": {
-    "lint": "npm run lint:eslint",
-    "lint:eslint": "eslint ./ --cache",
-    "clean": "rm -rf ./node_modules .eslintcache || true",
-    "setup": "npm run clean && npm run setup:pnpm",
-    "setup:pnpm": "npm i pnpm -g && pnpm i",
+    "lint": "eslint ./ --cache",
     "start": "node app/server",
     "start:dev": "DEBUG=mad* nodemon app/server",
     "prepare": "husky || true"

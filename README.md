@@ -5,7 +5,7 @@
 
 ```bash
 # one time
-npm run setup
+npm i
 
 # start app
 npm run start --user=admin --password=123 --host=localhost:3030 --port=11000 --turnoff=mik_log,mik_queue_tree
