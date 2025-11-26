@@ -1,6 +1,6 @@
 {
   "name": "mik-prom-exporter",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "[Mikrotik — Prometheus] exporter",
   "maintainers": [
     "Kirill Molchanov <k03.mad@gmail.com"
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@k03mad/request": "7.23.0",
-    "@k03mad/simple-prom": "5.13.0",
+    "@k03mad/simple-prom": "5.13.2",
     "chalk": "5.6.2"
   },
   "devDependencies": {
