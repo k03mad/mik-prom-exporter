@@ -1,7 +1,3 @@
-import os from 'node:os';
-
-import {logErrorExit} from '@k03mad/simple-log';
-
 import {errorText} from './app/helpers/colors.js';
 
 const env = {
@@ -19,11 +15,6 @@ const env = {
         user: process.env.npm_config_user || process.env.MIKROTIK_USER,
         password: process.env.npm_config_password || process.env.MIKROTIK_PASSWORD,
         toVpnList: process.env.npm_config_tovpn || process.env.MIKROTIK_TO_VPN_LIST,
-        honeypotList: process.env.npm_config_honeypot || process.env.MIKROTIK_HONEYPOT_LIST,
-    },
-    geoip: {
-        cacheDir: `${os.homedir()}/.ip2geo-cache`,
-        cacheMapMaxEntries: Infinity,
     },
     debug: process.env.DEBUG,
 };
@@ -37,11 +28,13 @@ Object.entries(env.mikrotik).forEach(([key, value]) => {
 });
 
 if (missedEnvNames.length > 0) {
-    logErrorExit([
+    console.error([
         errorText(` Mikrotik [${missedEnvNames.join(' + ')}] is not specified `),
         '> use env variables or npm parameters',
         '> see readme',
-    ]);
+    ].join('\n'));
+
+    process.exit(1);
 }
 
 export default env;

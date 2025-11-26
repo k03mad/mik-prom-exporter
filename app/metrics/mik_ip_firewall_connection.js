@@ -1,8 +1,4 @@
-import {cacheStorage, ip2geo} from '@k03mad/ip2geo';
-
-import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
-import {isLocalIp} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
@@ -31,8 +27,6 @@ export default {
         const byProtocol = {};
         const byFasttrack = {};
         const byDstHost = {};
-        const byDstCountry = {};
-        const byDstIsp = {};
 
         const dstAddresses = new Set();
 
@@ -64,28 +58,6 @@ export default {
             }
         });
 
-        if (!globalThis.ip2geoError) {
-            await Promise.all([...dstAddresses].map(async address => {
-                if (!isLocalIp(address)) {
-                    const {country, countryEmoji = '', connectionIsp} = await ip2geo({
-                        ip: address,
-                        cacheDir: env.geoip.cacheDir,
-                        cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
-                    });
-
-                    if (country) {
-                        countDupsBy(`${countryEmoji} ${country}`.trim(), byDstCountry);
-                    }
-
-                    if (connectionIsp) {
-                        countDupsBy(connectionIsp, byDstIsp);
-                    }
-                }
-            }));
-        }
-
-        ctx.labels('map_entries', null).set(cacheStorage.size);
-
         Object.entries(bySrc).forEach(([key, value]) => {
             ctx.labels('src-name-count', key).set(value);
         });
@@ -100,14 +72,6 @@ export default {
 
         Object.entries(byDstHost).forEach(([key, value]) => {
             ctx.labels('dst-host-bytes', key).set(value);
-        });
-
-        Object.entries(byDstCountry).forEach(([key, value]) => {
-            ctx.labels('dst-country', key).set(value);
-        });
-
-        Object.entries(byDstIsp).forEach(([key, value]) => {
-            ctx.labels('dst-isp', key).set(value);
         });
     },
 };

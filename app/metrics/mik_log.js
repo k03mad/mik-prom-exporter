@@ -1,8 +1,4 @@
-import {ip2geo} from '@k03mad/ip2geo';
-
-import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
-import {isLocalIp} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
@@ -33,11 +29,11 @@ export default {
         const topics = {};
         const counters = {};
 
-        await Promise.all(log.map(async (item, i) => {
+        log.forEach((item, i) => {
             ctx.labels('entries', item.time, item.topics, item.message, null).set(i + 1);
             countDupsBy(item.topics, topics);
 
-            await Promise.all(Object.keys(redirectsRe).map(async type => {
+            Object.keys(redirectsRe).forEach(type => {
                 if (!counters[type]) {
                     counters[type] = {};
                 }
@@ -64,26 +60,8 @@ export default {
                         counters[type].dest = {};
                     }
 
-                    let addressDomain = address;
-
-                    if (
-                        address.includes('.')
-                        && !globalThis.ip2geoError
-                        && !isLocalIp(address)
-                    ) {
-                        const {connectionDomain} = await ip2geo({
-                            ip: address,
-                            cacheDir: env.geoip.cacheDir,
-                            cacheMapMaxEntries: env.geoip.cacheMapMaxEntries,
-                        });
-
-                        if (connectionDomain) {
-                            addressDomain += ` / ${connectionDomain}`;
-                        }
-                    }
-
-                    countDupsBy(addressDomain, counters[type].dest);
-                    redirectFullArr.push('=>', addressDomain);
+                    countDupsBy(address, counters[type].dest);
+                    redirectFullArr.push('=>', address);
                 }
 
                 const proto = item.message.match(redirectsRe[type].proto)?.[1];
@@ -104,8 +82,8 @@ export default {
 
                     countDupsBy(redirectFullArr.join(' '), counters[type].full);
                 }
-            }));
-        }));
+            });
+        });
 
         Object.entries(topics).forEach(([key, value]) => {
             ctx.labels('topics', null, null, null, key).set(value);
