@@ -22,5 +22,5 @@ jobs:
             cd ~/git/mik-prom-exporter
             git reset --hard
             git pull
-            ~/.nvm/nvm-exec npm i
+            ~/.nvm/nvm-exec pnpm i
             systemctl restart mik-exporter.service
