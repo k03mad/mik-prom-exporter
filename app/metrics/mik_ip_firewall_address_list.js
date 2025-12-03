@@ -1,15 +1,20 @@
+import {Netmask} from 'netmask';
+
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
 const MERGE_DOMAINS = [
+    'akamai.net',
     'cdninstagram.com',
+    'cloudfront.net',
     'facebook.com',
     'fbcdn.net',
     'googlevideo.com',
     'gvt1.com',
     'instagram.com',
+    'roblox.com',
 ];
 
 export default {
@@ -20,7 +25,13 @@ export default {
     async collect(ctx) {
         ctx.reset();
 
-        const ipFirewallAddressList = await Mikrotik.ipFirewallAddressList();
+        const [
+            ipFirewallAddressList,
+            ipDnsCache,
+        ] = await Promise.all([
+            Mikrotik.ipFirewallAddressList(),
+            Mikrotik.ipDnsCache(),
+        ]);
 
         const listsNames = {};
 
@@ -33,20 +44,55 @@ export default {
         });
 
         if (env.mikrotik.toVpnList) {
-            const matchedDomains = new Set();
+            const domains = new Set();
+            const mergedDomains = new Set();
 
-            ipFirewallAddressList.forEach(elem => {
-                if (elem.list === env.mikrotik.toVpnList && elem.comment) {
-                    if (MERGE_DOMAINS.some(rule => elem.comment.endsWith(rule))) {
-                        const splitted = elem.comment.split('.');
-                        matchedDomains.add(`*.${splitted.at(-2)}.${splitted.at(-1)}`);
-                    } else {
-                        matchedDomains.add(elem.comment);
+            // mask to domains from dns cache
+            const vpnListMasks = ipFirewallAddressList
+                .map(elem => {
+                    if (
+                        elem.list === env.mikrotik.toVpnList
+                        && elem.address.includes('/')
+                    ) {
+                        return elem.address;
                     }
+                })
+                .filter(Boolean);
+
+            const dnsEntries = ipDnsCache.filter(entry => entry.type === 'A' && entry.data);
+
+            for (const mask of vpnListMasks) {
+                const maskData = new Netmask(mask);
+
+                for (const entry of dnsEntries) {
+                    if (maskData.contains(entry.data)) {
+                        domains.add(entry.name);
+                    }
+                }
+            }
+
+            // domains from comment
+            ipFirewallAddressList.forEach(elem => {
+                if (
+                    elem.list === env.mikrotik.toVpnList
+                    && elem.comment
+                    && !elem.address.includes('/')
+                ) {
+                    domains.add(elem.comment);
                 }
             });
 
-            [...matchedDomains].forEach((domain, i) => {
+            // merge
+            for (const domain of domains) {
+                if (MERGE_DOMAINS.some(rule => domain.endsWith(rule))) {
+                    const splitted = domain.split('.');
+                    mergedDomains.add(`*.${splitted.at(-2)}.${splitted.at(-1)}`);
+                } else {
+                    mergedDomains.add(domain);
+                }
+            }
+
+            [...mergedDomains].forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
             });
         }

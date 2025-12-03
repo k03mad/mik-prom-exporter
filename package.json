@@ -18,7 +18,8 @@
   "dependencies": {
     "@k03mad/request": "7.23.3",
     "@k03mad/simple-prom": "5.14.1",
-    "chalk": "5.6.2"
+    "chalk": "5.6.2",
+    "netmask": "2.0.2"
   },
   "devDependencies": {
     "@k03mad/eslint-config": "29.14.1",
