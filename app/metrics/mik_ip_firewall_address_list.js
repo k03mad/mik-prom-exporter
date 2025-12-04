@@ -2,6 +2,7 @@ import {Netmask} from 'netmask';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
+import {isValidIPv4} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
@@ -76,7 +77,7 @@ export default {
                 if (
                     elem.list === env.mikrotik.toVpnList
                     && elem.comment
-                    && !elem.address.includes('/')
+                    && isValidIPv4(elem.address)
                 ) {
                     domains.add(elem.comment);
                 }
