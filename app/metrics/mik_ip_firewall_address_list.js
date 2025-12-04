@@ -15,6 +15,7 @@ const MERGE_DOMAINS = [
     'googlevideo.com',
     'gvt1.com',
     'instagram.com',
+    'rbxcdn.com',
     'roblox.com',
 ];
 
