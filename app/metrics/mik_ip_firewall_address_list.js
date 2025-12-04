@@ -8,6 +8,7 @@ import {getCurrentFilename} from '../helpers/paths.js';
 
 const MERGE_DOMAINS = [
     'akamai.net',
+    'akamaiedge.net',
     'cdninstagram.com',
     'cloudfront.net',
     'facebook.com',
