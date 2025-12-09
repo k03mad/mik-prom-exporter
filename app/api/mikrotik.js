@@ -167,6 +167,13 @@ class Mikrotik {
     /**
      * @returns {Promise<Array<object>>}
      */
+    ipDnsStatic() {
+        return this._get('ip/dns/static/print');
+    }
+
+    /**
+     * @returns {Promise<Array<object>>}
+     */
     ipDnsCache() {
         return this._get('ip/dns/cache/print');
     }

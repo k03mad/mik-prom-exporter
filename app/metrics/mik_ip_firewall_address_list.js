@@ -6,20 +6,6 @@ import {isValidIPv4} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
-const MERGE_DOMAINS = [
-    'akamai.net',
-    'akamaiedge.net',
-    'cdninstagram.com',
-    'cloudfront.net',
-    'facebook.com',
-    'fbcdn.net',
-    'googlevideo.com',
-    'gvt1.com',
-    'instagram.com',
-    'rbxcdn.com',
-    'roblox.com',
-];
-
 export default {
     name: getCurrentFilename(import.meta.url),
     help: 'ip/firewall/address-list',
@@ -28,14 +14,7 @@ export default {
     async collect(ctx) {
         ctx.reset();
 
-        const [
-            ipFirewallAddressList,
-            ipDnsCache,
-        ] = await Promise.all([
-            Mikrotik.ipFirewallAddressList(),
-            Mikrotik.ipDnsCache(),
-        ]);
-
+        const ipFirewallAddressList = await Mikrotik.ipFirewallAddressList();
         const listsNames = {};
 
         ipFirewallAddressList.forEach(elem => {
@@ -47,8 +26,9 @@ export default {
         });
 
         if (env.mikrotik.toVpnList) {
+            const ipDnsCache = await Mikrotik.ipDnsCache();
+
             const domains = new Set();
-            const mergedDomains = new Set();
 
             // mask to domains from dns cache
             const vpnListMasks = ipFirewallAddressList
@@ -85,18 +65,11 @@ export default {
                 }
             });
 
-            // merge
-            for (const domain of domains) {
-                if (MERGE_DOMAINS.some(rule => domain.endsWith(rule))) {
-                    const splitted = domain.split('.');
-                    mergedDomains.add(`*.${splitted.at(-2)}.${splitted.at(-1)}`);
-                } else {
-                    mergedDomains.add(domain);
-                }
-            }
-
-            [...mergedDomains].forEach((domain, i) => {
+            [...domains].forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
+
+                const splitted = domain.split('.');
+                ctx.labels('tovpnMain', `${splitted.at(-2)}.${splitted.at(-1)}`).set(i + 1);
             });
         }
     },
