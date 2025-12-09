@@ -9,6 +9,9 @@ jobs:
   ssh-vds:
     environment: vds
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: appleboy/ssh-action@v1.2.2
         with:
