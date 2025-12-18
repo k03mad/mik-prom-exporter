@@ -13,7 +13,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "node": ">=25"
   },
   "dependencies": {
     "@k03mad/request": "9.0.1",
