@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  ssh-vds:
-    environment: vds
+  ssh-opi:
+    environment: opi
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.ref }}
