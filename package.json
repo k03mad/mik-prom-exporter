@@ -1,6 +1,6 @@
 {
   "name": "mik-prom-exporter",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "[Mikrotik — Prometheus] exporter",
   "maintainers": [
     "Kirill Molchanov <k03.mad@gmail.com"
@@ -16,13 +16,13 @@
     "node": ">=24"
   },
   "dependencies": {
-    "@k03mad/request": "10.0.0",
-    "@k03mad/simple-prom": "7.0.0",
+    "@k03mad/request": "11.0.0",
+    "@k03mad/simple-prom": "8.0.0",
     "chalk": "5.6.2",
     "netmask": "2.0.2"
   },
   "devDependencies": {
-    "@k03mad/eslint-config": "31.0.0",
+    "@k03mad/eslint-config": "32.0.0",
     "eslint": "9.39.2",
     "husky": "9.1.7",
     "nodemon": "3.1.11"
