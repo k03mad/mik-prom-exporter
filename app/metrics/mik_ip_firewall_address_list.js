@@ -22,9 +22,10 @@ const getMainDomain = domain => {
  * @param {string[]} domainsArr
  */
 const saveDomainsLog = async domainsArr => {
+    const lines = [];
     let prevMainDomain;
 
-    const lines = domainsArr
+    domainsArr
         .toSorted((a, b) => {
             const aParts = a.split('.').toReversed();
             const bParts = b.split('.').toReversed();
@@ -45,11 +46,11 @@ const saveDomainsLog = async domainsArr => {
             const mainDomain = getMainDomain(domain);
 
             if (prevMainDomain && prevMainDomain !== mainDomain) {
-                return '';
+                lines.push('');
             }
 
+            lines.push(`${i + 1}. ${domain}`);
             prevMainDomain = mainDomain;
-            return `${i + 1}. ${domain}`;
         });
 
     await fs.writeFile('.vpn_domains.log', lines.join('\n'));
