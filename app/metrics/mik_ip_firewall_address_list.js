@@ -30,7 +30,10 @@ const saveDomainsHtml = async () => {
         domains.size > 0
         && ((Date.now() - timestamp) / 60_000) > LOG_FILE_SAVE_EVERY_MIN
     ) {
-        const lines = ['<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>">'];
+        const lines = [
+            '<title>Domains</title>',
+            '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>">',
+        ];
 
         let currentContentArr = [];
 
