@@ -141,7 +141,16 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
         }
 
         .domain-group {
+            margin-bottom: 0;
+        }
+
+        .domain-group.multi-domain {
+            margin-top: 20px;
             margin-bottom: 20px;
+        }
+
+        .domain-group:first-child {
+            margin-top: 0;
         }
 
         .domain-group:last-child {
@@ -276,7 +285,16 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             return [...domainGroups.entries()]
                 .map(([mainDomain, groupDomains]) => {
                     const shouldCollapse = groupDomains.length >= AUTO_COLLAPSE_THRESHOLD;
-                    const groupClass = shouldCollapse ? 'domain-group collapsed' : 'domain-group';
+                    const isMultiDomain = groupDomains.length > 1;
+                    let groupClass = 'domain-group';
+
+                    if (shouldCollapse) {
+                        groupClass += ' collapsed';
+                    }
+
+                    if (isMultiDomain) {
+                        groupClass += ' multi-domain';
+                    }
 
                     let html = `<div class="${groupClass}">`;
 
