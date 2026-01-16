@@ -75,6 +75,7 @@ const saveDomainsLog = async () => {
                 prevMainDomain = mainDomain;
             });
 
+        await fs.mkdir(path.dirname(LOG_FILE), {recursive: true});
         await fs.writeFile(LOG_FILE, lines.join('\n'));
     }
 
