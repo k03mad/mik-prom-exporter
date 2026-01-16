@@ -25,17 +25,20 @@ const getMainDomain = domain => {
     return `${parts.at(-2)}.${parts.at(-1)}`;
 };
 
-const saveDomainsLog = async () => {
+const saveDomainsHtml = async () => {
     if (
         domains.size > 0
         && ((Date.now() - timestamp) / 60_000) > LOG_FILE_SAVE_EVERY_MIN
     ) {
+        const lines = ['<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>">'];
+
         let currentContentArr = [];
 
         try {
             const currentContent = await fs.readFile(LOG_FILE, {encoding: 'utf8'});
 
             currentContentArr = currentContent
+                .slice(lines.length)
                 .split(LOG_FILE_NEW_LINE)
                 .map(elem => elem.split('.').slice(1).join('.').trim())
                 .filter(Boolean);
@@ -45,7 +48,6 @@ const saveDomainsLog = async () => {
             }
         }
 
-        const lines = [];
         let prevMainDomain;
 
         [...new Set([...currentContentArr, ...domains])]
@@ -153,7 +155,7 @@ export default {
                 }
             });
 
-            await saveDomainsLog();
+            await saveDomainsHtml();
         }
     },
 };
