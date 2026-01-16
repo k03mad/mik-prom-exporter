@@ -29,20 +29,20 @@ const saveDomainsLog = async () => {
         domains.size > 0
         && ((Date.now() - timestamp) / 60_000) > LOG_SAVE_EVERY_MIN
     ) {
-        let currentContent = [];
+        let currentContentArr = [];
 
         try {
-            currentContent = await fs.readFile(LOG_FILE, {encoding: 'utf8'});
+            const currentContent = await fs.readFile(LOG_FILE, {encoding: 'utf8'});
+
+            currentContentArr = currentContent
+                .split('\n')
+                .map(elem => elem.split('.').slice(1).join('.').trim())
+                .filter(Boolean);
         } catch (err) {
             if (err.code !== 'ENOENT') {
                 throw err;
             }
         }
-
-        const currentContentArr = currentContent
-            .split('\n')
-            .map(elem => elem.split('.').slice(1).join('.').trim())
-            .filter(Boolean);
 
         const lines = [];
         let prevMainDomain;
