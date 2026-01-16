@@ -38,8 +38,8 @@ const saveDomainsHtml = async () => {
             const currentContent = await fs.readFile(LOG_FILE, {encoding: 'utf8'});
 
             currentContentArr = currentContent
-                .slice(lines.length)
                 .split(LOG_FILE_NEW_LINE)
+                .slice(lines.length)
                 .map(elem => elem.split('.').slice(1).join('.').trim())
                 .filter(Boolean);
         } catch (err) {
