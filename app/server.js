@@ -11,4 +11,5 @@ startMetricsServer({
     debug: env.debug,
     metrics,
     metricsTurnOff: env.metrics.turnOff?.split(','),
+    staticFolder: env.server.static,
 });

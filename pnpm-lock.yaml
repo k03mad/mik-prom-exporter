@@ -12,8 +12,8 @@ importers:
         specifier: 12.0.0
         version: 12.0.0
       '@k03mad/simple-prom':
-        specifier: 9.0.0
-        version: 9.0.0
+        specifier: 9.1.0
+        version: 9.1.0
       chalk:
         specifier: 5.6.2
         version: 5.6.2
@@ -127,8 +127,8 @@ packages:
     resolution: {integrity: sha512-aEj3UC8lFoO0SmIi9xbSeNECOGvTO/VlEX8EqiQ6YRypYdgXl5E9gv/O6HAkFldQK7JvJV/MoKq2DSOtl+tPCg==}
     engines: {node: '>=24'}
 
-  '@k03mad/simple-prom@9.0.0':
-    resolution: {integrity: sha512-MG5UG2Iu7iCyiDy9OdjfkTFx3KEXVsqrJwvUma7LLEwcKnPdZ96FHZjlDtWCSHLPlt+vVtVAcxa3Is5gqpdLzw==}
+  '@k03mad/simple-prom@9.1.0':
+    resolution: {integrity: sha512-MldQzjXdsm+J/4WJJx9lFfmlpnBUNyp31yCVU46VK2X5PKXzQDqyNcxRdoawrHcxxlxX94b608eGeP8C+Xsoaw==}
     engines: {node: '>=24'}
 
   '@keyv/serialize@1.1.1':
@@ -1519,7 +1519,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@k03mad/simple-prom@9.0.0':
+  '@k03mad/simple-prom@9.1.0':
     dependencies:
       chalk: 5.6.2
       compression: 1.8.1

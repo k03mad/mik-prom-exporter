@@ -5,6 +5,7 @@ const env = {
         port: process.env.npm_config_port
             || process.env.MIKROTIK_EXPORTER_PORT
             || 11_012,
+        static: 'public',
     },
     metrics: {
         turnOff: process.env.npm_config_turnoff

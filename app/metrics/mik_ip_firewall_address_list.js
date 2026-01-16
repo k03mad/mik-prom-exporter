@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import path from 'node:path';
 
 import {Netmask} from 'netmask';
 
@@ -10,6 +11,11 @@ import {getCurrentFilename} from '../helpers/paths.js';
 
 const domains = new Set();
 
+const LOG_FILE = path.join(env.server.static, 'domains');
+const LOG_SAVE_EVERY_MIN = 1;
+
+let timestamp = Date.now();
+
 /**
  * @param {string} domain
  */
@@ -18,42 +24,61 @@ const getMainDomain = domain => {
     return `${parts.at(-2)}.${parts.at(-1)}`;
 };
 
-/**
- * @param {string[]} domainsArr
- */
-const saveDomainsLog = async domainsArr => {
-    const lines = [];
-    let prevMainDomain;
+const saveDomainsLog = async () => {
+    if (
+        domains.size > 0
+        && ((Date.now() - timestamp) / 60_000) > LOG_SAVE_EVERY_MIN
+    ) {
+        let currentContent = [];
 
-    domainsArr
-        .toSorted((a, b) => {
-            const aParts = a.split('.').toReversed();
-            const bParts = b.split('.').toReversed();
+        try {
+            currentContent = await fs.readFile(LOG_FILE, {encoding: 'utf8'});
+        } catch (err) {
+            if (err.code !== 'ENOENT') {
+                throw err;
+            }
+        }
 
-            for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
-                const aPart = aParts[i] || '';
-                const bPart = bParts[i] || '';
-                const comparison = aPart.localeCompare(bPart);
+        const currentContentArr = currentContent
+            .split('\n')
+            .map(elem => elem.split('.').slice(1).join('.').trim())
+            .filter(Boolean);
 
-                if (comparison !== 0) {
-                    return comparison;
+        const lines = [];
+        let prevMainDomain;
+
+        [...new Set([...currentContentArr, ...domains])]
+            .toSorted((a, b) => {
+                const aParts = a.split('.').toReversed();
+                const bParts = b.split('.').toReversed();
+
+                for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+                    const aPart = aParts[i] || '';
+                    const bPart = bParts[i] || '';
+                    const comparison = aPart.localeCompare(bPart);
+
+                    if (comparison !== 0) {
+                        return comparison;
+                    }
                 }
-            }
 
-            return 0;
-        })
-        .map((domain, i) => {
-            const mainDomain = getMainDomain(domain);
+                return 0;
+            })
+            .map((domain, i) => {
+                const mainDomain = getMainDomain(domain);
 
-            if (prevMainDomain && prevMainDomain !== mainDomain) {
-                lines.push('');
-            }
+                if (prevMainDomain && prevMainDomain !== mainDomain) {
+                    lines.push('');
+                }
 
-            lines.push(`${i + 1}. ${domain}`);
-            prevMainDomain = mainDomain;
-        });
+                lines.push(`${i + 1}. ${domain}`);
+                prevMainDomain = mainDomain;
+            });
 
-    await fs.writeFile('.vpn_domains.log', lines.join('\n'));
+        await fs.writeFile(LOG_FILE, lines.join('\n'));
+    }
+
+    timestamp = Date.now();
 };
 
 export default {
@@ -114,9 +139,8 @@ export default {
             });
 
             const mainDomains = new Set();
-            const domainsArr = [...domains];
 
-            domainsArr.forEach((domain, i) => {
+            [...domains].forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
 
                 const mainDomain = getMainDomain(domain);
@@ -127,9 +151,7 @@ export default {
                 }
             });
 
-            if (domainsArr.length > 0) {
-                await saveDomainsLog(domainsArr);
-            }
+            await saveDomainsLog();
         }
     },
 };

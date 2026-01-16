@@ -4,4 +4,4 @@ node_modules
 .eslintcache
 .test.js
 
-.vpn_domains.log
+public
