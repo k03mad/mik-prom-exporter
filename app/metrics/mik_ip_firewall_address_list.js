@@ -45,7 +45,7 @@ const saveDomainsLog = async domainsArr => {
             const mainDomain = getMainDomain(domain);
 
             if (prevMainDomain && prevMainDomain !== mainDomain) {
-                lines.push('');
+                return '';
             }
 
             prevMainDomain = mainDomain;
