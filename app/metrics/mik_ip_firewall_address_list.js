@@ -12,9 +12,9 @@ import {getCurrentFilename} from '../helpers/paths.js';
 const domains = new Set();
 
 const LOG_FILE = path.join(env.server.static, 'domains');
-const LOG_SAVE_EVERY_MIN = 1;
+// const LOG_SAVE_EVERY_MIN = 1;
 
-let timestamp = Date.now();
+// let timestamp = Date.now();
 
 /**
  * @param {string} domain
@@ -27,7 +27,7 @@ const getMainDomain = domain => {
 const saveDomainsLog = async () => {
     if (
         domains.size > 0
-        && ((Date.now() - timestamp) / 60_000) > LOG_SAVE_EVERY_MIN
+        // && ((Date.now() - timestamp) / 60_000) > LOG_SAVE_EVERY_MIN
     ) {
         let currentContentArr = [];
 
@@ -79,7 +79,7 @@ const saveDomainsLog = async () => {
         await fs.writeFile(LOG_FILE, lines.join('\n'));
     }
 
-    timestamp = Date.now();
+    // timestamp = Date.now();
 };
 
 export default {
