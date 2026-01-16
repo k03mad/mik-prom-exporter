@@ -9,7 +9,33 @@ import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
 const domains = new Set();
-const vpnDomainsFile = '.vpn_domains.log';
+
+/**
+ * @param {string[]} domainsArr
+ */
+const saveDomainsLog = async domainsArr => {
+    if (domainsArr.length > 0) {
+        const lines = [];
+        let prevMainDomain = '';
+
+        domainsArr.forEach((domain, i) => {
+            const parts = domain.split('.');
+
+            const mainDomain = parts.length >= 2
+                ? `${parts.at(-2)}.${parts.at(-1)}`
+                : domain;
+
+            if (prevMainDomain && prevMainDomain !== mainDomain) {
+                lines.push('');
+            }
+
+            lines.push(`${i + 1}. ${domain}`);
+            prevMainDomain = mainDomain;
+        });
+
+        await fs.writeFile('.vpn_domains.log', lines.join('\n'));
+    }
+};
 
 export default {
     name: getCurrentFilename(import.meta.url),
@@ -68,10 +94,26 @@ export default {
                 }
             });
 
-            const domainsArr = [...domains];
+            const domainsSorted = [...domains].toSorted((a, b) => {
+                const aParts = a.split('.').toReversed();
+                const bParts = b.split('.').toReversed();
+
+                for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+                    const aPart = aParts[i] || '';
+                    const bPart = bParts[i] || '';
+                    const comparison = aPart.localeCompare(bPart);
+
+                    if (comparison !== 0) {
+                        return comparison;
+                    }
+                }
+
+                return 0;
+            });
+
             const mainDomains = new Set();
 
-            domainsArr.forEach((domain, i) => {
+            domainsSorted.forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
 
                 const splitted = domain.split('.');
@@ -83,7 +125,7 @@ export default {
                 }
             });
 
-            await fs.writeFile(vpnDomainsFile, domainsArr.join('\n'));
+            await saveDomainsLog(domainsSorted);
         }
     },
 };
