@@ -13,8 +13,6 @@ const domains = new Set();
 const SAVE_DOMAINS_HTML_EVERY_MIN = 1;
 let timestamp = Date.now();
 
-await saveDomainsHtml(domains, path.join(env.server.static, 'domains.html'));
-
 export default {
     name: getCurrentFilename(import.meta.url),
     help: 'ip/firewall/address-list',
