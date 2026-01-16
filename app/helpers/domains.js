@@ -16,7 +16,7 @@ export const getMainDomain = domain => {
  * @returns {string}
  */
 export const generateDomainsHtml = ({allDomains, domainGroups}) => {
-    const AUTO_COLLAPSE_THRESHOLD = 50;
+    const AUTO_COLLAPSE_THRESHOLD = 20;
 
     const lastUpdate = new Date().toLocaleString('ru-RU', {
         timeZone: 'Europe/Moscow',
@@ -82,28 +82,6 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             font-weight: 500;
         }
 
-        .stat.clickable {
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.2s;
-            padding: 6px 12px;
-            margin: -6px -12px;
-            border-radius: 4px;
-            border: 1px solid #2d2d2d;
-            background: #1e1e1e;
-        }
-
-        .stat.clickable:hover {
-            color: #e0e0e0;
-            background: rgba(76, 175, 80, 0.15);
-            border-color: #4caf50;
-        }
-
-        .stat.clickable.active {
-            background: rgba(76, 175, 80, 0.1);
-            border-color: #4caf50;
-        }
-
         .search-box {
             position: relative;
             flex: 1;
@@ -163,48 +141,11 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
         }
 
         .domain-group {
-            background: #1e1e1e;
-            margin-bottom: 15px;
-            border-radius: 4px;
-            border: 1px solid #2d2d2d;
-            overflow: hidden;
+            margin-bottom: 20px;
         }
 
-        .group-header {
-            background: #252525;
-            padding: 12px 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            font-weight: 500;
-            border-bottom: 1px solid #2d2d2d;
-            transition: background 0.2s;
-        }
-
-        .group-header:hover {
-            background: #2d2d2d;
-        }
-
-        .group-header.collapsed {
-            border-bottom: none;
-        }
-
-        .group-header.collapsed .group-title {
-            color: #4caf50;
-        }
-
-        .group-title {
-            font-size: 0.95em;
-            color: #e0e0e0;
-        }
-
-        .badge {
-            background: #4caf50;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            font-weight: normal;
+        .domain-group:last-child {
+            margin-bottom: 0;
         }
 
         .domain-table {
@@ -212,16 +153,16 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             border-collapse: collapse;
         }
 
+        .domain-table.collapsed {
+            display: none;
+        }
+
         .domain-table td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #252525;
+            padding: 8px 15px;
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 0.85em;
             color: #b0b0b0;
-        }
-
-        .domain-table tr:last-child td {
-            border-bottom: none;
+            cursor: pointer;
         }
 
         .domain-table tr:hover {
@@ -237,59 +178,37 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             width: 60px;
             text-align: right;
             padding-right: 15px;
-        }
-
-        .domain-table tr:hover .domain-num {
-            color: #4caf50;
-        }
-
-        .list-view .domain-group {
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            margin-bottom: 0;
-            padding: 15px 0;
-            border-bottom: 1px solid #2d2d2d;
-        }
-
-        .list-view .domain-group:first-child {
-            padding-top: 0;
-        }
-
-        .list-view .domain-group:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .list-view .group-header {
-            display: none;
-        }
-
-        .list-view .domain-table {
-            display: table !important;
-        }
-
-        .list-view .domain-table td {
-            border-bottom: none;
-            padding: 8px 15px;
-        }
-
-        .list-view .domain-table tr {
-            border-bottom: none;
-        }
-
-        .list-view .domain-num {
             font-size: 0;
         }
 
-        .list-view .domain-num::after {
+        .domain-num::after {
             content: attr(data-global-index);
             color: #666;
             font-size: 0.85rem;
         }
 
-        .list-view .domain-table tr:hover .domain-num::after {
+        .domain-table tr:hover .domain-num::after {
             color: #4caf50;
+        }
+
+        .collapsed-placeholder {
+            padding: 10px 15px;
+            color: #4caf50;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            background: rgba(76, 175, 80, 0.08);
+            border-radius: 4px;
+        }
+
+        .collapsed-placeholder:hover {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+        }
+
+        .collapsed-placeholder::before {
+            content: '▶ ';
+            margin-right: 5px;
         }
 
         .no-results {
@@ -327,10 +246,6 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
                 max-width: none;
             }
 
-            .view-toggle {
-                justify-content: center;
-            }
-
             .domain-num {
                 width: 40px;
                 padding-right: 10px;
@@ -347,7 +262,7 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
     <div class="toolbar">
         <div class="stats">
             <div class="stat">Total: <strong>${allDomains.length}</strong></div>
-            <div class="stat clickable" id="groupsToggle">Groups: <strong>${domainGroups.size}</strong></div>
+            <div class="stat">Groups: <strong>${domainGroups.size}</strong></div>
         </div>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Filter..." autocomplete="off">
@@ -361,23 +276,27 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             return [...domainGroups.entries()]
                 .map(([mainDomain, groupDomains]) => {
                     const shouldCollapse = groupDomains.length >= AUTO_COLLAPSE_THRESHOLD;
-                    return `
-                        <div class="domain-group">
-                            <div class="group-header${shouldCollapse ? ' collapsed' : ''}">
-                                <span class="group-title">${mainDomain}</span>
-                                <span class="badge">${groupDomains.length}</span>
-                            </div>
-                            <table class="domain-table"${shouldCollapse ? ' style="display: none;"' : ''}>
-            ${groupDomains.map((domain, localIndex) => {
-                globalIndex++;
-                return `<tr data-domain="${domain}" data-global-index="${globalIndex}" data-local-index="${localIndex + 1}">
-                                    <td class="domain-num" data-global-index="${globalIndex}">${localIndex + 1}</td>
+                    const groupClass = shouldCollapse ? 'domain-group collapsed' : 'domain-group';
+
+                    let html = `<div class="${groupClass}">`;
+
+                    if (shouldCollapse) {
+                        html += `<div class="collapsed-placeholder" data-main-domain="${mainDomain}" data-count="${groupDomains.length}">${mainDomain} (${groupDomains.length} domains)</div>`;
+                    }
+
+                    html += `<table class="domain-table${shouldCollapse ? ' collapsed' : ''}">`;
+
+                    html += groupDomains.map(domain => {
+                        globalIndex++;
+                        return `<tr data-domain="${domain}" data-global-index="${globalIndex}">
+                                    <td class="domain-num" data-global-index="${globalIndex}"></td>
                                     <td>${domain}</td>
                                 </tr>`;
-            }).join('\n')}
-                            </table>
-                        </div>
-                    `;
+                    }).join('\n');
+
+                    html += '</table></div>';
+
+                    return html;
                 })
                 .join('\n');
         })()}
@@ -391,7 +310,6 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
         const searchInput = document.getElementById('searchInput');
         const searchClear = document.getElementById('searchClear');
         const content = document.getElementById('content');
-        const groupsToggle = document.getElementById('groupsToggle');
         const originalContent = content.innerHTML;
 
         function performSearch() {
@@ -400,15 +318,8 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
 
             if (!query) {
                 content.innerHTML = originalContent;
-                initGroupHeaders();
-                const savedView = localStorage.getItem('domainsView') || 'groups';
-                if (savedView === 'list') {
-                    content.classList.add('list-view');
-                    groupsToggle.classList.remove('active');
-                } else {
-                    content.classList.remove('list-view');
-                    groupsToggle.classList.add('active');
-                }
+                initCollapsedPlaceholders();
+                initDomainRowClicks();
                 return;
             }
 
@@ -448,14 +359,51 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             }
         }
 
-        function initGroupHeaders() {
-            document.querySelectorAll('.group-header').forEach(header => {
-                header.addEventListener('click', () => {
-                    const table = header.nextElementSibling;
-                    const isCollapsed = table.style.display === 'none';
+        function initCollapsedPlaceholders() {
+            document.querySelectorAll('.collapsed-placeholder').forEach(placeholder => {
+                placeholder.addEventListener('click', () => {
+                    const group = placeholder.closest('.domain-group');
+                    const table = group.querySelector('.domain-table');
 
-                    table.style.display = isCollapsed ? '' : 'none';
-                    header.classList.toggle('collapsed', !isCollapsed);
+                    table.classList.remove('collapsed');
+                    group.classList.remove('collapsed');
+                    placeholder.remove();
+
+                    initDomainRowClicks();
+                });
+            });
+        }
+
+        function initDomainRowClicks() {
+            document.querySelectorAll('.domain-table:not(.collapsed)').forEach(table => {
+                const rows = table.querySelectorAll('tr');
+                rows.forEach(row => {
+                    row.replaceWith(row.cloneNode(true));
+                });
+
+                table.querySelectorAll('tr').forEach(row => {
+                    row.addEventListener('click', () => {
+                        const group = table.closest('.domain-group');
+
+                        table.classList.add('collapsed');
+                        group.classList.add('collapsed');
+
+                        const firstDomain = table.querySelector('tr').dataset.domain;
+                        const mainDomain = firstDomain.split('.').slice(-2).join('.');
+                        const count = table.querySelectorAll('tr').length;
+
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'collapsed-placeholder';
+                        placeholder.textContent = \`\${mainDomain} (\${count} domains)\`;
+                        placeholder.addEventListener('click', () => {
+                            table.classList.remove('collapsed');
+                            group.classList.remove('collapsed');
+                            placeholder.remove();
+                            initDomainRowClicks();
+                        });
+
+                        group.insertBefore(placeholder, table);
+                    });
                 });
             });
         }
@@ -468,27 +416,8 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             searchInput.focus();
         });
 
-        function setView(view) {
-            if (view === 'list') {
-                content.classList.add('list-view');
-                groupsToggle.classList.remove('active');
-            } else {
-                content.classList.remove('list-view');
-                groupsToggle.classList.add('active');
-            }
-            localStorage.setItem('domainsView', view);
-        }
-
-        groupsToggle.addEventListener('click', () => {
-            const currentView = localStorage.getItem('domainsView') || 'groups';
-            const newView = currentView === 'list' ? 'groups' : 'list';
-            setView(newView);
-        });
-
-        const savedView = localStorage.getItem('domainsView') || 'groups';
-        setView(savedView);
-
-        initGroupHeaders();
+        initCollapsedPlaceholders();
+        initDomainRowClicks();
     </script>
 </body>
 </html>`;

@@ -10,8 +10,11 @@ import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
 
 const domains = new Set();
-const SAVE_DOMAINS_HTML_EVERY_MIN = 1;
-let timestamp = Date.now();
+
+await saveDomainsHtml(
+    domains,
+    path.join(env.server.static, 'domains.html'),
+);
 
 export default {
     name: getCurrentFilename(import.meta.url),
@@ -83,17 +86,10 @@ export default {
                 }
             });
 
-            if (
-                domains.size > 0
-                && ((Date.now() - timestamp) / 60_000) > SAVE_DOMAINS_HTML_EVERY_MIN
-            ) {
-                await saveDomainsHtml(
-                    domains,
-                    path.join(env.server.static, 'domains.html'),
-                );
-
-                timestamp = Date.now();
-            }
+            await saveDomainsHtml(
+                domains,
+                path.join(env.server.static, 'domains.html'),
+            );
         }
     },
 };
