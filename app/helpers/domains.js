@@ -10,12 +10,10 @@ export const getMainDomain = domain => {
 };
 
 /**
- * @param {object} options
- * @param {string[]} options.allDomains
- * @param {Map<string, string[]>} options.domainGroups
+ * @param {Map<string, string[]>} domainGroups
  * @returns {string}
  */
-export const generateDomainsHtml = ({allDomains, domainGroups}) => {
+export const generateDomainsHtml = domainGroups => {
     const AUTO_COLLAPSE_THRESHOLD = 20;
 
     const lastUpdate = new Date().toLocaleString('ru-RU', {
@@ -57,36 +55,14 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             padding: 15px 20px;
             border-bottom: 1px solid #2d2d2d;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .stats {
-            display: flex;
-            gap: 30px;
-            font-size: 1em;
-        }
-
-        .stat {
-            color: #b0b0b0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
-
-        .stat strong {
-            color: #4caf50;
-            font-weight: 500;
         }
 
         .search-box {
             position: relative;
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
+            width: 100%;
+            max-width: 500px;
         }
 
         .search-box input {
@@ -171,6 +147,9 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 0.85em;
             color: #b0b0b0;
+        }
+
+        .multi-domain .domain-table td {
             cursor: pointer;
         }
 
@@ -241,16 +220,6 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
         }
 
         @media (max-width: 768px) {
-            .toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .stats {
-                justify-content: center;
-                gap: 20px;
-            }
-
             .search-box {
                 max-width: none;
             }
@@ -269,10 +238,6 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
 </head>
 <body>
     <div class="toolbar">
-        <div class="stats">
-            <div class="stat">Total: <strong>${allDomains.length}</strong></div>
-            <div class="stat">Groups: <strong>${domainGroups.size}</strong></div>
-        </div>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Filter..." autocomplete="off">
             <button class="search-clear" id="searchClear">×</button>
@@ -393,7 +358,7 @@ export const generateDomainsHtml = ({allDomains, domainGroups}) => {
         }
 
         function initDomainRowClicks() {
-            document.querySelectorAll('.domain-table:not(.collapsed)').forEach(table => {
+            document.querySelectorAll('.multi-domain .domain-table:not(.collapsed)').forEach(table => {
                 const rows = table.querySelectorAll('tr');
                 rows.forEach(row => {
                     row.replaceWith(row.cloneNode(true));
@@ -458,24 +423,23 @@ export const saveDomainsHtml = async (domains, file) => {
         }
     }
 
-    const allDomains = [...new Set([...currentContentArr, ...domains])];
+    const sortedDomains = [...new Set([...currentContentArr, ...domains])]
+        .toSorted((a, b) => {
+            const aParts = a.split('.').toReversed();
+            const bParts = b.split('.').toReversed();
 
-    const sortedDomains = allDomains.toSorted((a, b) => {
-        const aParts = a.split('.').toReversed();
-        const bParts = b.split('.').toReversed();
+            for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+                const aPart = aParts[i] || '';
+                const bPart = bParts[i] || '';
+                const comparison = aPart.localeCompare(bPart);
 
-        for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
-            const aPart = aParts[i] || '';
-            const bPart = bParts[i] || '';
-            const comparison = aPart.localeCompare(bPart);
-
-            if (comparison !== 0) {
-                return comparison;
+                if (comparison !== 0) {
+                    return comparison;
+                }
             }
-        }
 
-        return 0;
-    });
+            return 0;
+        });
 
     const domainGroups = new Map();
 
@@ -489,10 +453,7 @@ export const saveDomainsHtml = async (domains, file) => {
         domainGroups.get(mainDomain).push(domain);
     });
 
-    const html = generateDomainsHtml({
-        allDomains,
-        domainGroups,
-    });
+    const html = generateDomainsHtml(domainGroups);
 
     await fs.mkdir(path.dirname(file), {recursive: true});
     await fs.writeFile(file, html);

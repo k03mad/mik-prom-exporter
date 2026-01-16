@@ -11,11 +11,6 @@ import {getCurrentFilename} from '../helpers/paths.js';
 
 const domains = new Set();
 
-await saveDomainsHtml(
-    domains,
-    path.join(env.server.static, 'domains.html'),
-);
-
 export default {
     name: getCurrentFilename(import.meta.url),
     help: 'ip/firewall/address-list',
