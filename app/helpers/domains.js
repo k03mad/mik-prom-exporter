@@ -117,16 +117,7 @@ export const generateDomainsHtml = domainGroups => {
         }
 
         .domain-group {
-            margin-bottom: 0;
-        }
-
-        .domain-group.multi-domain {
-            margin-top: 20px;
             margin-bottom: 20px;
-        }
-
-        .domain-group:first-child {
-            margin-top: 0;
         }
 
         .domain-group:last-child {
