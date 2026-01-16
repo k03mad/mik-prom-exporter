@@ -69,12 +69,18 @@ export default {
             });
 
             const domainsArr = [...domains];
+            const mainDomains = new Set();
 
             domainsArr.forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
 
                 const splitted = domain.split('.');
-                ctx.labels('tovpnMain', `${splitted.at(-2)}.${splitted.at(-1)}`).set(i + 1);
+                const mainDomain = `${splitted.at(-2)}.${splitted.at(-1)}`;
+
+                if (!mainDomains.has(mainDomain)) {
+                    ctx.labels('tovpnMain', mainDomain).set(i + 1);
+                    mainDomains.add(mainDomain);
+                }
             });
 
             await fs.writeFile(vpnDomainsFile, domainsArr.join('\n'));
