@@ -4,4 +4,4 @@ node_modules
 .eslintcache
 .test.js
 
-public/domains.html
+public
