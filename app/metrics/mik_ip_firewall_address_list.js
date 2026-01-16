@@ -1,3 +1,5 @@
+import fs from 'node:fs/promises';
+
 import {Netmask} from 'netmask';
 
 import env from '../../env.js';
@@ -5,6 +7,9 @@ import Mikrotik from '../api/mikrotik.js';
 import {isValidIPv4} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
+
+const domains = new Set();
+const vpnDomainsFile = '.vpn_domains.log';
 
 export default {
     name: getCurrentFilename(import.meta.url),
@@ -27,8 +32,6 @@ export default {
 
         if (env.mikrotik.toVpnList) {
             const ipDnsCache = await Mikrotik.ipDnsCache();
-
-            const domains = new Set();
 
             // mask to domains from dns cache
             const vpnListMasks = ipFirewallAddressList
@@ -65,12 +68,16 @@ export default {
                 }
             });
 
-            [...domains].forEach((domain, i) => {
+            const domainsArr = [...domains];
+
+            domainsArr.forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
 
                 const splitted = domain.split('.');
                 ctx.labels('tovpnMain', `${splitted.at(-2)}.${splitted.at(-1)}`).set(i + 1);
             });
+
+            await fs.writeFile(vpnDomainsFile, domainsArr.join('\n'));
         }
     },
 };
