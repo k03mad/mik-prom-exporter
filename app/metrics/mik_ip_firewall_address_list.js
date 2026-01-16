@@ -11,30 +11,48 @@ import {getCurrentFilename} from '../helpers/paths.js';
 const domains = new Set();
 
 /**
+ * @param {string} domain
+ */
+const getMainDomain = domain => {
+    const parts = domain.split('.');
+    return `${parts.at(-2)}.${parts.at(-1)}`;
+};
+
+/**
  * @param {string[]} domainsArr
  */
 const saveDomainsLog = async domainsArr => {
-    if (domainsArr.length > 0) {
-        const lines = [];
-        let prevMainDomain = '';
+    let prevMainDomain;
 
-        domainsArr.forEach((domain, i) => {
-            const parts = domain.split('.');
+    const lines = domainsArr
+        .toSorted((a, b) => {
+            const aParts = a.split('.').toReversed();
+            const bParts = b.split('.').toReversed();
 
-            const mainDomain = parts.length >= 2
-                ? `${parts.at(-2)}.${parts.at(-1)}`
-                : domain;
+            for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+                const aPart = aParts[i] || '';
+                const bPart = bParts[i] || '';
+                const comparison = aPart.localeCompare(bPart);
+
+                if (comparison !== 0) {
+                    return comparison;
+                }
+            }
+
+            return 0;
+        })
+        .map((domain, i) => {
+            const mainDomain = getMainDomain(domain);
 
             if (prevMainDomain && prevMainDomain !== mainDomain) {
                 lines.push('');
             }
 
-            lines.push(`${i + 1}. ${domain}`);
             prevMainDomain = mainDomain;
+            return `${i + 1}. ${domain}`;
         });
 
-        await fs.writeFile('.vpn_domains.log', lines.join('\n'));
-    }
+    await fs.writeFile('.vpn_domains.log', lines.join('\n'));
 };
 
 export default {
@@ -94,30 +112,13 @@ export default {
                 }
             });
 
-            const domainsSorted = [...domains].toSorted((a, b) => {
-                const aParts = a.split('.').toReversed();
-                const bParts = b.split('.').toReversed();
-
-                for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
-                    const aPart = aParts[i] || '';
-                    const bPart = bParts[i] || '';
-                    const comparison = aPart.localeCompare(bPart);
-
-                    if (comparison !== 0) {
-                        return comparison;
-                    }
-                }
-
-                return 0;
-            });
-
             const mainDomains = new Set();
+            const domainsArr = [...domains];
 
-            domainsSorted.forEach((domain, i) => {
+            domainsArr.forEach((domain, i) => {
                 ctx.labels('tovpn', domain).set(i + 1);
 
-                const splitted = domain.split('.');
-                const mainDomain = `${splitted.at(-2)}.${splitted.at(-1)}`;
+                const mainDomain = getMainDomain(domain);
 
                 if (!mainDomains.has(mainDomain)) {
                     ctx.labels('tovpnMain', mainDomain).set(i + 1);
@@ -125,7 +126,9 @@ export default {
                 }
             });
 
-            await saveDomainsLog(domainsSorted);
+            if (domainsArr.length > 0) {
+                await saveDomainsLog(domainsArr);
+            }
         }
     },
 };
