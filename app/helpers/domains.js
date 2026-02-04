@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const AUTO_COLLAPSE_THRESHOLD = 5;
+const AUTO_COLLAPSE_THRESHOLD = 3;
 
 /**
  * @param {string} domain
