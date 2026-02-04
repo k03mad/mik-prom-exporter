@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+const AUTO_COLLAPSE_THRESHOLD = 5;
+
 /**
  * @param {string} domain
  */
@@ -13,20 +15,7 @@ export const getMainDomain = domain => {
  * @param {Map<string, string[]>} domainGroups
  * @returns {string}
  */
-export const generateDomainsHtml = domainGroups => {
-    const AUTO_COLLAPSE_THRESHOLD = 20;
-
-    const lastUpdate = new Date().toLocaleString('ru-RU', {
-        timeZone: 'Europe/Moscow',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-    });
-
-    return `
+export const generateDomainsHtml = domainGroups => `
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -277,7 +266,7 @@ export const generateDomainsHtml = domainGroups => {
     </div>
 
     <div class="footer">
-        Last update: ${lastUpdate}
+        Last update: ${new Date().toLocaleString('ru-RU')}
     </div>
 
     <script>
@@ -394,8 +383,8 @@ export const generateDomainsHtml = domainGroups => {
         initDomainRowClicks();
     </script>
 </body>
-</html>`;
-};
+</html>
+`;
 
 /**
  * @param {Set<string>} domains
