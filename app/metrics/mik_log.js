@@ -18,10 +18,7 @@ export default {
     async collect(ctx) {
         ctx.reset();
 
-        const [
-            log,
-            ipDhcpServerLeaseToName,
-        ] = await Promise.all([
+        const [log, ipDhcpServerLeaseToName] = await Promise.all([
             Mikrotik.log(),
             Mikrotik.ipDhcpServerLeaseToName(),
         ]);

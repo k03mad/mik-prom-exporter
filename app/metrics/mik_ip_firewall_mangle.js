@@ -13,6 +13,8 @@ export default {
 
         ipFirewallMangle
             .filter(elem => !Mikrotik.ipFirewallIsDummyRule(elem))
-            .forEach(elem => ctx.labels('bytes', Mikrotik.formatFilterRule(elem)).set(Number(elem.bytes)));
+            .forEach(elem =>
+                ctx.labels('bytes', Mikrotik.formatFilterRule(elem)).set(Number(elem.bytes)),
+            );
     },
 };

@@ -4,7 +4,6 @@ import env from '../../env.js';
 
 /** */
 class Mikrotik {
-
     constructor() {
         this.urls = {
             api: `http://${env.mikrotik.host}/rest/`,
@@ -37,10 +36,14 @@ class Mikrotik {
      * @returns {Promise<object>}
      */
     async _getCache(path, options = {}) {
-        const {body} = await requestCache(this.urls.api + path, {
-            ...this.options,
-            ...options,
-        }, {expire: 3600});
+        const {body} = await requestCache(
+            this.urls.api + path,
+            {
+                ...this.options,
+                ...options,
+            },
+            {expire: 3600},
+        );
 
         return body;
     }
@@ -186,11 +189,7 @@ class Mikrotik {
         const cache = await this.ipDnsCache();
 
         cache.forEach(elem => {
-            if (
-                elem.type === 'A'
-                && elem.data?.includes('.')
-                && elem.name?.includes('.')
-            ) {
+            if (elem.type === 'A' && elem.data?.includes('.') && elem.name?.includes('.')) {
                 ipToName[elem.data] = elem.name;
             }
         });
@@ -297,6 +296,5 @@ class Mikrotik {
     systemScript() {
         return this._getCache('system/script/print');
     }
-
 }
 export default new Mikrotik();

@@ -11,12 +11,24 @@ export default {
 
         const interfaceWireless = await Mikrotik.interfaceWireless();
 
-        await Promise.all(interfaceWireless.map(async iface => {
-            const [interfaceWirelessMonitor] = await Mikrotik.interfaceWirelessMonitor(iface['.id']);
+        await Promise.all(
+            interfaceWireless.map(async iface => {
+                const [interfaceWirelessMonitor] = await Mikrotik.interfaceWirelessMonitor(
+                    iface['.id'],
+                );
 
-            ctx.labels('noise-floor', iface.ssid).set(Number(interfaceWirelessMonitor['noise-floor']));
-            ctx.labels('overall-tx-ccq', iface.ssid).set(Number(interfaceWirelessMonitor['overall-tx-ccq']));
-            ctx.labels('registered-clients', iface.ssid).set(Number(interfaceWirelessMonitor['registered-clients']));
-        }));
+                ctx.labels('noise-floor', iface.ssid).set(
+                    Number(interfaceWirelessMonitor['noise-floor']),
+                );
+
+                ctx.labels('overall-tx-ccq', iface.ssid).set(
+                    Number(interfaceWirelessMonitor['overall-tx-ccq']),
+                );
+
+                ctx.labels('registered-clients', iface.ssid).set(
+                    Number(interfaceWirelessMonitor['registered-clients']),
+                );
+            }),
+        );
     },
 };

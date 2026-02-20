@@ -36,10 +36,7 @@ export default {
             // mask to domains from dns cache
             const vpnListMasks = ipFirewallAddressList
                 .map(elem => {
-                    if (
-                        elem.list === env.mikrotik.toVpnList
-                        && elem.address.includes('/')
-                    ) {
+                    if (elem.list === env.mikrotik.toVpnList && elem.address.includes('/')) {
                         return elem.address;
                     }
                 })
@@ -60,9 +57,9 @@ export default {
             // domains from comment
             ipFirewallAddressList.forEach(elem => {
                 if (
-                    elem.list === env.mikrotik.toVpnList
-                    && elem.comment
-                    && isValidIPv4(elem.address)
+                    elem.list === env.mikrotik.toVpnList &&
+                    elem.comment &&
+                    isValidIPv4(elem.address)
                 ) {
                     domains.add(elem.comment);
                 }
@@ -81,10 +78,7 @@ export default {
                 }
             });
 
-            await saveDomainsHtml(
-                domains,
-                path.join(env.server.static, 'domains.html'),
-            );
+            await saveDomainsHtml(domains, path.join(env.server.static, 'domains.html'));
         }
     },
 };

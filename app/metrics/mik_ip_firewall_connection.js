@@ -13,15 +13,13 @@ export default {
     async collect(ctx) {
         ctx.reset();
 
-        const [
-            ipFirewallConnection,
-            ipDhcpServerLeaseToName,
-            ipDnsCacheToName,
-        ] = await Promise.all([
-            Mikrotik.ipFirewallConnection(),
-            Mikrotik.ipDhcpServerLeaseToName(),
-            Mikrotik.ipDnsCacheToName(),
-        ]);
+        const [ipFirewallConnection, ipDhcpServerLeaseToName, ipDnsCacheToName] = await Promise.all(
+            [
+                Mikrotik.ipFirewallConnection(),
+                Mikrotik.ipDhcpServerLeaseToName(),
+                Mikrotik.ipDnsCacheToName(),
+            ],
+        );
 
         const bySrc = {};
         const byProtocol = {};

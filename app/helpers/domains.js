@@ -249,13 +249,15 @@ export const generateDomainsHtml = domainGroups => `
 
                     html += `<table class="domain-table${shouldCollapse ? ' collapsed' : ''}">`;
 
-                    html += groupDomains.map(domain => {
-                        globalIndex++;
-                        return `<tr data-domain="${domain}" data-global-index="${globalIndex}">
+                    html += groupDomains
+                        .map(domain => {
+                            globalIndex++;
+                            return `<tr data-domain="${domain}" data-global-index="${globalIndex}">
                                     <td class="domain-num" data-global-index="${globalIndex}"></td>
                                     <td>${domain}</td>
                                 </tr>`;
-                    }).join('\n');
+                        })
+                        .join('\n');
 
                     html += '</table></div>';
 
@@ -403,23 +405,22 @@ export const saveDomainsHtml = async (domains, file) => {
         }
     }
 
-    const sortedDomains = [...new Set([...currentContentArr, ...domains])]
-        .toSorted((a, b) => {
-            const aParts = a.split('.').toReversed();
-            const bParts = b.split('.').toReversed();
+    const sortedDomains = [...new Set([...currentContentArr, ...domains])].toSorted((a, b) => {
+        const aParts = a.split('.').toReversed();
+        const bParts = b.split('.').toReversed();
 
-            for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
-                const aPart = aParts[i] || '';
-                const bPart = bParts[i] || '';
-                const comparison = aPart.localeCompare(bPart);
+        for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+            const aPart = aParts[i] || '';
+            const bPart = bParts[i] || '';
+            const comparison = aPart.localeCompare(bPart);
 
-                if (comparison !== 0) {
-                    return comparison;
-                }
+            if (comparison !== 0) {
+                return comparison;
             }
+        }
 
-            return 0;
-        });
+        return 0;
+    });
 
     const domainGroups = new Map();
 
