@@ -1,6 +1,6 @@
 {
   "name": "mik-prom-exporter",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "private": true,
   "description": "[Mikrotik — Prometheus] exporter",
   "license": "MIT",
@@ -19,17 +19,17 @@
     "prepare": "husky || true"
   },
   "dependencies": {
-    "@k03mad/request": "14.0.2",
-    "@k03mad/simple-prom": "11.0.2",
+    "@k03mad/request": "14.1.0",
+    "@k03mad/simple-prom": "11.1.0",
     "chalk": "5.6.2",
     "netmask": "2.0.2"
   },
   "devDependencies": {
-    "@k03mad/oxlint-config": "0.0.19",
+    "@k03mad/oxlint-config": "0.1.0",
     "husky": "9.1.7",
-    "nodemon": "3.1.13",
-    "oxfmt": "0.34.0",
-    "oxlint": "1.49.0"
+    "nodemon": "3.1.14",
+    "oxfmt": "0.35.0",
+    "oxlint": "1.50.0"
   },
   "engines": {
     "node": ">=25"
