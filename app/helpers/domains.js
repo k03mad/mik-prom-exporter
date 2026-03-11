@@ -227,6 +227,7 @@ export const generateDomainsHtml = domainGroups => `
     <div class="content" id="content">
         ${(() => {
             let globalIndex = 0;
+
             return [...domainGroups.entries()]
                 .map(([mainDomain, groupDomains]) => {
                     const shouldCollapse = groupDomains.length >= AUTO_COLLAPSE_THRESHOLD;
@@ -252,6 +253,7 @@ export const generateDomainsHtml = domainGroups => `
                     html += groupDomains
                         .map(domain => {
                             globalIndex++;
+
                             return `<tr data-domain="${domain}" data-global-index="${globalIndex}">
                                     <td class="domain-num" data-global-index="${globalIndex}"></td>
                                     <td>${domain}</td>

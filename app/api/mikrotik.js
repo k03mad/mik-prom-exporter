@@ -297,4 +297,5 @@ class Mikrotik {
         return this._getCache('system/script/print');
     }
 }
+
 export default new Mikrotik();
