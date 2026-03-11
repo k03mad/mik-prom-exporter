@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@k03mad/request':
-        specifier: 14.3.0
-        version: 14.3.0
+        specifier: 14.3.1
+        version: 14.3.1
       '@k03mad/simple-prom':
-        specifier: 11.3.0
-        version: 11.3.0
+        specifier: 11.3.1
+        version: 11.3.1
       chalk:
         specifier: 5.6.2
         version: 5.6.2
@@ -22,8 +22,8 @@ importers:
         version: 2.0.2
     devDependencies:
       '@k03mad/oxlint-config':
-        specifier: 0.3.0
-        version: 0.3.0
+        specifier: 0.3.1
+        version: 0.3.1
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -39,16 +39,16 @@ importers:
 
 packages:
 
-  '@k03mad/oxlint-config@0.3.0':
-    resolution: {integrity: sha512-jmz8mN7b3cEgPt0K6vF6eOrvBf42CGMBIXjZD8UrKJ6jgnrq007ZxRePiTLJDwNEwRAXc/CDFcggYltuJ7ulKw==}
+  '@k03mad/oxlint-config@0.3.1':
+    resolution: {integrity: sha512-wlU+4KkAAz099JMBmZXMNyYc/mTULTQm0F5tbuBK/4uaWwRTYg/H2+rw50OcXO4QaD8MQFLfQ7/t9Ivkus2u2Q==}
     engines: {node: '>=24'}
 
-  '@k03mad/request@14.3.0':
-    resolution: {integrity: sha512-s6aBv3Q3fsEDnRpBk02YEeLxpOJUaH8lXS1SVYyqK+EksOdmH/fzoTB8Gr69Q/+soHQPWJganb0Gewc4MbugKg==}
+  '@k03mad/request@14.3.1':
+    resolution: {integrity: sha512-7h5C5UcWG6luh+oz+bTb5Vs/e62yu6xJTN0qnZ4QjPnY1h8oFeV98Wm+UJgTGHjQ4mD9D0x1WZnXVoZwRt8HGA==}
     engines: {node: '>=24'}
 
-  '@k03mad/simple-prom@11.3.0':
-    resolution: {integrity: sha512-tvFXVZ6O/UcMeIqd8ZXu8ZPhehXUfzETXV09rFf4iASg4MovEbrlIeL4UqZNKNhtoHc0VehVTK9ng9J0zbvaLQ==}
+  '@k03mad/simple-prom@11.3.1':
+    resolution: {integrity: sha512-Wxh6M99HjY1nF0SyOHoUtT5CDMfJlrgsOsCfQzVGywi/M7BgqdidQTvTG4pkHZh4Z1ZvMRSzTsqq4p68FOaETw==}
     engines: {node: '>=24'}
 
   '@keyv/serialize@1.1.1':
@@ -847,9 +847,9 @@ packages:
 
 snapshots:
 
-  '@k03mad/oxlint-config@0.3.0': {}
+  '@k03mad/oxlint-config@0.3.1': {}
 
-  '@k03mad/request@14.3.0':
+  '@k03mad/request@14.3.1':
     dependencies:
       chalk: 5.6.2
       debug: 4.4.3(supports-color@5.5.0)
@@ -860,7 +860,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@k03mad/simple-prom@11.3.0':
+  '@k03mad/simple-prom@11.3.1':
     dependencies:
       chalk: 5.6.2
       compression: 1.8.1
