@@ -3,9 +3,7 @@ import path from 'node:path';
 
 const AUTO_COLLAPSE_THRESHOLD = 3;
 
-/**
- * @param {string} domain
- */
+/** @param {string} domain */
 export const getMainDomain = domain => {
     const parts = domain.split('.');
     return `${parts.at(-2)}.${parts.at(-1)}`;

@@ -2,7 +2,6 @@ import {request, requestCache} from '@k03mad/request';
 
 import env from '../../env.js';
 
-/** */
 class Mikrotik {
     constructor() {
         this.urls = {
@@ -83,16 +82,14 @@ class Mikrotik {
             .join(' :: ');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     interface() {
         return this._get('interface/print');
     }
 
     /**
      * @param {string} name
-     * @returns {Promise<Array<object>>}
+     * @returns {Promise<object[]>}
      */
     interfaceMonitorTraffic(name) {
         return this._get('interface/monitor-traffic', {
@@ -103,23 +100,19 @@ class Mikrotik {
         });
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     interfaceWireguardPeers() {
         return this._get('interface/wireguard/peers/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     interfaceWireless() {
         return this._get('interface/wireless/print');
     }
 
     /**
      * @param {string} id
-     * @returns {Promise<Array<object>>}
+     * @returns {Promise<object[]>}
      */
     interfaceWirelessMonitor(id) {
         return this._get('interface/wireless/monitor', {
@@ -130,23 +123,17 @@ class Mikrotik {
         });
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     interfaceWirelessRegistrationTable() {
         return this._get('interface/wireless/registration-table/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipDhcpServerLease() {
         return this._getCache('ip/dhcp-server/lease/print');
     }
 
-    /**
-     * @returns {Promise<object>}
-     */
+    /** @returns {Promise<object>} */
     async ipDhcpServerLeaseToName() {
         const ipToName = {};
         const leases = await this.ipDhcpServerLease();
@@ -160,30 +147,22 @@ class Mikrotik {
         return ipToName;
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipDns() {
         return this._get('ip/dns/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipDnsStatic() {
         return this._get('ip/dns/static/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipDnsCache() {
         return this._get('ip/dns/cache/print');
     }
 
-    /**
-     * @returns {Promise<object>}
-     */
+    /** @returns {Promise<object>} */
     async ipDnsCacheToName() {
         const ipToName = {};
         const cache = await this.ipDnsCache();
@@ -197,23 +176,17 @@ class Mikrotik {
         return ipToName;
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipFirewallAddressList() {
         return this._get('ip/firewall/address-list/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipFirewallConnection() {
         return this._get('ip/firewall/connection/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipFirewallFilter() {
         return this._get('ip/firewall/filter/print');
     }
@@ -227,72 +200,52 @@ class Mikrotik {
         return rule.comment?.includes('dummy');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipFirewallMangle() {
         return this._get('ip/firewall/mangle/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipFirewallNat() {
         return this._get('ip/firewall/nat/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     ipFirewallRaw() {
         return this._get('ip/firewall/raw/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     log() {
         return this._get('log/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     queueTree() {
         return this._get('queue/tree/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     systemHistory() {
         return this._get('system/history/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     systemPackageUpdateCheck() {
         return this._getCache('system/package/update/check-for-updates');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     systemResource() {
         return this._get('system/resource/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     systemScheduler() {
         return this._getCache('system/scheduler/print');
     }
 
-    /**
-     * @returns {Promise<Array<object>>}
-     */
+    /** @returns {Promise<object[]>} */
     systemScript() {
         return this._getCache('system/script/print');
     }
