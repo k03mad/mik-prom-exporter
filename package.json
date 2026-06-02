@@ -1,6 +1,6 @@
 {
   "name": "mik-prom-exporter",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "private": true,
   "description": "[Mikrotik — Prometheus] exporter",
   "license": "MIT",
@@ -13,19 +13,19 @@
   },
   "type": "module",
   "scripts": {
-    "lint": "oxlint && oxfmt --check",
+    "lint": "oxlint && oxfmt -c node_modules/@k03mad/oxlint-config/.oxfmtrc.json --check",
     "start": "node app/server",
     "start:dev": "DEBUG=mad* nodemon app/server",
     "prepare": "husky || true"
   },
   "dependencies": {
-    "@k03mad/request": "15.3.1",
-    "@k03mad/simple-prom": "11.8.1",
+    "@k03mad/request": "15.3.3",
+    "@k03mad/simple-prom": "11.8.6",
     "chalk": "5.6.2",
     "netmask": "2.1.1"
   },
   "devDependencies": {
-    "@k03mad/oxlint-config": "0.9.1",
+    "@k03mad/oxlint-config": "0.9.3",
     "husky": "9.1.7",
     "nodemon": "3.1.14",
     "oxfmt": "0.53.0",

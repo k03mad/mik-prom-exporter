@@ -1,7 +1,7 @@
 minimumReleaseAgeExclude:
-  - '@k03mad/oxlint-config@0.9.1'
-  - '@k03mad/request@15.3.1'
-  - '@k03mad/simple-prom@11.8.1'
+  - '@k03mad/oxlint-config@0.9.3'
+  - '@k03mad/request@15.3.3'
+  - '@k03mad/simple-prom@11.8.6'
   - '@oxfmt/binding-android-arm-eabi@0.53.0'
   - '@oxfmt/binding-android-arm64@0.53.0'
   - '@oxfmt/binding-darwin-arm64@0.53.0'
