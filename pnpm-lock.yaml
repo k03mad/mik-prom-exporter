@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@k03mad/request':
-        specifier: 15.4.0
-        version: 15.4.0
+        specifier: 15.6.0
+        version: 15.6.0
       '@k03mad/simple-prom':
-        specifier: 11.9.1
-        version: 11.9.1
+        specifier: 11.10.0
+        version: 11.10.0
       chalk:
         specifier: 5.6.2
         version: 5.6.2
@@ -22,8 +22,8 @@ importers:
         version: 2.1.1
     devDependencies:
       '@k03mad/oxlint-config':
-        specifier: 0.10.1
-        version: 0.10.1
+        specifier: 0.11.0
+        version: 0.11.0
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -39,16 +39,16 @@ importers:
 
 packages:
 
-  '@k03mad/oxlint-config@0.10.1':
-    resolution: {integrity: sha512-03p9EPC9T1FvIfmobJPecmUHJbqhmT75Ix3fIlSnGKyDeB2SN7etEudTv2/+wSWrBvaQS60w8gkhP8J/j3D7Nw==}
+  '@k03mad/oxlint-config@0.11.0':
+    resolution: {integrity: sha512-UMhn3E7hDXm8Hrgzn/PriwkVLuHYs248H3s2rSJS+v144bEHoblwua7CC8TRDR5yS69XTtxDayeQxOPgTdFYXw==}
     engines: {node: '>=24'}
 
-  '@k03mad/request@15.4.0':
-    resolution: {integrity: sha512-h+V5yzFd1ovCxz3V5jXgCGxosMAgiZw7IvlbhVyHGmLvRm0f3+a3zuUOOusPkFqEV01LfNJQpbr6btsgXizvcg==}
+  '@k03mad/request@15.6.0':
+    resolution: {integrity: sha512-5xTe4HL3QLGws8jyqt16xCRHGzas82xCqvcTlhmf1ewOP2rB1gkPF8JwHN6nN+nk6I5qS/YOpSC1iw3iuHc1KA==}
     engines: {node: '>=24'}
 
-  '@k03mad/simple-prom@11.9.1':
-    resolution: {integrity: sha512-koGF2eXmXGpqTZJ9i1+8meAig8Ez/Ntf0GBEB6GDsrUOtnN3Tei2BSF+bmZvKqRWy/iHy/yzJD9FVmOflzvscQ==}
+  '@k03mad/simple-prom@11.10.0':
+    resolution: {integrity: sha512-Pv6RYmchVpPDWmpGQ9wmuERVhoMJNbkAu1EMyMi159lQXkSjfVL5UwT0FHgysMHD9WzRWDIVX0RgKIWmUlYztg==}
     engines: {node: '>=24'}
 
   '@keyv/serialize@1.1.1':
@@ -521,8 +521,8 @@ packages:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
 
-  got@15.0.7:
-    resolution: {integrity: sha512-HA4XUhL2xk0/sA4l3zRyOzfqPtDEiVYpzDae56WLX2aHZYF6v6hjTnuDvURIdznSTPFYW1JUdlREhZjGAF9LCQ==}
+  got@15.1.0:
+    resolution: {integrity: sha512-DG+DAAkRtno+oDr/GBsliAkhN9+zczOPM5qXk3efDZY3qvyRnZU+NwQlb/IOY6cSnxxTR9z3aHCcShJyjb0hJA==}
     engines: {node: '>=22'}
 
   has-flag@3.0.0:
@@ -709,8 +709,8 @@ packages:
       vite-plus:
         optional: true
 
-  p-queue@9.3.0:
-    resolution: {integrity: sha512-7NED7xhQ74Ngp4JP/2e0VZHp7vSWfJfqeiR92jPgxsz6m0Se4P03YoTKa9dDXyZ3r6P616gUXttrB6nnHYKang==}
+  p-queue@9.3.1:
+    resolution: {integrity: sha512-POWdiIPmsUPGwb4FeQ4OBg46aqmcInSWe45CKDsGHiOBiVQM9chqfQTuqhuTzcg2Vz9faTI65at0KkVyVEiCHw==}
     engines: {node: '>=20'}
 
   p-timeout@7.0.1:
@@ -882,20 +882,20 @@ packages:
 
 snapshots:
 
-  '@k03mad/oxlint-config@0.10.1': {}
+  '@k03mad/oxlint-config@0.11.0': {}
 
-  '@k03mad/request@15.4.0':
+  '@k03mad/request@15.6.0':
     dependencies:
       chalk: 5.6.2
       debug: 4.4.3(supports-color@5.5.0)
-      got: 15.0.7
-      p-queue: 9.3.0
+      got: 15.1.0
+      p-queue: 9.3.1
       pretty-bytes: 7.1.0
       strip-ansi: 7.2.0
     transitivePeerDependencies:
       - supports-color
 
-  '@k03mad/simple-prom@11.9.1':
+  '@k03mad/simple-prom@11.10.0':
     dependencies:
       chalk: 5.6.2
       compression: 1.8.1
@@ -1268,7 +1268,7 @@ snapshots:
 
   gopd@1.2.0: {}
 
-  got@15.0.7:
+  got@15.1.0:
     dependencies:
       '@sindresorhus/is': 8.1.0
       byte-counter: 0.1.0
@@ -1457,7 +1457,7 @@ snapshots:
       '@oxlint/binding-win32-ia32-msvc': 1.72.0
       '@oxlint/binding-win32-x64-msvc': 1.72.0
 
-  p-queue@9.3.0:
+  p-queue@9.3.1:
     dependencies:
       eventemitter3: 5.0.4
       p-timeout: 7.0.1

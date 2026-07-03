@@ -1,4 +1,5 @@
 minimumReleaseAgeExclude:
-  - '@k03mad/oxlint-config@0.10.1'
-  - '@k03mad/request@15.4.0'
-  - '@k03mad/simple-prom@11.9.1'
+  - '@k03mad/oxlint-config@0.10.1 || 0.11.0'
+  - '@k03mad/request@15.4.0 || 15.6.0'
+  - '@k03mad/simple-prom@11.9.1 || 11.10.0'
+  - p-queue@9.3.1
