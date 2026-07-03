@@ -4,7 +4,7 @@ import {Netmask} from 'netmask';
 
 import env from '../../env.js';
 import Mikrotik from '../api/mikrotik.js';
-import {getMainDomain, saveDomainsHtml} from '../helpers/domains.js';
+import {saveDomainsHtml} from '../helpers/domains.js';
 import {isValidIPv4} from '../helpers/net.js';
 import {countDupsBy} from '../helpers/object.js';
 import {getCurrentFilename} from '../helpers/paths.js';
@@ -62,19 +62,6 @@ export default {
                     isValidIPv4(elem.address)
                 ) {
                     domains.add(elem.comment);
-                }
-            });
-
-            const mainDomains = new Set();
-
-            [...domains].forEach((domain, i) => {
-                ctx.labels('tovpn', domain).set(i + 1);
-
-                const mainDomain = getMainDomain(domain);
-
-                if (!mainDomains.has(mainDomain)) {
-                    ctx.labels('tovpnMain', mainDomain).set(i + 1);
-                    mainDomains.add(mainDomain);
                 }
             });
 
